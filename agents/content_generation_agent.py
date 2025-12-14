@@ -1,10 +1,11 @@
 # content_generation_agent.py
 import logging
 from langchain_core.messages import SystemMessage
-from langchain_openai import AzureChatOpenAI
 from langgraph.graph import StateGraph
 from agents.agent_state import AgentState
 from repositories.campaign_repository import CampaignRepository
+from utils.api_cost_tracker import track_openai_request
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -60,6 +61,15 @@ class ContentGenerationAgent:
                     logger.debug("Context added to messages.")
 
             message = self.model.invoke(messages)
+
+            # Track API usage
+            model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+            track_openai_request(
+                model=model_name,
+                response=message,
+                metadata={"agent": "content_generation", "audience": selected_audience_name}
+            )
+
             logger.info("Content generated successfully.")
 
             return {'messages': [message], 'initial_english_content': message.content.replace("```json", "").replace("```", "")}

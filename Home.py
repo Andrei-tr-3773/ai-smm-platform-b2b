@@ -29,6 +29,11 @@ import pypandoc
 import ssl
 import io
 
+# Monitoring and compliance
+from utils.monitoring import track_execution_time, track_metric
+from utils.api_cost_tracker import get_tracker
+from utils.compliance import show_first_time_disclaimer, show_content_disclaimer
+
 ssl._create_default_https_context = ssl._create_unverified_context
 load_dotenv(override=True)
 logging.basicConfig(level=logging.INFO)
@@ -210,10 +215,35 @@ def generate_docx(html_content):
     return docx_io
 
 def main():
-    # audience_repository = AudienceRepository("audiences")
-    # handle_create_audience("All Players", "All audience which can be", audience_repository)
-    # handle_create_audience("Europe Teenagers", "Teenagers in Europe countries", audience_repository)
+    # Show disclaimer on first load
+    if 'disclaimer_shown' not in st.session_state:
+        show_first_time_disclaimer()
+        if st.button("I Understand", key="accept_disclaimer"):
+            st.session_state.disclaimer_shown = True
+            st.rerun()
+        st.stop()
+
     st.title("AI SMM Platform for B2B")
+
+    # Sidebar with API usage tracking
+    with st.sidebar:
+        st.markdown("### 📊 API Usage")
+        tracker = get_tracker()
+        summary = tracker.get_summary()
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric("Total Cost", f"${summary['total_cost']:.2f}")
+        with col2:
+            st.metric("This Month", f"${summary['current_month_cost']:.2f}")
+
+        st.metric("Total Tokens", f"{summary['total_tokens']:,}")
+
+        if summary['total_cost'] > 80:
+            st.warning("⚠️ Approaching budget limit!")
+
+        with st.expander("📋 Content Guidelines", expanded=False):
+            show_content_disclaimer()
 
     # Define top-level tabs
     main_tabs = st.tabs(["Create New", "Campaigns", "Audiences", "Prompts"])

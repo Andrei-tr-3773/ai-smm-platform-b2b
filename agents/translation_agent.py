@@ -1,10 +1,11 @@
 import json
 import logging
 from langchain_core.messages import HumanMessage
-from langchain_openai import AzureChatOpenAI
 from langgraph.graph import StateGraph
 from langchain_core.prompts import ChatPromptTemplate
 from agents.agent_state import AgentState
+from utils.api_cost_tracker import track_openai_request
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -49,6 +50,15 @@ class TranslationAgent:
         
             translation_message = HumanMessage(content=formatted_translation_prompt)
             translated_message = self.model.invoke([translation_message])
+
+            # Track API usage
+            model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+            track_openai_request(
+                model=model_name,
+                response=translated_message,
+                metadata={"agent": "translation", "step": "translate", "languages": language_keys}
+            )
+
             translations = json.loads(translated_message.content.replace("```json", "").replace("```", ""))
             logger.info("Content translated successfully.")
 
@@ -69,6 +79,15 @@ class TranslationAgent:
             
             criticism_message = HumanMessage(content=criticism_prompt)
             criticism_response = self.model.invoke([criticism_message])
+
+            # Track API usage
+            model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+            track_openai_request(
+                model=model_name,
+                response=criticism_response,
+                metadata={"agent": "translation", "step": "criticize"}
+            )
+
             logger.info("Translation criticized successfully.")
 
             return {'translations': translations, 'criticisms': criticism_response.content}
@@ -91,6 +110,15 @@ class TranslationAgent:
             
             reflection_message = HumanMessage(content=reflection_prompt)
             reflection_response = self.model.invoke([reflection_message])
+
+            # Track API usage
+            model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+            track_openai_request(
+                model=model_name,
+                response=reflection_response,
+                metadata={"agent": "translation", "step": "reflect", "languages": language_keys}
+            )
+
             improved_translations = json.loads(reflection_response.content.replace("```json", "").replace("```", ""))
             logger.info("Reflection on translation completed successfully.")
 
