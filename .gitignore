@@ -1,0 +1,60 @@
+# Environment variables
+.env
+.env.*
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+.venvs/
+venv/
+ENV/
+env/
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+
+# Google Cloud SDK (don't commit large SDK)
+google-cloud-sdk/
+google-cloud-cli-*.tar.gz
+
+# Audit files
+audit_*.txt
+
+# API keys and secrets
+*secret*
+*credential*
+*.key
+*.pem
+
+# Streamlit
+.streamlit/secrets.toml

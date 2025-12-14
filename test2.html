@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General HCP Template</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .header { text-align: center; font-size: 14px; }
+        .brand-image-container {
+            text-align: center;
+            margin: 0 auto;
+            width: 100%;
+            background-color: #ccc;
+            height: 250px;
+            position: relative;
+        }
+        .brand-image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .content { margin: 20px; display: flex; justify-content: space-between; }
+        .user-info { flex: 1; }
+        .footer { margin-top: 20px; border-top: 2px solid black; padding-top: 10px; display: flex; justify-content: space-between; }
+        .company-info { flex: 1; }
+        .user-photo img { width: 100px; height: 100px; display: block; }
+        .company-image { width: 50px; height: 25px; text-align: center; line-height: 50px; margin-right: 120px; margin-left: auto; }
+        .page { page-break-before: always; margin-top: 40px; }
+        .company-image img { width: 100px; height: 100px; }
+        .placeholder img { width: 100px; height: 100px; }
+        .right-shift { transform: translateX(-30px); }
+.footer {
+    display: inline-block;
+    background-color: transparent !important;
+}
+    </style>
+</head>
+<body>
+    <div class="brand-image-container">
+        <div class="brand-image">
+        <img src="{{AddBrandImageURL}}" alt="AddBrandImageURL"/>
+        </div>
+    </div>
+    <div class="content">
+        <div class="user-info">
+            <p>{{customRichText}}</p>
+            <p>{{insertEmailFragments}}</p>
+            <p>{{User_xR2_Title__c}} {{userName}}</p>
+            <p>Mobil: {{User_MobilePhone}}</p>
+            <p>Email: {{User_Email}}</p>
+        </div>
+        <div class="user-photo">
+        <img src="{{userPhotoURL}}" alt="userPhotoURL" width="100" height="100"/>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="company-info">
+            <p>Novartis Pharma GmbH</p>
+            <p>Roonstr. 25, 90429 Nürnberg</p>
+            <p>Tel.: (09 11) 273-0</p>
+            <p>Fax: (09 11) 273-12 653</p>
+            <p>
+               <a href="{{Link}}" target="_blank">{{CallToAction}}</a>
+            </p>
+            <p><strong>Referenzen:</strong> 1. Lorem ipsum</p>
+            <p><em>*Weitere wichtige Informationen</em></p>
+        </div>
+        <div class="company-image">
+        <img src="{{CompanyImageURL}}" alt="CompanyImageURL" width="100" height="100"/>
+        </div>
+    </div>
+    <div class="page">
+        <p>Bitte senden Sie Informationen zu Nebenwirkungen bzw. arzneimittelsicherheitsrelevanten
+        Ereignissen im zeitlichen Zusammenhang mit der Anwendung von Novartis-Arzneimitteln direkt an
+        die Abteilung Arzneimittelsicherheit der Novartis Pharma GmbH Deutschland
+        (<a href="mailto:ams.novartis@novartis.com">ams.novartis@novartis.com</a>). Vielen Dank!</p>
+        <p>Please kindly address any information concerning an adverse event/side effect/any drug-safety-
+        relevant issue of a Novartis product directly to the drug safety desk of Novartis Pharma GmbH
+        Germany (<a href="mailto:ams.novartis@novartis.com">ams.novartis@novartis.com</a>).</p>
+        <p>Thank you very much!</p>
+        <div class="highlighted-section">
+            <p><strong><a href="https://www.novartis.de">www.novartis.de</a></strong></p>
+            </div>
+            <div class="placeholder">
+            <img src="{{NovartisLogoURL}}" alt="NovartisLogoURL" width="100" height="100"/>
+            </div>
+        </div>
+        <p>Die gesetzlichen Pflichtangaben finden Sie hier:
+        <a href="https://www.novartis.de/pflichtangaben">https://www.novartis.de/pflichtangaben</a></p>
+        <p>Für mehr Informationen zur Novartis Datenschutzerklärung klicken Sie bitte
+        <a href="#">hier</a>.</p>
+    </div>
+</body>
+</html>

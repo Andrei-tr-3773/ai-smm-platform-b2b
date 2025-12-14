@@ -1,0 +1,441 @@
+#root {
+    --ICON-SIZE: 58px;
+}
+
+.preface, .preface .section-title {
+    color: var(--WHITE, #fff);
+}
+
+.case-id {
+    color: var(--N-ORANGE, #E74A21);
+}
+
+.preface .accent {
+    color: var(--N-ORANGE, #E74A21);
+}
+
+h1 span {
+    font-size: 2.26rem !important;
+    background-image: linear-gradient(90deg, var(--N-BLUE) 0%, var(--N-BLUE-2) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.preface .title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--N-ORANGE, #E74A21);
+}
+
+.preface .grid-container {
+    padding: 3rem 0;
+    font-size: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 4rem;
+    font-family: "Museo Sans", "Helvetica";
+    font-weight: 300;
+}
+
+.preface .grid-item {
+    position: relative;
+    padding-left: calc(var(--ICON-SIZE) + 24px); /* Space for the icon */
+    min-height: calc(var(--ICON-SIZE) + 24px); /* Height of the icon */
+}
+
+.preface .icon:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: var(--ICON-SIZE);
+    height: var(--ICON-SIZE);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.preface .icon.icon_magnifier:before {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg id='dark_mode_gradient' data-name='dark mode gradient' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 80 80'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: url(%23Dark_mode_graident); %7D %3C/style%3E%3ClinearGradient id='Dark_mode_graident' data-name='Dark mode graident' x1='12.86' y1='18.33' x2='73.37' y2='69.1' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='.45' stop-color='%230460a9'/%3E%3Cstop offset='.9' stop-color='%230460a9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath class='cls-1' d='m13.95,41.28c-.37-.12-.76.08-.88.44-.18.54-.33,1.08-.45,1.6-.09.38.15.75.53.84.05.01.11.02.16.02.32,0,.61-.22.68-.54.11-.47.25-.97.42-1.47.12-.37-.08-.76-.45-.88Zm3.14-6.07c-.33-.21-.76-.1-.96.22-.64,1.02-1.21,2.05-1.71,3.04-.17.35-.03.77.32.94.1.05.21.07.31.07.26,0,.51-.14.63-.39.47-.95,1.02-1.93,1.64-2.92.21-.33.11-.76-.22-.96Zm4.14-5.43c-.3-.25-.74-.22-.99.08-.76.89-1.49,1.8-2.16,2.71-.23.31-.17.75.15.98.12.09.27.14.42.14.21,0,.43-.1.56-.28.65-.88,1.36-1.77,2.1-2.63.25-.29.22-.74-.08-.99Zm6.89-5.9c.15,0,.31-.05.44-.15.89-.72,1.8-1.4,2.69-2.02.32-.22.39-.66.17-.97-.22-.32-.65-.4-.97-.17-.92.64-1.86,1.34-2.77,2.08-.3.24-.35.68-.11.98.14.17.34.26.54.26Zm20.79-1.22c-.37-.08-.75.17-.83.54-.1.47-.23.97-.39,1.48-.12.37.09.76.46.88.07.02.14.03.21.03.3,0,.57-.19.67-.49.17-.55.31-1.1.42-1.61.08-.38-.17-.75-.54-.83Zm-27.04,27.06c-.51.13-1.02.24-1.5.32-.38.06-.64.42-.58.8.06.34.35.59.69.59.04,0,.08,0,.12,0,.53-.09,1.07-.21,1.63-.35.37-.1.6-.48.5-.85-.1-.37-.48-.6-.85-.5Zm11.87-29.73c.12,0,.24-.03.35-.1,1-.59,2-1.11,2.96-1.55.35-.16.51-.58.35-.93-.16-.35-.58-.51-.93-.35-1.01.46-2.05,1-3.09,1.61-.33.2-.45.62-.25.96.13.22.36.35.61.35Zm-5.71,27.13c-1.02.58-2.03,1.08-3.01,1.5-.35.15-.52.56-.37.92.11.26.37.42.64.42.09,0,.19-.02.28-.06,1.03-.44,2.08-.97,3.14-1.57.34-.19.46-.62.26-.95-.19-.34-.62-.46-.95-.26Zm14.93-13.59c-.65.89-1.36,1.79-2.1,2.66-.25.3-.21.74.08.99.13.11.29.17.45.17.2,0,.4-.08.53-.25.76-.9,1.49-1.82,2.16-2.74.23-.31.16-.75-.15-.98-.31-.23-.75-.16-.98.15Zm4.44-6.08c-.35-.17-.77-.02-.93.33-.46.96-1.01,1.95-1.62,2.95-.2.33-.1.76.23.96.11.07.24.1.37.1.24,0,.46-.12.6-.33.64-1.04,1.21-2.07,1.69-3.08.17-.35.02-.77-.33-.93Zm-5.2-11.47c-.07-.38-.44-.62-.82-.55-.52.1-1.07.23-1.62.4-.37.11-.58.5-.47.87.09.31.37.5.67.5.07,0,.13,0,.2-.03.51-.15,1.01-.27,1.49-.36.38-.07.63-.44.55-.82Zm-3.61,22.72c-.42.44-.86.88-1.3,1.31-.37.36-.75.72-1.12,1.06-.28.26-.3.7-.04.99.14.15.33.23.51.23.17,0,.34-.06.47-.19.38-.35.77-.72,1.15-1.09.46-.44.9-.89,1.34-1.34.27-.28.26-.72-.02-.99-.28-.27-.72-.26-.99.02Zm-12.58-12.78c.29-.26.3-.7.04-.99-.26-.29-.71-.3-.99-.04-.44.4-.88.82-1.31,1.24-.4.39-.79.78-1.17,1.17-.27.28-.26.72.02.99.14.13.31.2.49.2s.37-.07.5-.21c.37-.38.75-.76,1.14-1.14.42-.41.85-.82,1.28-1.21Zm7.59,17.37c-.89.72-1.8,1.4-2.71,2.02-.32.22-.4.66-.18.97.14.2.35.3.58.3.14,0,.27-.04.4-.12.93-.64,1.87-1.34,2.79-2.09.3-.24.35-.68.11-.98-.24-.3-.68-.35-.98-.11Zm38.91,25.72l-23.87-18.68c4.11-4.31,6.65-10.15,6.65-16.56,0-13.25-10.78-24.02-24.02-24.02S7.23,20.52,7.23,33.76s10.78,24.02,24.02,24.02c6.32,0,12.08-2.46,16.37-6.47l24.01,18.79c.13.1.28.15.43.15.21,0,.41-.09.55-.27.24-.3.19-.74-.12-.98Zm-41.25-12.62c-12.47,0-22.62-10.15-22.62-22.62S18.78,11.14,31.25,11.14s22.62,10.15,22.62,22.62-10.15,22.62-22.62,22.62Z'/%3E%3C/svg%3E");
+}
+
+.preface .icon_globe:before {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg id='dark_mode_gradient' data-name='dark mode gradient' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 80 80'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: url(%23Dark_mode_graident); %7D %3C/style%3E%3ClinearGradient id='Dark_mode_graident' data-name='Dark mode graident' x1='19.44' y1='22.46' x2='66.45' y2='61.9' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='.45' stop-color='%230460a9'/%3E%3Cstop offset='.9' stop-color='%230460a9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath class='cls-1' d='m22.82,33.68c.08,0,.16-.01.24-.04.87-.32,1.82-.63,2.8-.9.37-.1.59-.49.49-.86-.1-.37-.49-.6-.86-.49-1.03.28-2.01.6-2.92.94-.36.13-.55.54-.41.9.1.28.37.46.66.46Zm-3.07-.11c-.51.27-1,.54-1.44.83-.33.21-.42.64-.21.97.13.21.36.32.59.32.13,0,.26-.04.38-.11.41-.26.85-.52,1.33-.76.34-.18.48-.6.3-.94-.18-.34-.6-.48-.94-.3Zm8.86-1.5s.09,0,.14-.01c.95-.19,1.93-.36,2.92-.5.38-.05.65-.41.6-.79-.05-.38-.41-.65-.79-.6-1.02.14-2.03.31-3,.51-.38.08-.62.45-.55.83.07.33.36.56.69.56Zm16.9-2.24c-.53-.05-1.07-.09-1.62-.12-.38-.02-.72.27-.74.66-.02.39.27.72.66.74.53.03,1.06.07,1.58.12.02,0,.04,0,.06,0,.36,0,.66-.28.7-.64.03-.38-.25-.72-.64-.76Zm14.1,4.98c.47.25.92.5,1.33.76.12.07.25.11.38.11.23,0,.46-.11.59-.32.21-.33.11-.76-.21-.97-.44-.28-.93-.56-1.44-.83-.34-.18-.77-.04-.94.3-.18.34-.04.77.3.94Zm-25.05-3.58s.04,0,.06,0c.52-.04,1.05-.08,1.58-.12.39-.02.68-.36.66-.74-.02-.38-.34-.68-.74-.66-.54.03-1.08.07-1.62.12-.39.03-.67.37-.64.76.03.36.34.64.7.64Zm22.86,1.1c-.91-.34-1.89-.65-2.92-.94-.38-.11-.76.12-.86.49-.1.37.12.76.49.86.99.27,1.93.57,2.8.9.08.03.16.04.24.04.28,0,.55-.17.66-.46.13-.36-.05-.77-.41-.9Zm-5.89-1.64c-.98-.2-1.99-.37-3-.51-.38-.06-.74.21-.79.6-.05.38.21.74.6.79.99.14,1.97.31,2.92.5.05,0,.09.01.14.01.33,0,.62-.23.69-.56.08-.38-.17-.75-.55-.83Zm-28.88,17.19c.93.34,1.94.66,3,.95.06.02.12.02.18.02.31,0,.59-.21.67-.52.1-.37-.12-.76-.49-.86-1.02-.28-1.98-.58-2.88-.91-.36-.13-.77.05-.9.42-.13.36.05.77.41.9Zm12.24,2.5c.53.04,1.07.08,1.62.11.01,0,.03,0,.04,0,.37,0,.68-.29.7-.66.02-.39-.27-.72-.66-.74-.53-.03-1.06-.06-1.58-.11-.39-.02-.72.26-.75.64-.03.39.26.72.64.75Zm8.77.1s.03,0,.04,0c.54-.03,1.08-.07,1.62-.12.39-.03.67-.37.64-.76-.03-.39-.38-.68-.76-.64-.52.04-1.05.08-1.58.11-.39.02-.68.35-.66.74.02.37.33.66.7.66Zm16.27-3.79c.11,0,.22-.03.32-.08.5-.26.99-.54,1.44-.83.33-.21.42-.64.21-.97-.21-.33-.64-.42-.97-.21-.41.27-.86.52-1.33.77-.34.18-.48.6-.3.94.12.24.37.38.62.38Zm-41.62-.91c.44.28.92.56,1.44.83.1.05.21.08.32.08.25,0,.5-.14.62-.38.18-.34.05-.77-.3-.94-.48-.25-.92-.51-1.33-.76-.33-.21-.76-.11-.97.21-.21.33-.11.76.21.97Zm35.93,3.05c.06,0,.12,0,.19-.03,1.04-.29,2.04-.6,2.96-.94.36-.13.55-.54.41-.9-.13-.36-.54-.55-.9-.41-.88.33-1.84.63-2.84.91-.37.1-.59.49-.49.86.09.31.37.52.67.52Zm-25.55.71c.99.2,2.03.37,3.08.51.03,0,.06,0,.09,0,.34,0,.65-.25.69-.61.05-.38-.22-.74-.6-.79-1.02-.14-2.03-.31-3-.5-.38-.08-.75.17-.82.55-.07.38.17.75.55.82Zm19.59.49s.06,0,.1,0c1.05-.15,2.07-.32,3.04-.51.38-.08.63-.44.55-.82-.08-.38-.45-.62-.82-.55-.94.19-1.94.36-2.96.5-.38.05-.65.41-.6.79.05.35.35.6.69.6Zm25.52-10.72h-6.96c-.22-14.38-11.8-26.06-26.14-26.43v-6.68c0-.39-.31-.7-.7-.7s-.7.31-.7.7v6.68c-14.35.37-25.93,12.04-26.14,26.43h-6.96c-.39,0-.7.31-.7.7s.31.7.7.7h6.98c.52,14.12,11.97,25.48,26.13,25.85v7.26c0,.39.31.7.7.7s.7-.31.7-.7v-7.26c14.15-.36,25.61-11.73,26.13-25.85h6.98c.39,0,.7-.31.7-.7s-.31-.7-.7-.7Zm-34.51,25.85c-13.38-.36-24.21-11.1-24.73-24.45h24.73v24.45Zm0-25.85H14.56c.22-13.61,11.17-24.66,24.74-25.03v25.03Zm1.4,25.85v-24.45h24.73c-.51,13.34-11.35,24.08-24.73,24.45Zm0-25.85V14.27c13.58.37,24.53,11.41,24.74,25.03h-24.74Z'/%3E%3C/svg%3E");
+}
+
+.preface .icon_laptop:before {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg id='dark_mode_gradient' data-name='dark mode gradient' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 80 80'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: url(%23Dark_mode_graident); %7D %3C/style%3E%3ClinearGradient id='Dark_mode_graident' data-name='Dark mode graident' x1='10.63' y1='16.81' x2='70.03' y2='66.65' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='.45' stop-color='%230460a9'/%3E%3Cstop offset='.9' stop-color='%230460a9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath class='cls-1' d='m74.22,55.6h-3.33V20.11c0-2.26-1.84-4.11-4.1-4.11H13.21c-2.26,0-4.1,1.84-4.1,4.11v35.49h-3.33c-.39,0-.7.31-.7.7v2.69c0,2.76,2.24,5,4.99,5h59.86c2.75,0,4.99-2.24,4.99-5v-2.69c0-.39-.31-.7-.7-.7ZM10.51,20.11c0-1.49,1.21-2.71,2.7-2.71h53.59c1.49,0,2.7,1.21,2.7,2.71v35.49H10.51V20.11Zm63.02,38.88c0,1.99-1.61,3.6-3.59,3.6H10.07c-1.98,0-3.59-1.62-3.59-3.6v-1.99h3.27s.04.01.06.01h60.39s.04-.01.06-.01h3.27v1.99Zm-49.46-12.88s.06-.05.07-.08l.63-1.36c.16-.35.01-.77-.34-.93-.35-.16-.77-.01-.93.34l-.63,1.36s0,.03-.01.05c-.51-.15-1.05-.21-1.61-.12-1.98.32-3.34,2.19-3.02,4.18.29,1.79,1.84,3.07,3.6,3.07.19,0,.38-.01.58-.05,1.98-.32,3.34-2.19,3.02-4.18-.15-.94-.66-1.73-1.36-2.28Zm-1.89,5.07c-1.22.2-2.38-.64-2.57-1.86-.2-1.22.64-2.38,1.86-2.57,1.22-.2,2.38.64,2.57,1.86s-.64,2.38-1.86,2.57Zm39.92-16.62c-.33-2.04-2.21-3.45-4.2-3.13-.56.09-1.06.32-1.5.63l-1.77-1.52c-.29-.25-.74-.22-.99.08-.25.29-.22.74.08.99l1.73,1.48c-.47.75-.7,1.68-.55,2.63.3,1.85,1.87,3.18,3.63,3.18.19,0,.37-.01.56-.04,1.98-.32,3.33-2.24,3-4.29h0Zm-3.23,2.9c-1.23.2-2.38-.69-2.59-1.97-.21-1.28.62-2.49,1.84-2.68.11-.02.23-.03.34-.03,1.09,0,2.06.83,2.25,2,.21,1.28-.62,2.49-1.84,2.68Zm-15.28,1.6s.01-.02.02-.04l.47-1.42c.12-.37-.08-.76-.45-.88-.37-.12-.76.08-.88.45l-.4,1.22c-.55-.18-1.15-.25-1.77-.15-.86.14-1.59.56-2.15,1.14l-1.99-1.42c-.31-.22-.75-.15-.98.16-.22.31-.15.75.16.98l2.04,1.45s0,0,0,0c-.23.58-.33,1.22-.23,1.88.15.96.68,1.8,1.49,2.37.64.45,1.39.69,2.17.69.21,0,.42-.02.62-.05,2.04-.33,3.45-2.21,3.13-4.2-.14-.89-.62-1.64-1.27-2.18Zm-2.08,4.99c-.63.1-1.26-.04-1.77-.4-.5-.35-.82-.86-.92-1.45-.2-1.22.69-2.38,1.97-2.59.13-.02.26-.03.39-.03,1.13,0,2.11.78,2.29,1.88.2,1.22-.69,2.38-1.97,2.59Zm-15.14-4.46c-.35-.16-.77-.01-.93.34l-.97,2.07c-.16.35-.01.77.34.93.1.04.2.07.3.07.26,0,.52-.15.63-.4l.97-2.07c.16-.35.01-.77-.34-.93Zm5.99-4.55c.24-.61.34-1.28.23-1.96-.33-2.04-2.26-3.45-4.31-3.11-2.04.33-3.44,2.26-3.11,4.31.18,1.11.83,2.01,1.71,2.57l-.47,1.01c-.16.35-.01.77.34.93.1.04.2.07.3.07.26,0,.52-.15.63-.4l.51-1.08c.23.04.46.07.7.07.2,0,.4-.02.6-.05.86-.14,1.59-.57,2.14-1.16l1.9,1.36c.12.09.26.13.41.13.22,0,.43-.1.57-.29.22-.31.15-.75-.16-.98l-1.96-1.4Zm-3.11.96c-1.29.21-2.49-.67-2.7-1.95-.21-1.28.67-2.49,1.95-2.7.13-.02.25-.03.37-.03,1.14,0,2.14.83,2.33,1.98.21,1.28-.67,2.49-1.95,2.7Zm15.89-3.87c-.37-.12-.76.08-.88.45l-.75,2.29c-.12.37.08.76.45.88.07.02.15.04.22.04.29,0,.57-.19.67-.48l.75-2.29c.12-.37-.08-.76-.45-.88Zm5.73-4.82c.25-.6.35-1.28.24-1.97-.32-1.98-2.19-3.34-4.18-3.02-1.98.32-3.34,2.19-3.02,4.18.16,1.02.75,1.87,1.55,2.42l-.45,1.37c-.12.37.08.76.45.88.07.02.15.04.22.04.29,0,.57-.19.67-.48l.41-1.25c.25.05.5.09.76.09.19,0,.38-.01.58-.05.79-.13,1.47-.51,2-1.04l1.65,1.41c.13.11.29.17.46.17.2,0,.39-.08.53-.24.25-.29.22-.74-.08-.99l-1.78-1.53Zm-1.54-.07c-.35.49-.87.81-1.46.9-1.22.2-2.38-.64-2.57-1.86-.2-1.22.64-2.38,1.86-2.57.59-.09,1.18.04,1.67.4.49.35.81.87.9,1.46.1.59-.05,1.19-.4,1.67Z'/%3E%3C/svg%3E");
+}
+
+.preface .icon_chain:before {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg id='dark_mode_gradient' data-name='dark mode gradient' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 80 80'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: url(%23Dark_mode_graident); %7D %3C/style%3E%3ClinearGradient id='Dark_mode_graident' data-name='Dark mode graident' x1='9.55' y1='22.47' x2='67.29' y2='56.09' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='.45' stop-color='%230460a9'/%3E%3Cstop offset='.9' stop-color='%230460a9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath class='cls-1' d='m14.81,53.91h.01c.38,0,.69-.3.7-.69,0-.49.04-1.01.08-1.55.03-.38-.25-.72-.64-.76-.38-.03-.72.25-.76.64-.05.57-.08,1.12-.09,1.64,0,.39.3.71.69.71Zm13.63-24.69c-.5.24-.99.5-1.46.77-.33.19-.45.62-.26.96.13.22.37.35.61.35.12,0,.24-.03.35-.09.44-.25.9-.5,1.37-.73.35-.17.49-.59.33-.93-.17-.35-.59-.5-.93-.33Zm-4.54,2.89c-.95.78-1.86,1.65-2.69,2.58-.26.29-.23.73.06.99.13.12.3.18.46.18.19,0,.38-.08.52-.24.78-.88,1.63-1.7,2.53-2.43.3-.25.34-.69.1-.99-.25-.3-.69-.34-.99-.1Zm30.56-2.12c-.47-.27-.96-.53-1.46-.77-.35-.17-.77-.02-.93.33-.17.35-.02.77.33.93.47.23.93.47,1.37.73.11.06.23.09.35.09.24,0,.48-.13.61-.35.19-.33.08-.76-.26-.96Zm-34.53,7.46c-.32-.21-.76-.12-.97.2-.66,1.01-1.28,2.1-1.82,3.24-.17.35-.02.77.33.93.1.05.2.07.3.07.26,0,.51-.15.63-.4.52-1.08,1.1-2.11,1.73-3.07.21-.32.12-.76-.2-.97Zm37.61-5.34c-.3-.24-.74-.2-.99.1-.24.3-.2.74.1.99.9.73,1.75,1.55,2.53,2.43.14.16.33.24.52.24.17,0,.33-.06.46-.18.29-.26.32-.7.06-.99-.83-.94-1.74-1.8-2.69-2.58Zm6.13,9.78c.1,0,.21-.02.3-.07.35-.17.5-.58.33-.93-.54-1.14-1.16-2.22-1.82-3.24-.21-.32-.65-.41-.97-.2-.32.21-.41.65-.2.97.63.96,1.21,1.99,1.73,3.07.12.25.37.4.63.4Zm2.94,12.02h.01c.39,0,.69-.33.69-.71-.01-.52-.04-1.07-.09-1.64-.03-.39-.36-.68-.76-.64-.38.03-.67.37-.64.76.05.54.08,1.06.08,1.55,0,.38.32.69.7.69Zm1.43-32.62c-3.09,0-5.64,2.33-5.98,5.33h-15.84v-4.27c0-.39-.31-.7-.7-.7h-9.58c-.39,0-.7.31-.7.7v4.27h-17.27c-.35-3-2.9-5.33-5.98-5.33-3.32,0-6.03,2.7-6.03,6.03s2.7,6.03,6.03,6.03c3.09,0,5.64-2.33,5.98-5.33h17.27v3.91c0,.39.31.7.7.7h9.58c.39,0,.7-.31.7-.7v-3.91h15.84c.35,3,2.9,5.33,5.98,5.33,3.32,0,6.03-2.7,6.03-6.03s-2.7-6.03-6.03-6.03Zm-56.06,6.73h4.56c-.34,2.22-2.25,3.93-4.56,3.93-2.55,0-4.63-2.08-4.63-4.63s2.08-4.63,4.63-4.63c2.31,0,4.22,1.71,4.56,3.93h-4.56c-.39,0-.7.31-.7.7s.31.7.7.7Zm32.84,3.21h-8.18v-3.21h8.18v3.21Zm0-4.61h-8.18v-3.57h8.18v3.57Zm23.22,5.33c-2.31,0-4.22-1.71-4.56-3.93h4.38c.39,0,.7-.31.7-.7s-.31-.7-.7-.7h-4.38c.34-2.22,2.25-3.93,4.56-3.93,2.55,0,4.63,2.08,4.63,4.63s-2.08,4.63-4.63,4.63Zm3.19,15.77h-4.6c-.25-1.15-.56-2.29-.93-3.4-.12-.37-.52-.57-.89-.44-.37.12-.56.52-.44.89.32.96.59,1.95.82,2.95h-3.55c-.39,0-.7.31-.7.7v9.58c0,.39.31.7.7.7h9.58c.39,0,.7-.31.7-.7v-9.58c0-.39-.31-.7-.7-.7Zm-.7,9.58h-8.18v-8.18h8.18v8.18Zm-51.08-9.58h-3.19c.23-1,.5-1.99.82-2.95.12-.37-.07-.76-.44-.89-.37-.13-.76.07-.89.44-.37,1.1-.68,2.25-.93,3.4h-4.95c-.39,0-.7.31-.7.7v9.58c0,.39.31.7.7.7h9.58c.39,0,.7-.31.7-.7v-9.58c0-.39-.31-.7-.7-.7Zm-.7,9.58h-8.18v-8.18h8.18v8.18Z'/%3E%3C/svg%3E");
+}
+
+.preface .icon_eye:before {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg id='dark_mode_gradient' data-name='dark mode gradient' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 80 80'%3E%3Cdefs%3E%3Cstyle%3E .cls-1 %7B fill: url(%23Dark_mode_graident); %7D %3C/style%3E%3ClinearGradient id='Dark_mode_graident' data-name='Dark mode graident' x1='17.69' y1='21.54' x2='62.31' y2='58.97' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='.45' stop-color='%230460a9'/%3E%3Cstop offset='.9' stop-color='%230460a9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath class='cls-1' d='m40,25.45c-8.02,0-14.55,6.47-14.55,14.42s6.53,14.42,14.55,14.42,14.55-6.47,14.55-14.42-6.53-14.42-14.55-14.42Zm0,27.43c-7.25,0-13.15-5.84-13.15-13.02s5.9-13.02,13.15-13.02,13.15,5.84,13.15,13.02-5.9,13.02-13.15,13.02Zm-7.6-18.1c.07,0,.15-.01.22-.04.88-.29,1.83-.53,2.82-.71.38-.07.63-.43.56-.81-.07-.38-.43-.63-.81-.56-1.06.19-2.07.45-3.01.76-.37.12-.57.52-.44.88.1.29.37.48.66.48Zm5.89-1.1s.03,0,.05,0c.54-.03,1.08-.05,1.74-.06.4,0,.8,0,1.19.03,0,0,.02,0,.03,0,.37,0,.68-.29.7-.67.02-.39-.28-.71-.67-.73-.41-.02-.83-.03-1.25-.03,0,0-.1,0-.1,0-.58,0-1.16.02-1.73.06-.39.02-.68.36-.65.74.02.37.33.66.7.66Zm-8.99.99c-.52.3-1,.62-1.42.96-.3.24-.35.68-.11.98.14.17.34.26.55.26.15,0,.31-.05.44-.15.36-.29.78-.57,1.23-.83.34-.19.45-.62.26-.96-.19-.34-.62-.45-.96-.26Zm20.39.99c.47.25.89.51,1.27.79.12.09.27.14.41.14.22,0,.43-.1.57-.29.23-.31.16-.75-.15-.98-.43-.32-.92-.62-1.45-.9-.34-.18-.76-.05-.95.29-.18.34-.05.77.29.95Zm-2.27-2.42c-.95-.29-1.97-.52-3.02-.69-.38-.06-.74.2-.8.58-.06.38.2.74.58.8.99.16,1.94.38,2.84.65.07.02.14.03.2.03.3,0,.58-.19.67-.5.11-.37-.1-.76-.47-.87Zm-11.98,12.47c-.99-.18-1.94-.42-2.82-.71-.37-.12-.76.08-.88.44-.12.37.08.76.44.88.94.31,1.95.57,3.01.76.04,0,.08.01.13.01.33,0,.63-.24.69-.57.07-.38-.18-.74-.56-.81Zm-5.44-1.86c-.46-.26-.87-.54-1.23-.83-.3-.24-.74-.19-.98.11-.24.3-.19.74.11.98.42.34.9.66,1.42.96.11.06.23.09.35.09.24,0,.48-.13.61-.35.19-.34.07-.76-.26-.96Zm20.02,1.54c.11,0,.22-.03.32-.08.53-.28,1.01-.58,1.45-.89.31-.23.38-.67.15-.98-.23-.31-.66-.38-.98-.15-.38.28-.81.54-1.27.79-.34.18-.47.6-.29.95.13.24.37.37.62.37Zm-8.75.7c-.39.02-.8.02-1.29.03-.55,0-1.1-.02-1.64-.05-.38-.02-.72.27-.74.65-.03.39.27.72.65.74.57.04,1.14.06,1.82.06.42,0,.84,0,1.26-.03.39-.02.69-.34.67-.73-.02-.39-.4-.7-.73-.67Zm5.75-.94c-.89.27-1.85.49-2.84.65-.38.06-.64.42-.58.8.06.34.35.59.69.59.04,0,.07,0,.11,0,1.05-.17,2.07-.4,3.02-.69.37-.11.58-.5.47-.87s-.51-.58-.87-.47Zm-7.01-9.33c-2.22,0-4.03,1.81-4.03,4.03s1.81,4.03,4.03,4.03,4.03-1.81,4.03-4.03-1.81-4.03-4.03-4.03Zm0,6.65c-1.45,0-2.63-1.18-2.63-2.63s1.18-2.63,2.63-2.63,2.63,1.18,2.63,2.63-1.18,2.63-2.63,2.63Zm37.48-2.81c-6.65-4.52-16.77-11.22-23.46-15.66-2.3-1.53-4.17-2.76-5.28-3.5-4.5-3-12.34-3.19-16.8-.42-2.89,1.52-20.67,13.19-29.46,19.59-.18.13-.29.34-.29.56,0,.22.1.43.28.56,7.04,5.25,19.39,13.37,26.98,17.73,3.88,2.23,7.28,3.34,10.61,3.34s6.62-1.12,10.24-3.36l27.17-17.68c.2-.13.32-.35.32-.58,0-.23-.11-.45-.31-.59Zm-27.93,17.66c-6.71,4.15-12.15,4.15-19.4-.01-7.28-4.18-18.97-11.84-26.08-17.07,9-6.49,25.82-17.53,28.53-18.94.02,0,.03-.02.05-.03,3.98-2.49,11.28-2.31,15.31.38,1.12.74,2.98,1.98,5.28,3.51,6.41,4.24,15.95,10.56,22.58,15.06l-26.27,17.1Z'/%3E%3C/svg%3E");
+}
+
+.center-container {
+    padding: 3rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.emphasized-square {
+    max-width: 40rem;
+    position: relative;
+    padding-left: 40px; /* Space for the icon */
+    min-height: 40px; /* Height of the icon */
+    text-align: left;
+}
+
+.preface .header-logo-bg {
+  height: 160px;
+  flex-shrink: 0;
+}
+
+.preface .header-logo-bg img {
+  position: absolute;
+  top: 37px;
+}
+
+#root .main .block-container {
+    padding-top: 3.5rem;
+}
+
+.stTabs {
+    overflow: hidden;
+}
+
+/*
+TODO: remove comments from the final version
+*/
+:root {
+    --rem: 18px;
+    --NIGHT: #060606;
+    --SEA: #00f6ff;
+    --SKY: #7ba8ff;
+    --SNOW: #fbfafa;
+    --WHITE: #fff;
+    --LILIAC: #b896ff;
+
+    --DARK-GRAY: #3C3D43;
+    --ACTIVE-GRAY: #191919;
+    --N-BLUE: #002068;
+    --N-BLUE-2: #023761;
+    --N-LIGHT-BLUE: #0460a9;
+    --N-LIGHT-BLUE-EXTRA: #5291dd;
+    --N-ORANGE: #E74A21;
+    --N-RED: #8D1F1B;
+    --T-GREEN: #00ff00;
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  src: url('app/static/common/fonts/MuseoSans-100.otf');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  src: url('app/static/common/fonts/MuseoSans-100Italic.otf');
+  font-weight: 100;
+  font-style: italic;
+} 
+   
+@font-face {
+  font-family: "Museo Sans";
+  src: url('app/static/common/fonts/Museo_Sans/MuseoSans-300.otf');
+  font-weight: 300;
+  font-style: normal; 
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  src: url('app/static/common/fonts/Museo_Sans/MuseoSans-300Italic.otf');
+  font-weight: 300;
+  font-style: italic; 
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  src: url('app/static/common/fonts/Museo_Sans/MuseoSans-500.otf');
+  font-weight: 500;
+  font-style: normal; 
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  src: url('app/static/common/fonts/Museo_Sans/MuseoSans-500Italic.otf');
+  font-weight: 500;
+  font-style: italic; 
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  src: url('app/static/common/fonts/Museo_Sans/MuseoSans-700.otf');
+  font-weight: 700;
+  font-style: normal; 
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  src: url('app/static/common/fonts/Museo_Sans/MuseoSans-700Italic.otf');
+  font-weight: 700;
+  font-style: italic; 
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  src: url('app/static/common/fonts/Museo_Sans/MuseoSans-900.otf');
+  font-weight: 900;
+  font-style: normal; 
+}
+
+@font-face {
+  font-family: "Museo Sans";
+  src: url('app/static/common/fonts/Museo_Sans/MuseoSans-900Italic.otf');
+  font-weight: 900;
+  font-style: normal; 
+}
+
+code {
+  color: var(--N-ORANGE);
+}
+
+html, body, h1, p {
+  font-family: "Museo Sans", "Helvetica";
+}
+
+html, .stApp {
+    background-color: var(--WHITE) !important;
+    color: var(--NIGHT) !important;
+}
+
+h1 span {
+  font-size: 2.55rem !important;
+  font-weight: 300 !important;
+}
+
+h3 span {
+  font-size: 2.22rem !important;
+  font-weight: 300 !important;
+}
+
+h4,h5,h6 {
+  font-size: 1.5rem !important;
+  font-weight: 300 !important;
+}
+
+p {
+  font-size: 1rem !important;
+  font-weight: 300 !important;
+}
+
+header {
+  /*
+   📕 header height is overriden from the stramlit value of ±2.5rem
+   📕 we might have to consider returning it back for the responsivness, but looks good for now.
+  */
+  height: 56px !important;
+  border-bottom: 1px solid var(--NIGHT);
+  margin-bottom: 0;
+  background-color: var(--SNOW) !important;
+
+  background-image: url('app/static/images/logo.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: 20px center !important;
+  background-size: auto 35px !important;
+
+  display: flex !important;
+  align-items: center;
+}
+
+header div[data-testid="stDecoration"] {
+  background-image: linear-gradient(90deg, var(--N-ORANGE) 0%, var(--N-RED) 100%) !important;
+}
+
+.stApp {
+  background-color: var(--WHITE) !important;
+}
+
+div[data-testid="stFullScreenFrame"] {
+  background: var(--WHITE) !important;
+  color: var(--NIGHT) !important;
+}
+
+/*
+  Expander styles
+*/
+
+div[data-testid="stExpander"] {
+  margin-bottom: 20px; /* TODO: CSS var */
+}
+
+div[data-testid="stExpander"] details {
+  border-radius: 0 !important;
+  border-left: none !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: solid 1px var(--SNOW) !important;
+}
+
+section[data-testid="stSidebar"] {
+  background-color: var(--NIGHT) !important;
+}
+
+div[data-testid="stSidebarNav"] ul {
+  font-size: 1.2rem !important;
+}
+
+div[data-testid="stExpander"] svg {
+  font-size: 2.25rem !important;
+  width: 2.25rem !important;
+  height: 2.25rem !important;
+}
+
+div[data-testid="stExpander"] summary:hover svg {
+  fill: var(--N-ORANGE) !important;
+}
+
+div[data-testid="stExpander"] summary {
+  align-items: center !important;
+}
+
+div[data-testid="stExpander"] summary:hover {
+  color: var(--N-ORANGE) !important;
+}
+
+div[data-testid="stFileDropzoneInstructions"] span svg {
+  fill: var(--NIGHT) !important;
+}
+
+div[data-testid="stFileDropzoneInstructions"] div span {
+  color: var(--NIGHT) !important;
+}
+
+div[data-testid="stFileDropzoneInstructions"] div small {
+  color: var(--ACTIVE-GRAY) !important;
+}
+
+/*
+  Button styles
+*/
+.stButton button {
+  background-color: var(--N-BLUE) !important;
+  /*border-color: var(--SEA) !important;*/
+  color: var(--WHITE) !important;
+  border-radius: 4px;
+  padding: 8px 16px !important;
+}
+
+.stButton button:hover {
+  color: var(--WHITE) !important;
+  border-color: var(--N-LIGHT-BLUE) !important;
+  background-color: var(--N-LIGHT-BLUE) !important;
+}
+
+.stCodeBlock pre {
+  background-color: var(--DARK-GRAY) !important;
+  border: 1px solid var(--ACTIVE-GRAY) !important;
+}
+
+.stButton button:disabled {
+  color: var(--DARK-GRAY) !important;
+  border-color: var(--DARK-GRAY) !important;
+  background-color: var(--ACTIVE-GRAY) !important;
+}
+
+/*
+ Inputs
+*/
+input,textarea {
+  background-color: var(--WHITE) !important;
+  color: var(--NIGHT) !important;
+  border-color: var(--NIGHT) !important;
+  caret-color: var(--NIGHT) !important;
+}
+
+iframe[data-testid="stVideo"] {
+  border-radius: 4px !important;
+}
+
+div[data-testid="textInputRootElement"] {
+  border-radius: 0 !important;
+  border-color: var(--SNOW) !important;
+  border-left: none !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: solid 1px var(--SNOW) !important;
+}
+
+div[data-testid="textInputRootElement"] .st-g6 {
+  border-color: var(--N-ORANGE) !important;
+}
+
+.st-cc,.st-cd,.st-cb,.st-ca {
+  border-color: var(--N-ORANGE) !important;
+}
+
+textarea:disabled {
+  cursor: default;
+}
+
+div[data-baseweb="select"] div {
+  background-color: var(--WHITE) !important;
+  color: var(--NIGHT) !important;
+}
+
+div[data-baseweb="select"] > div {
+  border: 1px solid #585B69 !important; /* TODO: This color is out of scheme */
+  border-radius: 3px !important;
+}
+
+ul[data-testid="stVirtualDropdown"] li {
+  background-color: var(--NIGHT) !important;
+}
+
+ul[data-testid="stVirtualDropdown"] li:hover {
+  color: var(--N-ORANGE) !important;
+}
+
+div[data-baseweb="select"] .st-av {
+  border: none;
+}
+
+/*
+  Tabs
+*/
+button[data-baseweb="tab"] div:hover {
+  color: var(--N-ORANGE) !important;
+}
+
+button[data-baseweb="tab"][aria-selected=true] div {
+  color: var(--N-ORANGE) !important;
+}
+
+div[data-baseweb="tab-list"] div[data-baseweb="tab-highlight"] {
+  background-color: var(--N-ORANGE) !important;
+}
+
+/*
+Spinner
+*/
+.stSpinner div i {
+  border-color: var(--N-ORANGE) var(--SNOW) var(--SNOW) !important;
+}
+
+/* Empty iframes hack */
+.element-container:has(iframe[height="0"]) {
+  display: none;
+}
+
+hr[data-testid="stHeadingDivider"] {
+  background-color: var(--WHITE) !important;
+}
+
+section .block-container {
+  margin: 0 auto !important;
+  max-width: 1248px !important;
+}
