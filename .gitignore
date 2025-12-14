@@ -58,3 +58,6 @@ audit_*.txt
 
 # Streamlit
 .streamlit/secrets.toml
+
+# API Usage Tracking
+.api_usage.json
