@@ -20,8 +20,8 @@ from utils.llm_queries import predefined_query, DefaultPrompts
 from utils.mongodb_utils import MongoDBClient
 from campaign import Campaign
 import streamlit as st
-from utils.deepeval_azure_openai import DeepEvalAzureOpenAI
-from utils.azure_openai_utils import get_azure_chat_openai_model
+from utils.deepeval_openai import DeepEvalOpenAI
+from utils.openai_utils import get_openai_model
 from weasyprint import HTML
 from html2docx import html2docx
 from pdf2docx import Converter
@@ -47,7 +47,7 @@ def apply_template(content_dict, html_template):
 
 def generate_content(user_query, template_name, state, prompts, add_context, selected_audience_name, selected_audience_description):
     try:
-        model = get_azure_chat_openai_model()
+        model = get_openai_model()
         mongodb_client = MongoDBClient("content_templates")
         content_template = mongodb_client.get_template_by_name(template_name)
 
@@ -94,7 +94,7 @@ def generate_content(user_query, template_name, state, prompts, add_context, sel
 
 def translate_content(state, selected_languages, prompts):
     try:
-        model = get_azure_chat_openai_model()
+        model = get_openai_model()
         translation_agent = TranslationAgent(
             model=model,
             translate_prompt=prompts['translate_prompt'],
@@ -496,7 +496,7 @@ def handle_clear(default_prompts):
 
 def handle_evaluate(state, selected_metrics, history, spinner_placeholder):
     try:
-        eval_model = DeepEvalAzureOpenAI(model=get_azure_chat_openai_model())
+        eval_model = DeepEvalOpenAI(model=get_openai_model())
         with spinner_placeholder:
             with st.spinner("Evaluating..."):
                 new_state = evaluate_translations(state, eval_model, selected_metrics)

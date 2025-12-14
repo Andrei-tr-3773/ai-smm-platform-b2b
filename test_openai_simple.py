@@ -1,11 +1,11 @@
-from utils.azure_openai_utils import get_azure_chat_openai_model
+from utils.openai_utils import get_openai_model
 from dotenv import load_dotenv
 
 load_dotenv()
 
 print('Testing OpenAI client...')
 try:
-    model = get_azure_chat_openai_model()
+    model = get_openai_model()
     response = model.invoke('Say hello in one word')
     print(f'Success! Response: {response.content}')
 except Exception as e:

@@ -1,8 +1,87 @@
-# Marketing Campaign Generator and Translator
+# AI SMM Platform for B2B
 
 ## Overview
 
-The Marketing Campaign Generator and Translator is a comprehensive Python application built to assist in the creation, translation, and evaluation of marketing campaigns. Leveraging OpenAI's GPT models, this app generates marketing content, translates it into different languages, and evaluates the translations based on various metrics. It's designed with an intuitive interface using Streamlit to facilitate interaction and customization.
+The AI SMM Platform is a comprehensive B2B marketing campaign generator built to help businesses create, translate, and evaluate professional social media content for Instagram, Facebook, Telegram, and LinkedIn. Leveraging OpenAI's GPT models, this platform generates platform-optimized marketing content, translates it into 15+ languages, and evaluates quality using the G-Eval framework. It's designed with an intuitive interface using Streamlit to facilitate interaction and customization.
+
+## Target Audience
+
+### 🎯 Who Is This For?
+
+This platform is designed for B2B businesses that need professional, scalable content creation for social media marketing.
+
+#### Primary Persona: Small Business Owners (60% of users)
+
+**Example: Alex Rodriguez, 35** - Owner of FitZone Fitness (3 locations, 15 employees, $500k/year revenue)
+
+**Pain Points:**
+- No time for social media (12-hour workdays)
+- Can't afford marketing agency ($2k-5k/month)
+- Canva takes too long (3 hours per post)
+- No idea what content works
+- Needs multilingual content (English + Spanish for Hispanic clients)
+- Needs content for Instagram, Facebook, Telegram
+
+**Current Workflow:** 2.5 hours per post × 5 posts/week = **12.5 hours/week**
+
+**What Alex Needs:**
+- ✅ Create post in 15 min (not 2.5 hours)
+- ✅ Templates for recurring content types
+- ✅ Know WHAT works and WHY
+- ✅ Auto-translate to multiple languages
+- ✅ Platform-specific optimization
+
+**Willingness to Pay:** $49-199/month
+
+#### Secondary Persona: Marketing Managers (30% of users)
+
+**Example: Jessica Kim, 29** - Marketing Manager at CloudFlow SaaS ($2M ARR, 50 employees)
+
+**Pain Points:**
+- Small team (just her + intern)
+- Needs 20+ posts/week
+- B2B content must be professional
+- Currently: Jasper ($99) + Canva ($13) = $112/mo + 15h/week
+- CEO asks "what's ROI?" - no clear answer
+
+**What Jessica Needs:**
+- ✅ One tool (replace Jasper + Canva)
+- ✅ B2B-focused (not generic B2C)
+- ✅ Custom templates for product releases, case studies, webinars
+- ✅ Analytics that prove ROI
+- ✅ Multi-language (US + EU markets)
+
+**Willingness to Pay:** $79-300/month
+
+#### Tertiary Persona: Digital Agencies (10% of users)
+
+**Example: Carlos Santos, 38** - Founder of Digital Boost Agency (25 clients, 12 employees)
+
+**Pain Points:**
+- Each client needs custom templates
+- Hard to scale (hire more = lower margin)
+- Clients ask "why no viral?"
+- 12 hours/client/month × 25 = **300 hours/month** = need 4 full-time employees
+
+**What Carlos Needs:**
+- ✅ White-label solution
+- ✅ Custom template per client
+- ✅ Bulk generation (20 posts at once)
+- ✅ Analytics clients understand
+- ✅ Multi-user (his 12 employees)
+
+**Willingness to Pay:** $299-1,500/month
+
+## Industries We Serve
+
+- **Fitness & Wellness**: Gyms, yoga studios, personal trainers, nutrition coaches
+- **E-commerce**: Fashion, electronics, handmade goods, dropshipping
+- **SaaS & Tech**: Software companies, apps, developer tools, cloud services
+- **Consulting**: Business consulting, coaching, training, advisory
+- **Local Services**: Dentists, lawyers, accountants, real estate
+- **Digital Agencies**: Marketing agencies serving multiple clients
+- **Education**: Online courses, tutoring, schools, training programs
+- **Food & Beverage**: Restaurants, cafes, catering, food delivery
 
 ## Features
 
@@ -22,15 +101,15 @@ The Marketing Campaign Generator and Translator is a comprehensive Python applic
 
 - **Purpose**: Generates marketing content based on user input and templates, using additional context to enhance the output.
 
-- **Patterns**: 
+- **Patterns**:
   - **Retrieval-Augmented Generation (RAG)**: Enhances content by retrieving similar campaigns from a database, adding context to the generation process.
 
-- **Libraries**: 
+- **Libraries**:
   - **Langchain Core**: Facilitates message formatting and state management.
   - **Langgraph**: Manages the state graph for seamless execution flow.
   - **Milvus**: A vector database used for storing and retrieving campaign embeddings to find similar content for context provisioning.
 
-- **AI Models**: Utilizes Azure OpenAI models for content creation, augmented with retrieved context to improve relevance and coherence.
+- **AI Models**: Utilizes OpenAI models (gpt-4o-mini, gpt-4o) for content creation, augmented with retrieved context to improve relevance and coherence.
 
 This approach leverages the strengths of both retrieval and generation methods, ensuring that the content is not only creative but also contextually rich and relevant.
 
@@ -38,41 +117,53 @@ This approach leverages the strengths of both retrieval and generation methods, 
 
 - **Purpose**: Translates generated content into multiple languages, while handling criticism and improvement through reflection.
 - **Patterns**: Employs a [Reflection](https://blog.langchain.dev/reflection-agents/) pattern: graph-based state machine (`StateGraph`) with nodes for translation, criticism, and reflection.
-- **Libraries**: 
+- **Libraries**:
   - **Langchain Core**: For message and prompt management.
   - **Langgraph**: Controls the logical flow of translation tasks.
 
-- **AI Models**: Leverages Azure OpenAI models for language translation and refinement operations.
+- **AI Models**: Leverages OpenAI models for language translation and refinement operations.
 
 ### EvaluationAgent
 
 - **Purpose**: Evaluates translations against selected metrics to ensure quality and cultural relevancy.
 - **Patterns**: Implements metric-based evaluation using [G-Eval framework](https://docs.confident-ai.com/docs/metrics-llm-evals).
-- **Libraries**: 
+- **Libraries**:
   - **DeepEval**: Provides tools for creating test cases and applying various evaluation metrics.
-- **AI Models**: Utilizes the DeepEval framework with embedded models for scoring translations on aspects like fluency and accuracy.
+- **AI Models**: Utilizes the DeepEval framework with OpenAI models for scoring translations on aspects like fluency and accuracy.
 
-Each agent interacts with Azure OpenAI models to perform specific tasks, using state management and evaluation frameworks to ensure quality and efficiency.
+Each agent interacts with OpenAI models to perform specific tasks, using state management and evaluation frameworks to ensure quality and efficiency.
 
 ## File Structure
 ```
 root/
-├── models/
-│   ├── agent_state.py              # Model for agent state
-│   ├── campaign.py                 # Model for campaigns saved in MongoDB
-├── utils/
-│   ├── deepeval_azure_openai.py    # AzureOpenAI wrapper for DeepEval framework
-│   ├── mongodb_utils.py            # Utilities for MongoDB data handling
 ├── agents/
-│   ├── translation_agent.py        # Contains `TranslationAgent` class and state graph
-│   ├── evaluation_agent.py         # Contains `EvaluationAgent` class for translation evaluation
-│   ├── content_generation_agent.py # Contains `ContentGenerationAgent` class for content generation
-├── queries/
-│   ├── llm_queries.py              # Defines prompts and example queries
-├── templates/
-│   ├── content_template.py         # Defines content templates
-├── home.py                         # Main entry point for the Streamlit interface
-├── requirements.txt                # List of dependencies
+│   ├── content_generation_agent.py # ContentGenerationAgent class for content generation
+│   ├── translation_agent.py        # TranslationAgent class with reflection pattern
+│   ├── evaluation_agent.py         # EvaluationAgent class for translation evaluation
+│   └── agent_state.py              # Shared state schema (TypedDict)
+├── repositories/
+│   ├── campaign_repository.py      # Campaign CRUD + vector search (MongoDB + Milvus)
+│   ├── audience_repository.py      # Audience management
+├── utils/
+│   ├── openai_utils.py             # OpenAI client and embedding generation
+│   ├── deepeval_openai.py          # OpenAI wrapper for DeepEval framework
+│   ├── mongodb_utils.py            # MongoDB client utilities
+│   ├── llm_queries.py              # Default prompts for agents
+│   └── ui_components.py            # Streamlit UI components
+├── pages/
+│   ├── 02_OpenAI_Check.py          # OpenAI API connectivity test
+│   └── ... (other pages)
+├── seeding_scripts/
+│   ├── insert_tempaltes.py         # Load B2B content templates
+│   └── insert_audiences.py         # Load B2B audiences
+├── static/
+│   ├── images/                     # Logos, brand images
+│   └── ui/                         # UI assets
+├── docs/                           # Documentation files
+├── Home.py                         # Main Streamlit application
+├── campaign.py                     # Campaign data model
+├── audience.py                     # Audience data model
+├── pyproject.toml                  # Poetry dependencies
 └── README.md                       # Project documentation
 ```
 ## How to Run
@@ -125,9 +216,10 @@ root/
 
 7. **Create `.env` file** with your OpenAI API key:
    ```env
-   # OpenAI API Configuration
-   AZURE_OPENAI_API_KEY=your_api_key_here
-   AZURE_OPENAI_MODEL=gpt-4o-mini
+   # OpenAI Configuration
+   OPENAI_API_KEY=your_api_key_here
+   OPENAI_MODEL=gpt-4o-mini
+   OPENAI_ENDPOINT=https://api.openai.com/v1  # Optional, defaults to official OpenAI
 
    # Language Configuration
    LANGUAGES=uk-UA,pl-PL,kk-KZ,es-ES,zh-CN,fr-FR,de-DE,hi-IN,ar-SA,pt-BR,ru-RU,ja-JP,ko-KR,it-IT,tr-TR
@@ -136,6 +228,9 @@ root/
    # Database Connections
    CONNECTION_STRING_MONGO=mongodb://admin:password123@localhost:27017/marketing_db?authSource=admin
    CONNECTION_STRING_MILVUS=http://root:Milvus@localhost:19530
+
+   # Monitoring (optional)
+   SENTRY_DSN=
    ```
 
 8. **Run Streamlit** (через Poetry):
@@ -180,8 +275,9 @@ poetry run python seeding_scripts/insert_tempaltes.py
 2. **Set Up Environment Variables**: Create a `.env` file with your OpenAI API key:
    ```env
    # OpenAI Configuration
-   AZURE_OPENAI_API_KEY=your_api_key_here
-   AZURE_OPENAI_MODEL=gpt-4o-mini
+   OPENAI_API_KEY=your_api_key_here
+   OPENAI_MODEL=gpt-4o-mini
+   OPENAI_ENDPOINT=https://api.openai.com/v1  # Optional
 
    # Languages
    LANGUAGES=uk-UA,pl-PL,kk-KZ,es-ES,zh-CN,fr-FR,de-DE,hi-IN,ar-SA,pt-BR,ru-RU,ja-JP,ko-KR,it-IT,tr-TR
@@ -189,6 +285,9 @@ poetry run python seeding_scripts/insert_tempaltes.py
 
    # Database
    CONNECTION_STRING_MONGO=mongodb://admin:password123@localhost:27017/marketing_db?authSource=admin
+
+   # Monitoring (optional)
+   SENTRY_DSN=
    ```
 
 ### Running the Application

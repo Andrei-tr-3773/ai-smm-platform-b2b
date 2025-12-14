@@ -1,6 +1,6 @@
 from pymongo import MongoClient, errors as mongo_errors
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility, exceptions as milvus_errors
-from utils.azure_openai_utils import generate_embeddings  # Import from utils
+from utils.openai_utils import generate_embeddings  # Import from utils
 from campaign import Campaign
 import os
 from urllib.parse import urlparse
