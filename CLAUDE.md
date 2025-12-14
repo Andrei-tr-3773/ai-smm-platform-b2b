@@ -4,7 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A Streamlit-based marketing campaign generator that creates, translates, and evaluates marketing content using Azure OpenAI. The application generates marketing campaigns using templates, translates them into multiple languages, and evaluates translation quality using the G-Eval framework.
+AI SMM Platform for B2B businesses. A Streamlit-based marketing campaign generator that creates, translates, and evaluates professional social media content for Instagram, Facebook, Telegram, and LinkedIn using OpenAI. The application generates platform-optimized marketing campaigns using templates, translates them into 15+ languages, and evaluates translation quality using the G-Eval framework.
+
+**Target Audience:** Small business owners, marketing managers, and digital agencies.
+
+**Example Businesses:**
+- **FitZone Fitness** - Fitness studio (3 locations, 15 employees)
+- **CloudFlow** - B2B SaaS platform for workflow automation
+- **ShopStyle** - E-commerce fashion store
 
 ## Common Commands
 
@@ -58,7 +65,7 @@ The application uses a **LangGraph-based state machine** architecture with three
 - Audiences (name + description)
 
 **Milvus** - Vector database for:
-- Campaign embeddings (1536-dimensional vectors from Azure OpenAI)
+- Campaign embeddings (1536-dimensional vectors from OpenAI)
 - Similarity search for RAG context retrieval
 - Uses IVF_FLAT index with L2 metric
 
@@ -107,17 +114,22 @@ Uses **Liquid templates** (`python-liquid` package) to generate HTML from JSON c
 Required in `.env`:
 
 ```env
-# OpenAI API Configuration
-AZURE_OPENAI_API_KEY=your_api_key
-AZURE_OPENAI_MODEL=gpt-4o-mini
+# OpenAI Configuration
+OPENAI_API_KEY=your_api_key_here
+OPENAI_MODEL=gpt-4o-mini
+OPENAI_ENDPOINT=https://api.openai.com/v1
 
 # Language Configuration
 LANGUAGES=uk-UA,pl-PL,kk-KZ,es-ES,zh-CN,fr-FR,de-DE,hi-IN,ar-SA,pt-BR,ru-RU,ja-JP,ko-KR,it-IT,tr-TR
 DEFAULT_LANGUAGES=uk-UA
 
 # Database Connections
-CONNECTION_STRING_MONGO=mongodb://team-099:password@localhost:27017/team-099
-CONNECTION_STRING_MILVUS=http://user:password@localhost:19530/database
+CONNECTION_STRING_MONGO=mongodb://admin:password@localhost:27017/marketing_db?authSource=admin
+CONNECTION_STRING_MILVUS=http://root:Milvus@localhost:19530
+
+# Monitoring (optional)
+SENTRY_DSN=
+ENVIRONMENT=development
 ```
 
 ## Important Implementation Details
@@ -127,7 +139,7 @@ CONNECTION_STRING_MILVUS=http://user:password@localhost:19530/database
 1. User enters query + selects template + audience
 2. Query is formatted with template structure and audience context
 3. ContentGenerationAgent retrieves similar campaigns (if context enabled)
-4. Azure OpenAI generates JSON content matching template schema
+4. OpenAI generates JSON content matching template schema
 5. JSON is applied to Liquid template → English HTML
 
 ### Translation Flow
@@ -159,3 +171,22 @@ The application supports exporting campaigns in:
 - Streamlit session state for persistence across reruns
 - Agent methods return state dicts that update shared `AgentState`
 - JSON responses from LLM are cleaned (strip ```json markers)
+
+## Git Commit Guidelines
+
+**IMPORTANT:** Git commit messages should be plain text only. DO NOT add:
+- "🤖 Generated with Claude Code"
+- "Co-Authored-By: Claude <noreply@anthropic.com>"
+- Any other metadata about AI generation
+
+**Example:**
+```bash
+# ✅ CORRECT
+git commit -m "Add B2B target audience documentation"
+
+# ❌ INCORRECT
+git commit -m "Add B2B target audience documentation
+
+🤖 Generated with Claude Code
+Co-Authored-By: Claude <noreply@anthropic.com>"
+```
