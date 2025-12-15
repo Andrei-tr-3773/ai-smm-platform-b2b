@@ -48,15 +48,27 @@ source .venv/bin/activate  # Unix/macOS
 
 ### Deployment
 
+**Server Setup:**
+- Poetry location: `~/.local/bin/poetry` (version 2.2.1)
+- Project uses local venv: `.venv/` in project directory
+- Must add Poetry to PATH: `export PATH="$HOME/.local/bin:$PATH"`
+
 ```bash
 # Deploy to production server
 ssh semeniukandrei@34.165.81.129
 cd ~/projects/ai-smm-platform-b2b
 git pull origin main
-poetry install  # if new dependencies
+
+# Add Poetry to PATH and install dependencies
+export PATH="$HOME/.local/bin:$PATH"
+poetry install --no-interaction  # if new dependencies
+
+# Restart Streamlit
 pkill -f 'streamlit run'
-nohup poetry run streamlit run Home.py --server.port=8501 --server.address=0.0.0.0 > streamlit.log 2>&1 &
-tail -f streamlit.log  # check logs
+nohup poetry run streamlit run Home.py --server.port=8501 --server.headless=true > streamlit.log 2>&1 &
+
+# Check logs
+tail -f streamlit.log  # Ctrl+C to exit
 exit
 
 # Verify deployment
