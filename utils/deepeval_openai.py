@@ -1,8 +1,8 @@
 from langchain_openai import ChatOpenAI
 from deepeval.models.base_model import DeepEvalBaseLLM
 
-class DeepEvalAzureOpenAI(DeepEvalBaseLLM):
-    """DeepEval wrapper for OpenAI model (name kept for compatibility)"""
+class DeepEvalOpenAI(DeepEvalBaseLLM):
+    """DeepEval wrapper for OpenAI model"""
     def __init__(self, model):
         self.model = model
 
