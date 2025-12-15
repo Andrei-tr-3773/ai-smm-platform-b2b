@@ -26,7 +26,9 @@ AI SMM Platform for B2B businesses. A Streamlit-based marketing campaign generat
 - Production: http://34.165.81.129:8501 (GCP VM with SSH configured)
 - Local: http://localhost:8501
 - SSH Access: Already configured on local machine
-- Deploy: `ssh` to server → `cd ~/projects/marketing_generator` → `git pull` → restart Streamlit
+- Server project path: `~/projects/ai-smm-platform-b2b` (matches GitHub repo name)
+- Local project path: `~/Projects/marketing_generator_work` (different name - OK!)
+- Deploy: `ssh` to server → `cd ~/projects/ai-smm-platform-b2b` → `git pull` → restart Streamlit
 
 ## Common Commands
 
@@ -49,7 +51,7 @@ source .venv/bin/activate  # Unix/macOS
 ```bash
 # Deploy to production server
 ssh semeniukandrei@34.165.81.129
-cd ~/projects/marketing_generator
+cd ~/projects/ai-smm-platform-b2b
 git pull origin main
 poetry install  # if new dependencies
 pkill -f 'streamlit run'
