@@ -13,6 +13,14 @@ AI SMM Platform for B2B businesses. A Streamlit-based marketing campaign generat
 - **CloudFlow** - B2B SaaS platform for workflow automation
 - **ShopStyle** - E-commerce fashion store
 
+## Repository
+
+**GitHub:** https://github.com/Andrei-tr-3773/ai-smm-platform-b2b
+
+**Deployment:**
+- Production: http://34.165.152.150:8501 (GCP VM)
+- Local: http://localhost:8501
+
 ## Common Commands
 
 ### Development
@@ -102,9 +110,12 @@ Uses **Liquid templates** (`python-liquid` package) to generate HTML from JSON c
 ## Key Files
 
 - `Home.py` - Main Streamlit application with 4 tabs: Create New, Campaigns, Audiences, Prompts
+- `pages/00_Getting_Started.py` - Getting Started page with conversion-optimized content
 - `agents/agent_state.py` - Shared state schema for all agents (TypedDict)
-- `utils/azure_openai_utils.py` - Azure OpenAI client and embedding generation
-- `utils/deepeval_azure_openai.py` - Azure OpenAI wrapper for DeepEval
+- `utils/openai_utils.py` - OpenAI client and embedding generation
+- `utils/deepeval_openai.py` - OpenAI wrapper for DeepEval
+- `utils/api_cost_tracker.py` - API usage and cost tracking
+- `utils/monitoring.py` - Sentry monitoring and metrics tracking
 - `utils/mongodb_utils.py` - MongoDB client utilities
 - `utils/llm_queries.py` - Default prompts for system, translation, criticism, and reflection
 - `campaign.py` / `audience.py` - Data models
