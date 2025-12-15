@@ -17,9 +17,16 @@ AI SMM Platform for B2B businesses. A Streamlit-based marketing campaign generat
 
 **GitHub:** https://github.com/Andrei-tr-3773/ai-smm-platform-b2b
 
+**Git Authentication:**
+- Credential helper configured: `git config credential.helper store`
+- Token stored in: `~/.git-credentials` (local machine only, NOT in repo)
+- Push works automatically: `git push origin main`
+
 **Deployment:**
-- Production: http://34.165.152.150:8501 (GCP VM)
+- Production: http://34.165.81.129:8501 (GCP VM with SSH configured)
 - Local: http://localhost:8501
+- SSH Access: Already configured on local machine
+- Deploy: `ssh` to server → `cd ~/projects/marketing_generator` → `git pull` → restart Streamlit
 
 ## Common Commands
 
@@ -35,6 +42,24 @@ poetry run streamlit run Home.py
 # Activate virtual environment (if needed)
 source .venv/bin/activate  # Unix/macOS
 .venv\Scripts\activate     # Windows
+```
+
+### Deployment
+
+```bash
+# Deploy to production server
+ssh semeniukandrei@34.165.81.129
+cd ~/projects/marketing_generator
+git pull origin main
+poetry install  # if new dependencies
+pkill -f 'streamlit run'
+nohup poetry run streamlit run Home.py --server.port=8501 --server.address=0.0.0.0 > streamlit.log 2>&1 &
+tail -f streamlit.log  # check logs
+exit
+
+# Verify deployment
+curl http://34.165.81.129:8501
+# Or visit in browser: http://34.165.81.129:8501
 ```
 
 ### Testing
