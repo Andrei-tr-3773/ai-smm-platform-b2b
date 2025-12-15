@@ -97,6 +97,12 @@ class APIUsageTracker:
             "metadata": metadata or {}
         })
 
+        # Limit request history to prevent unbounded growth
+        MAX_REQUESTS_HISTORY = 1000
+        if len(self.usage_data["requests"]) > MAX_REQUESTS_HISTORY:
+            self.usage_data["requests"] = self.usage_data["requests"][-MAX_REQUESTS_HISTORY:]
+            logger.info(f"Trimmed request history to {MAX_REQUESTS_HISTORY} most recent requests")
+
         # Save
         self._save_usage()
 
@@ -137,21 +143,30 @@ def get_tracker() -> APIUsageTracker:
 def track_openai_request(model: str, response, metadata: Optional[Dict] = None):
     """Track OpenAI request from response"""
     tracker = get_tracker()
-    if hasattr(response, 'usage'):
-        usage = response.usage
-        tracker.track_request(
-            model=model,
-            input_tokens=usage.prompt_tokens,
-            output_tokens=usage.completion_tokens,
-            metadata=metadata
-        )
-    elif hasattr(response, 'response_metadata'):
-        # LangChain response format
-        if 'token_usage' in response.response_metadata:
-            usage = response.response_metadata['token_usage']
+
+    try:
+        if hasattr(response, 'usage'):
+            usage = response.usage
             tracker.track_request(
                 model=model,
-                input_tokens=usage.get('prompt_tokens', 0),
-                output_tokens=usage.get('completion_tokens', 0),
+                input_tokens=usage.prompt_tokens,
+                output_tokens=usage.completion_tokens,
                 metadata=metadata
             )
+        elif hasattr(response, 'response_metadata'):
+            # LangChain response format
+            if 'token_usage' in response.response_metadata:
+                usage = response.response_metadata['token_usage']
+                tracker.track_request(
+                    model=model,
+                    input_tokens=usage.get('prompt_tokens', 0),
+                    output_tokens=usage.get('completion_tokens', 0),
+                    metadata=metadata
+                )
+            else:
+                logger.warning(f"Cannot track usage: response_metadata exists but no token_usage found. Type: {type(response)}")
+        else:
+            logger.warning(f"Cannot track usage: unknown response format. Type: {type(response)}, Attributes: {dir(response)}")
+    except Exception as e:
+        logger.error(f"Error tracking API usage: {e}. Response type: {type(response)}")
+        # Don't crash the app, just log the error

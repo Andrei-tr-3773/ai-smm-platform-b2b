@@ -214,6 +214,11 @@ def generate_docx(html_content):
 
     return docx_io
 
+@st.cache_resource(ttl=10)  # Cache for 10 seconds
+def get_cached_tracker():
+    """Get cached API usage tracker to avoid file I/O on every rerun"""
+    return get_tracker()
+
 def main():
     # Show disclaimer on first load
     if 'disclaimer_shown' not in st.session_state:
@@ -228,7 +233,7 @@ def main():
     # Sidebar with API usage tracking
     with st.sidebar:
         st.markdown("### 📊 API Usage")
-        tracker = get_tracker()
+        tracker = get_cached_tracker()
         summary = tracker.get_summary()
 
         col1, col2 = st.columns(2)
