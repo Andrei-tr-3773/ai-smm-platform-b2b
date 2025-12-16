@@ -41,13 +41,13 @@
 
 | Feature | Jasper.ai | Copy.ai | Lately.ai | ChatGPT | **US** |
 |---------|-----------|---------|-----------|---------|--------|
-| **Custom Templates per Client** | ❌ Generic | ❌ Generic | ❌ Generic | ❌ No templates | ✅ **YES! For each client** |
-| **Template Editing** | ❌ No | ❌ No | ❌ No | ❌ No | ✅ **YES! Client can modify** |
+| **AI Template Generator** | ❌ No | ❌ No | ❌ No | ❌ No | ✅ **YES! Describe & AI creates** |
+| **Video Script Generator** | ❌ No | ❌ No | ⚠️ Video to post | ❌ No | ✅ **YES! Shot-by-shot scripts** |
 | **Multi-language Translation** | ✅ Yes | ✅ Yes | ❌ No | ✅ Yes | ✅ **YES + Reflection** |
 | **Analytics with "WHY"** | ❌ No | ❌ No | ✅ Basic | ❌ No | ✅ **YES! Explains why it worked** |
 | **Platform-specific Content** | ⚠️ Limited | ⚠️ Limited | ✅ Good | ❌ No | ✅ **Instagram, FB, Telegram, LinkedIn** |
 | **Viral Content Generation** | ⚠️ Generic | ⚠️ Generic | ❌ No | ⚠️ Manual | ✅ **Algorithm-optimized** |
-| **Voice Input** | ❌ No | ❌ No | ❌ No | ❌ No | ✅ **YES (future)** |
+| **Custom Template Editor** | ✅ Has | ✅ Has | ⚠️ Limited | ❌ No | ⏳ **Week 5+ (if needed)** |
 | **B2B Focus** | ❌ B2C | ❌ B2C | ⚠️ Mixed | ❌ Generic | ✅ **B2B specialized** |
 | **Price** | $39-125/mo | $36-186/mo | $83-333/mo | $20/mo | ✅ **$29-199/mo** |
 
@@ -55,46 +55,65 @@
 
 ## 🎯 KILLER FEATURES IN DETAIL
 
-### 1. **Custom Template Creation** (MAIN DIFFERENTIATOR)
+### 1. **AI Template Generator** (MAIN DIFFERENTIATOR)
 
 **What competitors do:**
-- Generic templates for everyone
-- Can't customize
-- One size fits all
+- Manual template creation (Jasper Custom Commands, Copy.ai Workflows)
+- User must write HTML/Liquid code
+- Takes 15-30 minutes per template
+- Requires technical knowledge
 
 **What WE do:**
 ```markdown
-For Client A (Fitness Studio):
-├── Template: "New Class Announcement"
-├── Fields: class_name, instructor, date, benefits
-├── Liquid Template: Customized HTML with their branding
-└── Example: "Join Sarah's HIIT class this Saturday!"
+User: "I need template for gym class announcement with instructor photo"
+AI: [10 seconds later]
+✅ Generated template with fields:
+   - class_name (text)
+   - instructor_name (text)
+   - instructor_photo (url)
+   - date_time (datetime)
+   - benefits (rich_text)
+   - cta_button (text)
+✅ HTML/Liquid code ready
+✅ Preview with sample data
+✅ Save and use immediately
 
-For Client B (SaaS Company):
-├── Template: "Feature Release"
-├── Fields: feature_name, problem_solved, cta_link
-├── Liquid Template: Tech-focused layout
-└── Example: "New API endpoint: 10x faster queries!"
+User: "I need template for SaaS feature release announcement"
+AI: [10 seconds later]
+✅ Generated template with:
+   - feature_name (text)
+   - problem_solved (text)
+   - technical_details (rich_text)
+   - demo_video_url (url)
+   - cta_link (url)
+✅ Professional B2B layout
+✅ Ready to use
 
-For Client C (E-commerce):
-├── Template: "Product Launch"
-├── Fields: product_name, price, discount, image_url
-├── Liquid Template: Product-focused with buy button
-└── Example: "New winter collection: 30% off this week!"
+User: "I need template for product launch with discount"
+AI: [10 seconds later]
+✅ Generated template with:
+   - product_name (text)
+   - product_image (url)
+   - price (number)
+   - discount_percentage (number)
+   - launch_date (date)
+✅ E-commerce optimized
+✅ Buy button included
 ```
 
 **Implementation:**
-- Clients can create templates via UI
-- Liquid template editor
-- Field schema builder
+- User describes template need in plain English
+- AI generates Liquid template + field schema
+- Reflection pattern (generate → validate → improve)
 - Preview before saving
-- Share templates across team
+- "Advanced Mode" shows generated code (for agencies)
 
 **Competitive Advantage:**
-- ✅ Each client has unique templates
-- ✅ Matches their exact needs
-- ✅ No generic "one size fits all"
-- ✅ Can evolve templates over time
+- ✅ NO competitor has AI template generation from description
+- ✅ 10 seconds vs 15-30 minutes (90x faster!)
+- ✅ No HTML/Liquid knowledge needed
+- ✅ Works for 90% of users (not just technical 10%)
+- ✅ Wow-effect for demos and marketing
 
 ---
 
@@ -821,38 +840,52 @@ Features:
 
 ---
 
-### Phase 2: Custom Templates & Multi-tenancy (Week 2) - 28 hours
+### Phase 2: AI Template Generator & Video Scripts (Week 2) - 26 hours
 
-**NEW PHASE - Added based on killer feature**
+**REVISED PHASE - Focus on AI-driven template creation + viral video scripts**
 
-**Goal:** Enable clients to create custom templates
+**Goal:** Enable AI to generate templates instantly + create viral video scripts
 
 **Tasks:**
 
-**2.1 Template Management UI (12 hours)**
-- Create template management page
-- List user's custom templates
-- Create/Edit/Delete templates
-- Template gallery (shared templates)
+**2.1 AI Template Generator (10 hours)**
+- LangGraph workflow: TemplateGeneratorAgent (4 hours)
+  - Node: analyze_description (understand user request)
+  - Node: generate_schema (create field schema)
+  - Node: generate_liquid (create Liquid template)
+  - Node: validate_template (check syntax + security)
+- Template description UI (2 hours)
+- Preview with sample data (2 hours)
+- Save to workspace + "Advanced Mode" (2 hours)
 
-**2.2 Liquid Template Editor (10 hours)**
-- Monaco editor integration (code editor)
-- Syntax highlighting for Liquid
-- Auto-complete for variables
-- Live preview panel
-- Validation & error messages
-
-**2.3 Field Schema Builder (6 hours)**
-- Define template fields (name, type, required)
-- Support types: text, number, url, date, rich_text
-- Default values
-- Validation rules
+**2.2 Video Script Generator (16 hours)**
+- Viral patterns database (2 hours)
+  - Seed with 20-30 proven viral patterns
+  - Hook types, curiosity patterns, trending formats
+- LangGraph workflow: VideoScriptAgent (6 hours)
+  - Node: analyze_campaign (understand content goal)
+  - Node: select_viral_pattern (choose best hook type)
+  - Node: generate_script (shot-by-shot with timing)
+  - Node: add_production_notes (camera angles, lighting, audio)
+  - Node: predict_virality (score 0-100)
+- Platform-specific optimization (4 hours)
+  - Instagram Reels (15-30 sec)
+  - TikTok (15-60 sec)
+  - YouTube Shorts (15-60 sec)
+  - Facebook Video (30-120 sec)
+- Video script UI (4 hours)
+  - Display script with timing
+  - Show production notes
+  - Virality score visualization
+  - Export as PDF/DOCX
 
 **Deliverables:**
-✅ Users can create custom templates
-✅ Liquid editor working
-✅ Live preview functional
-✅ Templates saved to workspace
+✅ AI generates templates from description in 10 seconds
+✅ No HTML/Liquid knowledge needed
+✅ Video scripts with shot-by-shot instructions
+✅ Camera angles, lighting, audio recommendations
+✅ Virality prediction score
+✅ Platform-specific optimization (Instagram, TikTok, etc.)
 
 ---
 
@@ -1103,7 +1136,7 @@ Features:
 
 ```markdown
 Week 1:  Foundation & Cleanup                   (32h) ✅ CRITICAL
-Week 2:  Custom Templates & Multi-tenancy       (28h) ✅ KILLER FEATURE
+Week 2:  AI Template Generator & Video Scripts  (26h) ✅ KILLER FEATURES (2!)
 Week 3:  Analytics & Insights                   (20h) ✅ HIGH ROI
 Week 4:  Viral Content & Platforms              (24h) ✅ HIGH ROI
 Week 5:  Campaign Setup & UX                    (20h) ⭐ UX
@@ -1111,11 +1144,13 @@ Week 6:  Monetization & User Auth               (24h) ⭐ REVENUE
 Week 7:  Content Tools (Blog/SEO)               (20h) ⭐ VALUE-ADD
 Week 8:  Polish & Beta Launch                   (20h) 🚀 LAUNCH
 ─────────────────────────────────────────────────────────────
-TOTAL:                                          188 hours
+TOTAL:                                          186 hours
 
-+ Buffer (testing, unforeseen):                  28 hours
++ Buffer (testing, unforeseen):                  30 hours
 ═════════════════════════════════════════════════════════════
 GRAND TOTAL:                                    216 hours (27 days)
+
+Note: Custom Template Editor deferred to Week 5+ (if agencies demand it)
 ```
 
 ---
