@@ -1,0 +1,854 @@
+[
+  {
+    "id": "curiosity_hook",
+    "name": "Curiosity Hook",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "Stop! You're making these {number} mistakes...",
+        "duration": "0-3sec",
+        "shot_type": "close_up_face",
+        "action": "Person stopping scrolling / Direct eye contact"
+      },
+      "setup": {
+        "template": "{percentage}% of {target_audience} {problem} because...",
+        "duration": "4-10sec",
+        "shot_type": "problem_demonstration"
+      },
+      "reveal": {
+        "template": "Here's what you need to know...",
+        "duration": "11-25sec",
+        "shot_type": "solution_explanation"
+      },
+      "cta": {
+        "template": "Try this and see results!",
+        "duration": "26-30sec",
+        "shot_type": "direct_address"
+      }
+    },
+    "success_rate": 0.75,
+    "avg_views": 50000,
+    "best_for": ["education", "tips", "warnings", "saas", "consulting"]
+  },
+  {
+    "id": "transformation",
+    "name": "Before/After Transformation",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "Watch this {transformation_type}...",
+        "duration": "0-3sec",
+        "shot_type": "split_screen_before",
+        "action": "Show 'before' state"
+      },
+      "setup": {
+        "template": "Here's what happened...",
+        "duration": "4-15sec",
+        "shot_type": "process_montage"
+      },
+      "reveal": {
+        "template": "The result 🤯",
+        "duration": "16-25sec",
+        "shot_type": "split_screen_after"
+      },
+      "cta": {
+        "template": "Want this transformation?",
+        "duration": "26-30sec",
+        "shot_type": "direct_call_to_action"
+      }
+    },
+    "success_rate": 0.82,
+    "avg_views": 120000,
+    "best_for": ["fitness", "diy", "makeover", "product_demo", "testimonial"]
+  },
+  {
+    "id": "tutorial_quick",
+    "name": "Quick Tutorial (60 seconds)",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "How to {achieve_goal} in {time_period}",
+        "duration": "0-3sec",
+        "shot_type": "overhead_angle",
+        "action": "Show materials/setup"
+      },
+      "steps": {
+        "template": "Step {number}: {action}",
+        "duration": "3-5sec per step",
+        "shot_type": "hands_demonstration",
+        "max_steps": 5
+      },
+      "result": {
+        "template": "And you're done!",
+        "duration": "last 5sec",
+        "shot_type": "final_result"
+      }
+    },
+    "success_rate": 0.68,
+    "avg_views": 35000,
+    "best_for": ["how-to", "recipes", "hacks", "tutorial", "education"]
+  },
+  {
+    "id": "problem_solution",
+    "name": "Problem → Agitate → Solution",
+    "platform": ["instagram_reels", "facebook_video", "linkedin", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "Struggling with {problem}?",
+        "duration": "0-3sec",
+        "shot_type": "frustrated_person",
+        "action": "Show pain point"
+      },
+      "agitate": {
+        "template": "It gets worse... {consequences}",
+        "duration": "4-8sec",
+        "shot_type": "problems_compounding"
+      },
+      "solution": {
+        "template": "Here's the solution: {product/service}",
+        "duration": "9-20sec",
+        "shot_type": "demo_solution"
+      },
+      "cta": {
+        "template": "{call_to_action}",
+        "duration": "21-30sec",
+        "shot_type": "direct_address"
+      }
+    },
+    "success_rate": 0.71,
+    "avg_views": 42000,
+    "best_for": ["saas", "services", "products", "promotion", "announcement"]
+  },
+  {
+    "id": "trending_sound",
+    "name": "Trending Sound/Music Sync",
+    "platform": ["instagram_reels", "tiktok"],
+    "pattern": {
+      "hook": {
+        "template": "Use trending audio with visual sync",
+        "duration": "0-3sec",
+        "shot_type": "sync_with_beat",
+        "action": "Match movement to music"
+      },
+      "content": {
+        "template": "{your_message} synced to music beats",
+        "duration": "4-25sec",
+        "shot_type": "rhythmic_transitions"
+      },
+      "finale": {
+        "template": "End on music drop/climax",
+        "duration": "26-30sec",
+        "shot_type": "impactful_ending"
+      }
+    },
+    "success_rate": 0.88,
+    "avg_views": 200000,
+    "best_for": ["entertainment", "product_showcase", "announcement", "promotion"]
+  },
+  {
+    "id": "storytelling_personal",
+    "name": "Personal Story Arc",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts", "facebook_video"],
+    "pattern": {
+      "hook": {
+        "template": "I never thought {surprising_outcome}...",
+        "duration": "0-3sec",
+        "shot_type": "talking_head",
+        "action": "Direct eye contact"
+      },
+      "conflict": {
+        "template": "But then {challenge} happened...",
+        "duration": "4-12sec",
+        "shot_type": "story_visuals"
+      },
+      "resolution": {
+        "template": "Here's how I {overcame/achieved}...",
+        "duration": "13-25sec",
+        "shot_type": "solution_demonstration"
+      },
+      "lesson": {
+        "template": "The lesson: {key_takeaway}",
+        "duration": "26-30sec",
+        "shot_type": "direct_address"
+      }
+    },
+    "success_rate": 0.73,
+    "avg_views": 65000,
+    "best_for": ["testimonial", "brand_story", "motivational", "education"]
+  },
+  {
+    "id": "listicle",
+    "name": "Listicle (Top 3/5 Things)",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts", "linkedin"],
+    "pattern": {
+      "hook": {
+        "template": "{number} {things} you need to know about {topic}",
+        "duration": "0-3sec",
+        "shot_type": "text_overlay",
+        "action": "Show number on screen"
+      },
+      "items": {
+        "template": "#{count}: {item_name} - {quick_explanation}",
+        "duration": "5-7sec per item",
+        "shot_type": "visual_for_each",
+        "max_items": 5
+      },
+      "conclusion": {
+        "template": "Which one surprised you?",
+        "duration": "last 5sec",
+        "shot_type": "engagement_prompt"
+      }
+    },
+    "success_rate": 0.69,
+    "avg_views": 38000,
+    "best_for": ["education", "tips", "product_features", "comparison"]
+  },
+  {
+    "id": "day_in_life",
+    "name": "Day in the Life / Behind the Scenes",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "A day as {role} at {business}",
+        "duration": "0-3sec",
+        "shot_type": "morning_scene",
+        "action": "Show wake-up/start"
+      },
+      "montage": {
+        "template": "Time-lapse of daily activities",
+        "duration": "4-25sec",
+        "shot_type": "fast_cuts",
+        "action": "Show 5-8 quick moments"
+      },
+      "closing": {
+        "template": "That's a wrap! See you tomorrow",
+        "duration": "26-30sec",
+        "shot_type": "friendly_wave"
+      }
+    },
+    "success_rate": 0.64,
+    "avg_views": 28000,
+    "best_for": ["brand_building", "culture", "recruitment", "transparency"]
+  },
+  {
+    "id": "reaction_duet",
+    "name": "Reaction / Duet Format",
+    "platform": ["tiktok", "instagram_reels"],
+    "pattern": {
+      "hook": {
+        "template": "Reacting to {content}",
+        "duration": "0-3sec",
+        "shot_type": "split_screen",
+        "action": "Show original + reaction"
+      },
+      "commentary": {
+        "template": "Your expert take/opinion",
+        "duration": "4-25sec",
+        "shot_type": "reaction_face",
+        "action": "Pause and comment at key moments"
+      },
+      "conclusion": {
+        "template": "What do you think?",
+        "duration": "26-30sec",
+        "shot_type": "ask_audience"
+      }
+    },
+    "success_rate": 0.76,
+    "avg_views": 85000,
+    "best_for": ["commentary", "expert_opinion", "viral_response"]
+  },
+  {
+    "id": "comparison",
+    "name": "This vs. That Comparison",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts", "facebook_video"],
+    "pattern": {
+      "hook": {
+        "template": "{Option A} vs {Option B} - Which is better?",
+        "duration": "0-3sec",
+        "shot_type": "side_by_side",
+        "action": "Show both options"
+      },
+      "comparison": {
+        "template": "Compare key features/benefits",
+        "duration": "4-20sec",
+        "shot_type": "alternating_views"
+      },
+      "verdict": {
+        "template": "The winner is...",
+        "duration": "21-25sec",
+        "shot_type": "reveal_winner"
+      },
+      "cta": {
+        "template": "Which would you choose?",
+        "duration": "26-30sec",
+        "shot_type": "engagement_question"
+      }
+    },
+    "success_rate": 0.70,
+    "avg_views": 45000,
+    "best_for": ["product_comparison", "reviews", "education", "decision_help"]
+  },
+  {
+    "id": "myth_busting",
+    "name": "Myth Busting",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts", "linkedin"],
+    "pattern": {
+      "hook": {
+        "template": "MYTH: {common_belief}",
+        "duration": "0-3sec",
+        "shot_type": "text_bold",
+        "action": "Show myth on screen"
+      },
+      "debunk": {
+        "template": "REALITY: {truth}",
+        "duration": "4-15sec",
+        "shot_type": "explanation_visuals"
+      },
+      "proof": {
+        "template": "Here's the evidence...",
+        "duration": "16-25sec",
+        "shot_type": "data_or_demo"
+      },
+      "lesson": {
+        "template": "Don't believe everything you hear!",
+        "duration": "26-30sec",
+        "shot_type": "direct_address"
+      }
+    },
+    "success_rate": 0.74,
+    "avg_views": 62000,
+    "best_for": ["education", "authority_building", "controversial_topics"]
+  },
+  {
+    "id": "challenge_trend",
+    "name": "Challenge / Trend Participation",
+    "platform": ["tiktok", "instagram_reels"],
+    "pattern": {
+      "hook": {
+        "template": "Trying the {challenge_name} challenge!",
+        "duration": "0-3sec",
+        "shot_type": "enthusiastic_start",
+        "action": "Announce participation"
+      },
+      "attempt": {
+        "template": "Your branded take on the challenge",
+        "duration": "4-25sec",
+        "shot_type": "challenge_execution"
+      },
+      "result": {
+        "template": "Did I do it right?",
+        "duration": "26-30sec",
+        "shot_type": "reaction_to_result"
+      }
+    },
+    "success_rate": 0.85,
+    "avg_views": 150000,
+    "best_for": ["brand_awareness", "engagement", "viral_participation"]
+  },
+  {
+    "id": "customer_testimonial_video",
+    "name": "Customer Testimonial Story",
+    "platform": ["instagram_reels", "facebook_video", "linkedin", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "Meet {customer_name} who {achievement}",
+        "duration": "0-3sec",
+        "shot_type": "customer_intro",
+        "action": "Show happy customer"
+      },
+      "problem": {
+        "template": "Before {product/service}: {struggle}",
+        "duration": "4-10sec",
+        "shot_type": "problem_state"
+      },
+      "solution": {
+        "template": "After using {product/service}: {results}",
+        "duration": "11-20sec",
+        "shot_type": "transformation"
+      },
+      "recommendation": {
+        "template": "I highly recommend...",
+        "duration": "21-30sec",
+        "shot_type": "customer_speaking"
+      }
+    },
+    "success_rate": 0.77,
+    "avg_views": 55000,
+    "best_for": ["testimonial", "social_proof", "conversion"]
+  },
+  {
+    "id": "announcement_exciting",
+    "name": "Exciting Announcement",
+    "platform": ["instagram_reels", "tiktok", "facebook_video", "linkedin"],
+    "pattern": {
+      "hook": {
+        "template": "BIG NEWS! 🎉",
+        "duration": "0-2sec",
+        "shot_type": "energetic_opener",
+        "action": "High energy entrance"
+      },
+      "tease": {
+        "template": "You've been waiting for this...",
+        "duration": "3-8sec",
+        "shot_type": "build_anticipation"
+      },
+      "reveal": {
+        "template": "We're launching {announcement}!",
+        "duration": "9-20sec",
+        "shot_type": "big_reveal"
+      },
+      "details": {
+        "template": "Here's what you need to know...",
+        "duration": "21-30sec",
+        "shot_type": "key_info_overlay"
+      }
+    },
+    "success_rate": 0.72,
+    "avg_views": 48000,
+    "best_for": ["announcement", "product_launch", "events", "news"]
+  },
+  {
+    "id": "unpacking_unboxing",
+    "name": "Unboxing / First Impressions",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "Unboxing {product_name}!",
+        "duration": "0-3sec",
+        "shot_type": "package_close_up",
+        "action": "Show sealed package"
+      },
+      "reveal": {
+        "template": "Let's see what's inside...",
+        "duration": "4-12sec",
+        "shot_type": "opening_footage"
+      },
+      "first_impressions": {
+        "template": "Initial thoughts and features",
+        "duration": "13-25sec",
+        "shot_type": "product_showcase"
+      },
+      "verdict": {
+        "template": "Is it worth it? {verdict}",
+        "duration": "26-30sec",
+        "shot_type": "honest_opinion"
+      }
+    },
+    "success_rate": 0.67,
+    "avg_views": 40000,
+    "best_for": ["product_review", "ecommerce", "new_arrival"]
+  },
+  {
+    "id": "time_lapse",
+    "name": "Time-Lapse Transformation",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "{Task} in {time} seconds",
+        "duration": "0-3sec",
+        "shot_type": "start_state",
+        "action": "Show beginning"
+      },
+      "process": {
+        "template": "Sped-up process footage",
+        "duration": "4-25sec",
+        "shot_type": "time_lapse",
+        "action": "Fast-forward work"
+      },
+      "result": {
+        "template": "Final result reveal",
+        "duration": "26-30sec",
+        "shot_type": "completed_work"
+      }
+    },
+    "success_rate": 0.66,
+    "avg_views": 32000,
+    "best_for": ["process", "art", "cooking", "construction", "makeover"]
+  },
+  {
+    "id": "pov_perspective",
+    "name": "POV (Point of View)",
+    "platform": ["tiktok", "instagram_reels", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "POV: You're a {role} and {situation}",
+        "duration": "0-3sec",
+        "shot_type": "pov_camera",
+        "action": "First-person view"
+      },
+      "scenario": {
+        "template": "Act out the relatable scenario",
+        "duration": "4-25sec",
+        "shot_type": "immersive_pov"
+      },
+      "punchline": {
+        "template": "Relatable ending or twist",
+        "duration": "26-30sec",
+        "shot_type": "reaction_or_resolution"
+      }
+    },
+    "success_rate": 0.79,
+    "avg_views": 95000,
+    "best_for": ["relatable_content", "humor", "scenarios", "brand_personality"]
+  },
+  {
+    "id": "educational_explainer",
+    "name": "Quick Educational Explainer",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts", "linkedin"],
+    "pattern": {
+      "hook": {
+        "template": "Did you know {surprising_fact}?",
+        "duration": "0-3sec",
+        "shot_type": "attention_grabber",
+        "action": "Bold statement"
+      },
+      "explanation": {
+        "template": "Here's how it works...",
+        "duration": "4-20sec",
+        "shot_type": "visual_diagrams"
+      },
+      "application": {
+        "template": "Why this matters to you...",
+        "duration": "21-25sec",
+        "shot_type": "real_world_example"
+      },
+      "cta": {
+        "template": "Want to learn more?",
+        "duration": "26-30sec",
+        "shot_type": "engagement_prompt"
+      }
+    },
+    "success_rate": 0.71,
+    "avg_views": 44000,
+    "best_for": ["education", "thought_leadership", "expertise", "saas"]
+  },
+  {
+    "id": "common_mistakes",
+    "name": "Common Mistakes to Avoid",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts", "linkedin"],
+    "pattern": {
+      "hook": {
+        "template": "{number} mistakes {target_audience} make",
+        "duration": "0-3sec",
+        "shot_type": "warning_text",
+        "action": "Alert viewer"
+      },
+      "mistakes": {
+        "template": "Mistake #{count}: {mistake} ❌",
+        "duration": "5-7sec per mistake",
+        "shot_type": "mistake_visual",
+        "max_mistakes": 5
+      },
+      "solution": {
+        "template": "Do this instead ✅",
+        "duration": "last 8sec",
+        "shot_type": "correct_way"
+      }
+    },
+    "success_rate": 0.73,
+    "avg_views": 58000,
+    "best_for": ["education", "tips", "expertise", "prevention"]
+  },
+  {
+    "id": "limited_offer",
+    "name": "Limited Time Offer / Urgency",
+    "platform": ["instagram_reels", "facebook_video", "tiktok"],
+    "pattern": {
+      "hook": {
+        "template": "⏰ Only {time_left} left!",
+        "duration": "0-3sec",
+        "shot_type": "urgency_timer",
+        "action": "Show countdown"
+      },
+      "offer": {
+        "template": "Get {discount}% off {product}",
+        "duration": "4-12sec",
+        "shot_type": "product_showcase"
+      },
+      "benefits": {
+        "template": "Why you need this now...",
+        "duration": "13-22sec",
+        "shot_type": "benefits_list"
+      },
+      "cta": {
+        "template": "Click link in bio NOW!",
+        "duration": "23-30sec",
+        "shot_type": "strong_cta"
+      }
+    },
+    "success_rate": 0.68,
+    "avg_views": 36000,
+    "best_for": ["sale", "promotion", "limited_offer", "ecommerce"]
+  },
+  {
+    "id": "green_screen_context",
+    "name": "Green Screen Commentary",
+    "platform": ["tiktok", "instagram_reels"],
+    "pattern": {
+      "hook": {
+        "template": "Let me explain {topic}...",
+        "duration": "0-3sec",
+        "shot_type": "talking_head_green_screen",
+        "action": "Point to background content"
+      },
+      "explanation": {
+        "template": "Commentary on background visual",
+        "duration": "4-25sec",
+        "shot_type": "presenter_with_content"
+      },
+      "conclusion": {
+        "template": "That's the key takeaway!",
+        "duration": "26-30sec",
+        "shot_type": "final_thought"
+      }
+    },
+    "success_rate": 0.70,
+    "avg_views": 47000,
+    "best_for": ["education", "commentary", "explainer", "news"]
+  },
+  {
+    "id": "montage_emotional",
+    "name": "Emotional Montage",
+    "platform": ["instagram_reels", "facebook_video", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "This is why we do what we do...",
+        "duration": "0-3sec",
+        "shot_type": "emotional_opener",
+        "action": "Set emotional tone"
+      },
+      "montage": {
+        "template": "Series of impactful moments",
+        "duration": "4-25sec",
+        "shot_type": "cinematic_clips",
+        "action": "Build emotional arc"
+      },
+      "message": {
+        "template": "Our mission: {mission_statement}",
+        "duration": "26-30sec",
+        "shot_type": "text_overlay_finale"
+      }
+    },
+    "success_rate": 0.65,
+    "avg_views": 30000,
+    "best_for": ["brand_story", "mission", "values", "inspiration"]
+  },
+  {
+    "id": "q_and_a",
+    "name": "Q&A / FAQ",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts", "linkedin"],
+    "pattern": {
+      "hook": {
+        "template": "You asked: {question}",
+        "duration": "0-3sec",
+        "shot_type": "question_on_screen",
+        "action": "Show question text"
+      },
+      "answer": {
+        "template": "Here's the answer...",
+        "duration": "4-25sec",
+        "shot_type": "direct_explanation"
+      },
+      "cta": {
+        "template": "Got more questions? Ask below!",
+        "duration": "26-30sec",
+        "shot_type": "engagement_prompt"
+      }
+    },
+    "success_rate": 0.69,
+    "avg_views": 39000,
+    "best_for": ["community_building", "education", "customer_service"]
+  },
+  {
+    "id": "reveal_surprise",
+    "name": "Big Reveal / Surprise",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts", "facebook_video"],
+    "pattern": {
+      "hook": {
+        "template": "Wait for it...",
+        "duration": "0-3sec",
+        "shot_type": "anticipation_build",
+        "action": "Create suspense"
+      },
+      "buildup": {
+        "template": "Building anticipation",
+        "duration": "4-15sec",
+        "shot_type": "slow_approach"
+      },
+      "reveal": {
+        "template": "🤯 The big reveal!",
+        "duration": "16-25sec",
+        "shot_type": "dramatic_reveal"
+      },
+      "reaction": {
+        "template": "Your reaction?",
+        "duration": "26-30sec",
+        "shot_type": "ask_for_comment"
+      }
+    },
+    "success_rate": 0.76,
+    "avg_views": 82000,
+    "best_for": ["product_launch", "transformation", "announcement", "surprise"]
+  },
+  {
+    "id": "influencer_collab",
+    "name": "Collaboration / Takeover",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "Teaming up with {partner}!",
+        "duration": "0-3sec",
+        "shot_type": "both_people_intro",
+        "action": "Show collaboration"
+      },
+      "content": {
+        "template": "Combined expertise/value",
+        "duration": "4-25sec",
+        "shot_type": "collaborative_demo"
+      },
+      "cross_promo": {
+        "template": "Follow {partner} for more!",
+        "duration": "26-30sec",
+        "shot_type": "mutual_promotion"
+      }
+    },
+    "success_rate": 0.80,
+    "avg_views": 110000,
+    "best_for": ["partnerships", "cross_promotion", "reach_expansion"]
+  },
+  {
+    "id": "behind_the_product",
+    "name": "Behind the Product / Process",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts", "linkedin"],
+    "pattern": {
+      "hook": {
+        "template": "How we make {product}...",
+        "duration": "0-3sec",
+        "shot_type": "raw_materials",
+        "action": "Show starting point"
+      },
+      "process": {
+        "template": "Step-by-step creation",
+        "duration": "4-25sec",
+        "shot_type": "process_footage"
+      },
+      "pride": {
+        "template": "That's why we're proud of this!",
+        "duration": "26-30sec",
+        "shot_type": "finished_product"
+      }
+    },
+    "success_rate": 0.67,
+    "avg_views": 35000,
+    "best_for": ["craftsmanship", "transparency", "premium_products", "manufacturing"]
+  },
+  {
+    "id": "stat_fact_shocking",
+    "name": "Shocking Statistic / Fact",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts", "linkedin"],
+    "pattern": {
+      "hook": {
+        "template": "{percentage}% of people don't know this...",
+        "duration": "0-3sec",
+        "shot_type": "bold_text_stat",
+        "action": "Show surprising number"
+      },
+      "context": {
+        "template": "Here's why this matters...",
+        "duration": "4-15sec",
+        "shot_type": "explanation_visual"
+      },
+      "application": {
+        "template": "What you can do about it...",
+        "duration": "16-25sec",
+        "shot_type": "actionable_advice"
+      },
+      "cta": {
+        "template": "Share this with someone who needs to know!",
+        "duration": "26-30sec",
+        "shot_type": "share_prompt"
+      }
+    },
+    "success_rate": 0.72,
+    "avg_views": 53000,
+    "best_for": ["awareness", "education", "advocacy", "thought_leadership"]
+  },
+  {
+    "id": "voice_over_broll",
+    "name": "Voice Over with B-Roll",
+    "platform": ["instagram_reels", "youtube_shorts", "facebook_video", "linkedin"],
+    "pattern": {
+      "hook": {
+        "template": "Let me tell you about {topic}...",
+        "duration": "0-3sec",
+        "shot_type": "voice_over_visuals",
+        "action": "Engaging visuals start"
+      },
+      "narration": {
+        "template": "Voice-over storytelling",
+        "duration": "4-25sec",
+        "shot_type": "b_roll_footage"
+      },
+      "conclusion": {
+        "template": "And that's the story!",
+        "duration": "26-30sec",
+        "shot_type": "final_visual"
+      }
+    },
+    "success_rate": 0.68,
+    "avg_views": 41000,
+    "best_for": ["storytelling", "professional", "brand_narrative", "documentary_style"]
+  },
+  {
+    "id": "poll_question",
+    "name": "Interactive Poll / Question",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "Quick question: {question}?",
+        "duration": "0-3sec",
+        "shot_type": "question_text",
+        "action": "Pose question"
+      },
+      "options": {
+        "template": "Option A vs Option B",
+        "duration": "4-20sec",
+        "shot_type": "show_both_options"
+      },
+      "engagement": {
+        "template": "Comment your answer!",
+        "duration": "21-30sec",
+        "shot_type": "engagement_cta"
+      }
+    },
+    "success_rate": 0.70,
+    "avg_views": 46000,
+    "best_for": ["engagement", "market_research", "community_building"]
+  },
+  {
+    "id": "day_night_routine",
+    "name": "Morning/Night Routine",
+    "platform": ["instagram_reels", "tiktok", "youtube_shorts"],
+    "pattern": {
+      "hook": {
+        "template": "My {morning/night} routine as {role}",
+        "duration": "0-3sec",
+        "shot_type": "alarm_clock",
+        "action": "Start of routine"
+      },
+      "steps": {
+        "template": "Quick clips of each step",
+        "duration": "4-25sec",
+        "shot_type": "routine_montage"
+      },
+      "closing": {
+        "template": "That's how I {start/end} my day!",
+        "duration": "26-30sec",
+        "shot_type": "satisfied_conclusion"
+      }
+    },
+    "success_rate": 0.66,
+    "avg_views": 33000,
+    "best_for": ["lifestyle", "productivity", "wellness", "personal_brand"]
+  }
+]
