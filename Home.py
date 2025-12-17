@@ -584,17 +584,35 @@ def handle_show_template(template_name, mongodb_client, history):
     try:
         content_template = mongodb_client.get_template_by_name(template_name)
         template_content = content_template['liquid_template']
-        items_content = "<br>".join(f"{item['Name']}: {item['Type']} (Max length: {item['MaxLength']})" for item in content_template['items'])
-        
+
+        # Support both old format (Name/Type/MaxLength) and new format (name/type/label)
+        items_lines = []
+        for item in content_template['items']:
+            # Try new format first (AI-generated templates)
+            if 'name' in item:
+                name = item.get('name', 'Unknown')
+                type_ = item.get('type', 'text')
+                label = item.get('label', name)
+                required = '(Required)' if item.get('required', False) else '(Optional)'
+                items_lines.append(f"{label}: {type_} {required}")
+            # Fallback to old format (manual templates)
+            else:
+                name = item.get('Name', 'Unknown')
+                type_ = item.get('Type', 'text')
+                max_length = item.get('MaxLength', 'N/A')
+                items_lines.append(f"{name}: {type_} (Max length: {max_length})")
+
+        items_content = "<br>".join(items_lines)
+
         # Combine the template HTML and items into a single message
         combined_content = (
             f"<details><summary>{template_name} HTML</summary>{template_content}</details>"
             f"<details><summary>Template items</summary>{items_content}</details>"
         )
-        
+
         # Append the combined content as a single message to the history
         history.append((f"Template Details for {template_name}:", combined_content))
-        
+
         st.session_state['history'] = history
     except Exception as e:
         logging.error(f"Error showing template: {e}")
