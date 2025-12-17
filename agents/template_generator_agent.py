@@ -325,20 +325,28 @@ HTML STRUCTURE:
 - Add CSS classes for styling (.campaign-card, .title, .description, etc.)
 - Make layout responsive (use flexbox/grid concepts in class names)
 - Include accessibility attributes (alt, aria-label)
+- INCLUDE <style> tag with complete CSS styling (colors, fonts, spacing, layout)
 
 LAYOUT GUIDELINES:
 - visual-focused: Large image at top, minimal text
 - text-focused: Headline-first, smaller images
 - balanced: Equal weight to images and text
 
-TONE STYLING:
-- professional: Clean, minimal, corporate colors
-- casual: Friendly, rounded corners, warm colors
-- energetic: Bold, bright, dynamic layout
-- inspirational: Large quotes, hero images
-- urgent: Strong CTAs, countdown elements
+TONE STYLING (with CSS):
+- professional: Clean sans-serif fonts, minimal colors (#2c3e50, #ecf0f1), subtle borders
+- casual: Rounded corners (8px+), warm colors (#ff6b6b, #4ecdc4), playful fonts
+- energetic: Bold colors (#ff5722, #ffc107), large headings, dynamic shadows
+- inspirational: Large fonts, hero images, elegant colors (#6c5ce7, #a29bfe)
+- urgent: Strong CTAs (red/orange), countdown timers, bold text
 
-Return ONLY the HTML template with Liquid syntax. NO explanations.
+CSS REQUIREMENTS:
+- Add embedded <style> block at the top with all necessary styles
+- Style all classes used in HTML (.title, .description, .cta-button, etc.)
+- Include responsive design (max-width, padding, margins)
+- Style buttons with hover effects
+- Use proper typography (font-family, line-height, letter-spacing)
+
+Return complete HTML with embedded <style> block and Liquid syntax. NO explanations.
 """
 
             message = HumanMessage(content=prompt)
