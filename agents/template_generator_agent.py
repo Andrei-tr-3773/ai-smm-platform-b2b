@@ -343,8 +343,16 @@ CSS REQUIREMENTS:
 - Add embedded <style> block at the top with all necessary styles
 - Style all classes used in HTML (.title, .description, .cta-button, etc.)
 - Include responsive design (max-width, padding, margins)
-- Style buttons with hover effects
+- Style buttons with :hover pseudo-class for hover effects
 - Use proper typography (font-family, line-height, letter-spacing)
+
+SECURITY REQUIREMENTS:
+- DO NOT use inline event handlers (onclick, onload, onmouseover, etc.)
+- DO NOT use javascript: protocol in links
+- DO NOT use <script> tags
+- Use CSS :hover pseudo-classes instead of inline events
+- Example: .button:hover {{ background: #357ABD; }} (GOOD)
+- Example: <button onclick="..."> (BAD - DO NOT USE)
 
 Return complete HTML with embedded <style> block and Liquid syntax. NO explanations.
 """
@@ -410,7 +418,7 @@ Return complete HTML with embedded <style> block and Liquid syntax. NO explanati
             dangerous_patterns = [
                 (r'<script', 'Found <script> tag (XSS risk)'),
                 (r'javascript:', 'Found javascript: protocol (XSS risk)'),
-                (r'on\w+\s*=', 'Found inline event handler (onclick, onload, etc.)'),
+                (r'<[^>]+\s+on\w+\s*=', 'Found inline event handler (onclick, onload, etc.)'),  # Only catch in HTML tags
                 (r'eval\(', 'Found eval() function (code injection risk)'),
             ]
 
