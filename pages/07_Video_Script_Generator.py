@@ -345,7 +345,7 @@ with col2:
         result = st.session_state.generated_script
 
         # Tabs for different sections
-        script_tabs = st.tabs(["📜 Full Script", "🎥 Sections", "🎬 Production", "⚡ Virality"])
+        script_tabs = st.tabs(["📜 Full Script", "🎥 Sections", "🎬 Production", "⚡ Virality", "🎯 Platform Tips"])
 
         with script_tabs[0]:  # Full Script
             st.markdown("#### Complete Video Script")
@@ -515,6 +515,67 @@ with col2:
                     st.success("Script is optimized!")
             else:
                 st.info("Virality analysis will appear here")
+
+        with script_tabs[4]:  # Platform Tips
+            st.markdown("#### 🎯 Platform-Specific Optimization")
+
+            platform_opt = result.get('platform_optimization', {})
+            if platform_opt:
+                # Duration check
+                st.markdown("##### ⏱️ Duration Check")
+                duration_status = platform_opt.get('duration_check', 'N/A')
+                total_duration = platform_opt.get('total_duration', 0)
+
+                if "✅" in duration_status:
+                    st.success(f"{duration_status} - {total_duration} seconds")
+                elif "⚠️" in duration_status:
+                    st.warning(duration_status)
+                else:
+                    st.info(duration_status)
+
+                # Platform specifications
+                st.markdown("---")
+                st.markdown("##### 📐 Platform Specifications")
+
+                col_spec1, col_spec2 = st.columns(2)
+                with col_spec1:
+                    st.markdown(f"**Aspect Ratio:** {platform_opt.get('aspect_ratio', 'N/A')}")
+                    st.markdown(f"**Tone:** {platform_opt.get('tone', 'N/A')}")
+
+                with col_spec2:
+                    best_times = platform_opt.get('best_times', [])
+                    if best_times:
+                        st.markdown(f"**Best Times:** {', '.join(best_times)}")
+
+                # Critical platform notes
+                st.markdown("---")
+                st.markdown("##### ⚠️ Critical Platform Notes")
+
+                platform_notes = platform_opt.get('platform_notes', [])
+                if platform_notes:
+                    for note in platform_notes:
+                        if "CRITICAL" in note:
+                            st.error(note)
+                        elif "⚠️" in note:
+                            st.warning(note)
+                        else:
+                            st.info(note)
+                else:
+                    st.info("No specific critical notes")
+
+                # Optimization tips
+                st.markdown("---")
+                st.markdown("##### 💡 Optimization Tips")
+
+                optimization_tips = platform_opt.get('optimization_tips', [])
+                if optimization_tips:
+                    for tip in optimization_tips:
+                        st.markdown(f"• {tip}")
+                else:
+                    st.info("No specific optimization tips")
+
+            else:
+                st.info("Platform optimization tips will appear here")
 
         # Selected pattern info (below tabs)
         st.markdown("---")

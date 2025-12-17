@@ -25,6 +25,88 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
+# Platform-specific optimization rules
+PLATFORM_RULES = {
+    "instagram_reels": {
+        "duration": {"min": 15, "max": 30},
+        "aspect_ratio": "9:16 (vertical)",
+        "hook_critical": True,
+        "music_importance": "high",
+        "hashtags": 11,
+        "trending_audio": True,
+        "best_times": ["9-11 AM", "2-3 PM", "7-9 PM"],
+        "tone": "trendy, aesthetic, visually-focused",
+        "optimization_tips": [
+            "Use trending audio for 2x reach",
+            "Hook in first 1 second (not 3!)",
+            "Add text overlays for sound-off viewers",
+            "End with clear CTA in last 3 seconds"
+        ]
+    },
+    "tiktok": {
+        "duration": {"min": 15, "max": 60},
+        "aspect_ratio": "9:16 (vertical)",
+        "hook_critical": True,
+        "music_importance": "very high",
+        "trending_sounds": True,
+        "duet_stitch_friendly": True,
+        "best_times": ["6-9 AM", "12-3 PM", "7-11 PM"],
+        "tone": "casual, fun, authentic, fast-paced",
+        "optimization_tips": [
+            "Trending sound = 50% more views",
+            "Pattern interrupt in first 1 second",
+            "Make it duet/stitch-worthy",
+            "Use on-screen text for accessibility"
+        ]
+    },
+    "youtube_shorts": {
+        "duration": {"min": 15, "max": 60},
+        "aspect_ratio": "9:16 (vertical)",
+        "hook_critical": True,
+        "music_importance": "medium",
+        "seo_important": True,
+        "best_times": ["12-3 PM", "7-10 PM"],
+        "tone": "entertaining, value-driven, retention-focused",
+        "optimization_tips": [
+            "Strong hook + payoff at end (keeps watch time)",
+            "Use keywords in title",
+            "End screen CTA to channel",
+            "Shorts feed algo favors watch time"
+        ]
+    },
+    "facebook_video": {
+        "duration": {"min": 30, "max": 120},
+        "aspect_ratio": "1:1 (square) or 9:16 (vertical)",
+        "hook_critical": False,
+        "music_importance": "low",
+        "captions_critical": True,
+        "best_times": ["1-3 PM", "7-9 PM"],
+        "tone": "community-oriented, story-driven, relatable",
+        "optimization_tips": [
+            "85% watch without sound - USE CAPTIONS",
+            "Longer form okay (60-120 sec)",
+            "Community engagement > virality",
+            "Native upload > link share"
+        ]
+    },
+    "linkedin": {
+        "duration": {"min": 30, "max": 60},
+        "aspect_ratio": "1:1 (square) or 16:9 (landscape)",
+        "hook_critical": True,
+        "music_importance": "low",
+        "professionalism_critical": True,
+        "best_times": ["7-9 AM", "12-1 PM", "5-6 PM"],
+        "tone": "professional, value-driven, thought leadership",
+        "optimization_tips": [
+            "Lead with value/insight, not promotion",
+            "Professional tone (no memes/trends)",
+            "First sentence critical for feed",
+            "Native video outperforms YouTube links"
+        ]
+    }
+}
+
+
 class VideoScriptState(TypedDict):
     """State schema for Video Script Generator workflow."""
     # Inputs
@@ -274,11 +356,17 @@ Return JSON:
             }
             max_duration = duration_limits.get(platform, "30 seconds")
 
+            # Get platform-specific tone guidance
+            platform_rules = PLATFORM_RULES.get(platform, {})
+            platform_tone = platform_rules.get('tone', 'engaging and authentic')
+            hook_timing = "1 second" if platform in ['instagram_reels', 'tiktok'] else "3 seconds"
+
             prompt = f"""Generate a shot-by-shot video script for this campaign:
 
 Campaign: "{campaign}"
 Campaign Analysis: {json.dumps(campaign_analysis, indent=2)}
 Platform: {platform} (max duration: {max_duration})
+Platform Tone: {platform_tone}
 
 Viral Pattern: {pattern['name']}
 Pattern Structure: {json.dumps(pattern['pattern'], indent=2)}
@@ -304,11 +392,14 @@ Return JSON with "sections" array:
 }}
 
 CRITICAL VIRAL ELEMENTS:
-- Hook MUST grab attention in first 3 seconds (use surprise, curiosity, or transformation)
+- Hook MUST grab attention in first {hook_timing} (use surprise, curiosity, or transformation)
 - Include pattern interrupt (something unexpected)
 - Make it shareable (emotional resonance)
-- Authentic tone (not overly scripted)
-- Mobile-first framing (vertical 9:16)
+- Tone must match platform: {platform_tone}
+- Mobile-first framing (vertical 9:16 for {platform})
+
+PLATFORM-SPECIFIC REQUIREMENTS:
+{self._get_platform_specific_requirements(platform)}
 """
 
             response = self.model.invoke(
@@ -555,6 +646,143 @@ SCORING GUIDE:
 """
         return script
 
+    def _get_platform_specific_requirements(self, platform: str) -> str:
+        """
+        Get platform-specific script requirements as formatted string.
+
+        Args:
+            platform: Platform name
+
+        Returns:
+            Formatted string with platform requirements
+        """
+        requirements_map = {
+            "instagram_reels": """
+- Hook in FIRST 1 SECOND (Instagram users scroll fast!)
+- Use trending audio (check Instagram Reels trending section)
+- Add text overlays (many watch without sound)
+- Visual aesthetic matters (beautiful shots, good lighting)
+- End with clear CTA in last 3 seconds""",
+            "tiktok": """
+- Hook in FIRST 1 SECOND (TikTok scroll speed is fastest!)
+- Trending sound is CRITICAL (50% more views)
+- Make it duet/stitch-worthy (encourages user participation)
+- Casual, authentic tone (avoid overly polished/corporate)
+- Fast-paced editing (cuts every 2-3 seconds)""",
+            "youtube_shorts": """
+- Strong hook + payoff at end (watch time is key metric)
+- Use keywords in script for SEO (title/description)
+- End screen CTA to channel/subscription
+- Value-driven content (entertainment or education)
+- Retention > virality (YouTube algo favors watch time)""",
+            "facebook_video": """
+- 85% watch WITHOUT sound - TEXT OVERLAYS CRITICAL
+- Longer form okay (60-120 sec acceptable)
+- Community engagement > virality (comments, shares)
+- Story-driven, relatable content
+- Native upload > link share (better reach)""",
+            "linkedin": """
+- Professional tone (no memes, casual trends)
+- Lead with VALUE/INSIGHT, not promotion
+- First sentence CRITICAL for feed (LinkedIn preview)
+- Thought leadership positioning
+- Native video outperforms YouTube links"""
+        }
+
+        return requirements_map.get(platform, "")
+
+    def get_platform_optimization(self, platform: str, script_sections: List[Dict]) -> Dict:
+        """
+        Generate platform-specific optimization recommendations.
+
+        Args:
+            platform: Target platform name
+            script_sections: Generated script sections
+
+        Returns:
+            Dict with platform_notes, duration_check, and best_practices
+        """
+        rules = PLATFORM_RULES.get(platform, {})
+
+        if not rules:
+            return {
+                'platform_notes': [],
+                'duration_check': 'Platform not found',
+                'best_practices': []
+            }
+
+        # Calculate total duration
+        total_duration = 0
+        for section in script_sections:
+            timing = section.get('timing', '0-0')
+            # Parse timing like "0-3 seconds" or "4-10 seconds"
+            try:
+                parts = timing.replace('seconds', '').replace('sec', '').strip().split('-')
+                if len(parts) == 2:
+                    end_time = int(parts[1])
+                    total_duration = max(total_duration, end_time)
+            except:
+                pass
+
+        # Check duration
+        min_dur = rules.get('duration', {}).get('min', 0)
+        max_dur = rules.get('duration', {}).get('max', 60)
+
+        duration_status = "✅ Perfect"
+        if total_duration < min_dur:
+            duration_status = f"⚠️ Too short ({total_duration}s < {min_dur}s minimum)"
+        elif total_duration > max_dur:
+            duration_status = f"⚠️ Too long ({total_duration}s > {max_dur}s maximum)"
+
+        # Build platform notes
+        platform_notes = []
+
+        # Hook critical
+        if rules.get('hook_critical'):
+            platform_notes.append(
+                f"🎯 CRITICAL: Hook in first {1 if platform in ['instagram_reels', 'tiktok'] else 3} second(s)"
+            )
+
+        # Captions critical (Facebook)
+        if rules.get('captions_critical') and platform == 'facebook_video':
+            platform_notes.append(
+                "❗ CRITICAL: Add captions/text overlays (85% watch without sound)"
+            )
+
+        # Trending audio
+        if rules.get('trending_audio') and platform in ['instagram_reels', 'tiktok']:
+            platform_notes.append(
+                "🎵 Use trending audio for 2-3x more reach!"
+            )
+
+        # Professional tone (LinkedIn)
+        if rules.get('professionalism_critical') and platform == 'linkedin':
+            platform_notes.append(
+                "💼 Keep professional tone - avoid memes/casual trends"
+            )
+
+        # SEO important (YouTube)
+        if rules.get('seo_important') and platform == 'youtube_shorts':
+            platform_notes.append(
+                "🔍 Use keywords in title for discoverability"
+            )
+
+        # Duet/Stitch friendly (TikTok)
+        if rules.get('duet_stitch_friendly') and platform == 'tiktok':
+            platform_notes.append(
+                "🔄 Make it duet/stitch-worthy for viral potential"
+            )
+
+        return {
+            'platform_notes': platform_notes,
+            'duration_check': duration_status,
+            'total_duration': total_duration,
+            'aspect_ratio': rules.get('aspect_ratio', 'N/A'),
+            'best_times': rules.get('best_times', []),
+            'optimization_tips': rules.get('optimization_tips', []),
+            'tone': rules.get('tone', 'engaging')
+        }
+
     def generate_video_script_from_campaign(
         self,
         campaign_content: str,
@@ -600,6 +828,12 @@ SCORING GUIDE:
                 logger.error(f"Video script generation failed: {final_state['error']}")
                 return final_state
 
+            # Generate platform optimization
+            platform_optimization = self.get_platform_optimization(
+                platform=platform,
+                script_sections=final_state['script_sections']
+            )
+
             # Return results
             result = {
                 'campaign_analysis': final_state['campaign_analysis'],
@@ -607,6 +841,7 @@ SCORING GUIDE:
                 'script_sections': final_state['script_sections'],
                 'production_notes': final_state['production_notes'],
                 'virality_prediction': final_state['virality_prediction'],
+                'platform_optimization': platform_optimization,
                 'full_script': final_state['full_script'],
                 'error': final_state.get('error', '')
             }
