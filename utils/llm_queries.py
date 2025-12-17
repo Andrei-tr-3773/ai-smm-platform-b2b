@@ -38,6 +38,19 @@ system_prompt_template = ChatPromptTemplate.from_template(
     You will be provided with a liquid template, that could be any: HTML, JSON, XML, etc. and the JSON with requirements to the generated content.
     As output you should provide a JSON with the content based on the template items. Keys: should be ids from the template items.
 
+    FIELD TYPE RULES:
+    - text fields: Generate relevant text based on context
+    - rich_text fields: Generate HTML formatted text (use <p>, <strong>, <em>, <ul>, <li> tags)
+    - url fields: Generate realistic placeholder image URLs using https://via.placeholder.com/WIDTHxHEIGHT/COLOR/TEXT
+      Example: https://via.placeholder.com/800x600/FF5722/FFFFFF?text=Product+Image
+    - number fields: Generate realistic numbers based on context (prices, quantities, etc.)
+    - datetime fields: Generate realistic dates in readable format
+
+    URL FIELD EXAMPLES:
+    - Product image: https://via.placeholder.com/800x600/4CAF50/FFFFFF?text=Product
+    - Logo: https://via.placeholder.com/200x200/2196F3/FFFFFF?text=Logo
+    - Banner: https://via.placeholder.com/1200x400/FF5722/FFFFFF?text=Banner
+
     Example:
     Query: "{example_query}"
 

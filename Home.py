@@ -83,7 +83,11 @@ def generate_content(user_query, template_name, state, prompts, add_context, sel
         interim_state = content_agent.graph.invoke(agent_state)
         state.update(interim_state)
 
-        content_dict = {'en-US': json.loads(interim_state['initial_english_content'])}
+        # Log generated JSON content
+        generated_json = json.loads(interim_state['initial_english_content'])
+        logging.info(f"Generated JSON content: {json.dumps(generated_json, indent=2)}")
+
+        content_dict = {'en-US': generated_json}
         translated_htmls = apply_template(content_dict, content_template['liquid_template'])
 
         english_html = translated_htmls['en-US']
