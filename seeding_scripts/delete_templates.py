@@ -5,6 +5,13 @@ Delete Templates Script
 Deletes specified templates from MongoDB content_templates collection.
 Useful for removing AI-generated templates with old format (items.field_name).
 """
+import sys
+from pathlib import Path
+
+# Add parent directory to Python path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
 from dotenv import load_dotenv
 from utils.mongodb_utils import MongoDBClient
 
