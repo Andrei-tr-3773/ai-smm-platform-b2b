@@ -1,5 +1,6 @@
 # 06_AI_Template_Generator.py
 import streamlit as st
+import streamlit.components.v1 as components
 import os
 import json
 from dotenv import load_dotenv
@@ -211,56 +212,58 @@ if st.session_state.generated_template:
                 with st.expander("Show raw template"):
                     st.code(result['liquid_template'], language='liquid')
             else:
-                # Display preview in a styled container with CSS
-                st.markdown(
-                    f"""
+                # Display preview using HTML component for proper rendering
+                preview_html = f"""
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
                     <style>
-                        .preview-container {{
-                            border: 2px solid #e0e0e0;
+                        body {{
+                            margin: 0;
                             padding: 20px;
-                            border-radius: 8px;
-                            background-color: #ffffff;
                             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                            background-color: #ffffff;
                         }}
-                        .preview-container img {{
+                        img {{
                             max-width: 100%;
                             height: auto;
                             border-radius: 8px;
                             margin-bottom: 15px;
                         }}
-                        .preview-container h1 {{
+                        h1 {{
                             color: #1a1a1a;
                             font-size: 28px;
                             font-weight: 700;
                             margin: 15px 0;
                         }}
-                        .preview-container h2 {{
+                        h2 {{
                             color: #333333;
                             font-size: 22px;
                             font-weight: 600;
                             margin: 12px 0;
                         }}
-                        .preview-container h3 {{
+                        h3 {{
                             color: #555555;
                             font-size: 18px;
                             font-weight: 600;
                             margin: 10px 0;
                         }}
-                        .preview-container p {{
+                        p {{
                             color: #666666;
                             line-height: 1.6;
                             margin: 10px 0;
                         }}
-                        .preview-container ul {{
+                        ul {{
                             padding-left: 25px;
                             margin: 10px 0;
                         }}
-                        .preview-container li {{
+                        li {{
                             color: #666666;
                             line-height: 1.8;
                             margin: 5px 0;
                         }}
-                        .preview-container a, .preview-container button {{
+                        a, button {{
                             display: inline-block;
                             padding: 12px 24px;
                             background-color: #4A90E2;
@@ -272,26 +275,34 @@ if st.session_state.generated_template:
                             border: none;
                             cursor: pointer;
                         }}
-                        .preview-container a:hover, .preview-container button:hover {{
+                        a:hover, button:hover {{
                             background-color: #357ABD;
                         }}
-                        .preview-container .class-details {{
+                        .class-details, .promotion-details {{
                             background-color: #f5f5f5;
                             padding: 15px;
                             border-radius: 6px;
                             margin-top: 15px;
                         }}
-                        .preview-container .schedule {{
+                        .schedule {{
                             color: #4A90E2;
                             font-weight: 600;
                         }}
+                        .campaign-card {{
+                            border: 2px solid #e0e0e0;
+                            border-radius: 8px;
+                            padding: 20px;
+                            background-color: #ffffff;
+                        }}
                     </style>
-                    <div class="preview-container">
-                        {result['preview_html']}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                </head>
+                <body>
+                    {result['preview_html']}
+                </body>
+                </html>
+                """
+
+                components.html(preview_html, height=600, scrolling=True)
 
                 st.caption("✨ Preview uses AI-generated realistic sample data based on your template's industry and content type")
         else:
