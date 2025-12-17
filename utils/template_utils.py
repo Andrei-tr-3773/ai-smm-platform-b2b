@@ -316,10 +316,10 @@ def render_template_preview(liquid_template: str, field_schema: List[Dict], indu
         # Generate sample data
         sample_data = generate_sample_data(field_schema, industry)
 
-        # Render template
+        # Render template (pass fields directly, not nested in 'items')
         env = Environment()
         template = env.from_string(liquid_template)
-        rendered = template.render(items=sample_data)
+        rendered = template.render(**sample_data)
 
         logger.info(f"Template preview rendered successfully ({len(rendered)} chars)")
         return rendered

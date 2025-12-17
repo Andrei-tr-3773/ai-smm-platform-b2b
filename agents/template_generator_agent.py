@@ -312,11 +312,13 @@ Field Schema:
 Generate a complete HTML template using Liquid syntax:
 
 LIQUID SYNTAX RULES:
-1. Variables: {{{{ items.field_name }}}} - renders field value
-2. Conditionals: {{% if items.field_name %}} ... {{% endif %}} - optional fields
-3. Rich text: Use <div> for rich_text fields
-4. Images: <img src="{{{{ items.field_url }}}}" alt="...">
-5. Dates: {{{{ items.date_field }}}} (formatted as-is)
+1. Variables: {{{{ field_name }}}} - renders field value (use exact field name from schema)
+2. Conditionals: {{% if field_name %}} ... {{% endif %}} - for optional fields
+3. Rich text: Use <div>{{{{ rich_text_field }}}}</div> for rich_text fields
+4. Images: <img src="{{{{ image_url_field }}}}" alt="{{{{ image_alt_field }}}}">
+5. Dates: {{{{ date_field }}}} (formatted as-is)
+
+IMPORTANT: Do NOT use "items." prefix - just use field names directly from schema!
 
 HTML STRUCTURE:
 - Use semantic HTML5 (section, article, header, footer)
@@ -415,8 +417,8 @@ Return ONLY the HTML template with Liquid syntax. NO explanations.
                 logger.info("✓ Security validation passed")
 
             # 3. Field consistency validation
-            # Extract all field references from template
-            field_pattern = r'{{\s*items\.(\w+)\s*}}|{%\s*if\s+items\.(\w+)\s*%}'
+            # Extract all field references from template (now without 'items.' prefix)
+            field_pattern = r'{{\s*(\w+)\s*}}|{%\s*if\s+(\w+)\s*%}'
             matches = re.findall(field_pattern, liquid_template)
             used_fields = set()
             for match in matches:
@@ -501,7 +503,7 @@ Return ONLY the HTML template with Liquid syntax. NO explanations.
             # Render template with sample data
             env = Environment()
             template = env.from_string(liquid_template)
-            preview_html = template.render(items=sample_data)
+            preview_html = template.render(**sample_data)
 
             logger.info("Preview HTML generated successfully")
             return preview_html
