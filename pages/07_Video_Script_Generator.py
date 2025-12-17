@@ -492,8 +492,8 @@ with col2:
                 if factors:
                     for factor, score in factors.items():
                         factor_name = factor.replace('_', ' ').title()
-                        st.markdown(f"**{factor_name}:** {score}/10")
-                        st.progress(score / 10)
+                        st.markdown(f"**{factor_name}:** {score}/100")
+                        st.progress(score / 100)
 
                 # Strengths
                 st.markdown("---")
