@@ -211,10 +211,82 @@ if st.session_state.generated_template:
                 with st.expander("Show raw template"):
                     st.code(result['liquid_template'], language='liquid')
             else:
-                # Display preview in a styled container
+                # Display preview in a styled container with CSS
                 st.markdown(
                     f"""
-                    <div style="border: 2px solid #e0e0e0; padding: 20px; border-radius: 8px; background-color: #f9f9f9;">
+                    <style>
+                        .preview-container {{
+                            border: 2px solid #e0e0e0;
+                            padding: 20px;
+                            border-radius: 8px;
+                            background-color: #ffffff;
+                            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                        }}
+                        .preview-container img {{
+                            max-width: 100%;
+                            height: auto;
+                            border-radius: 8px;
+                            margin-bottom: 15px;
+                        }}
+                        .preview-container h1 {{
+                            color: #1a1a1a;
+                            font-size: 28px;
+                            font-weight: 700;
+                            margin: 15px 0;
+                        }}
+                        .preview-container h2 {{
+                            color: #333333;
+                            font-size: 22px;
+                            font-weight: 600;
+                            margin: 12px 0;
+                        }}
+                        .preview-container h3 {{
+                            color: #555555;
+                            font-size: 18px;
+                            font-weight: 600;
+                            margin: 10px 0;
+                        }}
+                        .preview-container p {{
+                            color: #666666;
+                            line-height: 1.6;
+                            margin: 10px 0;
+                        }}
+                        .preview-container ul {{
+                            padding-left: 25px;
+                            margin: 10px 0;
+                        }}
+                        .preview-container li {{
+                            color: #666666;
+                            line-height: 1.8;
+                            margin: 5px 0;
+                        }}
+                        .preview-container a, .preview-container button {{
+                            display: inline-block;
+                            padding: 12px 24px;
+                            background-color: #4A90E2;
+                            color: white;
+                            text-decoration: none;
+                            border-radius: 6px;
+                            font-weight: 600;
+                            margin-top: 15px;
+                            border: none;
+                            cursor: pointer;
+                        }}
+                        .preview-container a:hover, .preview-container button:hover {{
+                            background-color: #357ABD;
+                        }}
+                        .preview-container .class-details {{
+                            background-color: #f5f5f5;
+                            padding: 15px;
+                            border-radius: 6px;
+                            margin-top: 15px;
+                        }}
+                        .preview-container .schedule {{
+                            color: #4A90E2;
+                            font-weight: 600;
+                        }}
+                    </style>
+                    <div class="preview-container">
                         {result['preview_html']}
                     </div>
                     """,
