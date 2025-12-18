@@ -24,6 +24,14 @@ def get_openai_embedding_model():
 
     return OpenAI(api_key=api_key), embedding_model_name
 
+def get_openai_client():
+    """Get OpenAI client for direct API calls"""
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise ValueError("API key not found. Please set the OPENAI_API_KEY environment variable.")
+
+    return OpenAI(api_key=api_key)
+
 def generate_embeddings(text, model=None):
     """Generate embeddings using OpenAI"""
     embedding_model, embedding_model_name = model or get_openai_embedding_model()
