@@ -41,15 +41,15 @@ system_prompt_template = ChatPromptTemplate.from_template(
     FIELD TYPE RULES:
     - text fields: Generate relevant text based on context
     - rich_text fields: Generate HTML formatted text (use <p>, <strong>, <em>, <ul>, <li> tags)
-    - url fields: Generate realistic placeholder image URLs using https://via.placeholder.com/WIDTHxHEIGHT/COLOR/TEXT
-      Example: https://via.placeholder.com/800x600/FF5722/FFFFFF?text=Product+Image
+    - url fields: Generate realistic placeholder image URLs using https://placehold.co/WIDTHxHEIGHT/BGCOLOR/TEXTCOLOR?text=Your+Text
+      Example: https://placehold.co/800x600/orange/white?text=Product+Image
     - number fields: Generate realistic numbers based on context (prices, quantities, etc.)
     - datetime fields: Generate realistic dates in readable format
 
     URL FIELD EXAMPLES:
-    - Product image: https://via.placeholder.com/800x600/4CAF50/FFFFFF?text=Product
-    - Logo: https://via.placeholder.com/200x200/2196F3/FFFFFF?text=Logo
-    - Banner: https://via.placeholder.com/1200x400/FF5722/FFFFFF?text=Banner
+    - Product image: https://placehold.co/800x600/green/white?text=Product
+    - Logo: https://placehold.co/200x200/blue/white?text=Logo
+    - Banner: https://placehold.co/1200x400/orange/white?text=Banner
 
     Example:
     Query: "{example_query}"

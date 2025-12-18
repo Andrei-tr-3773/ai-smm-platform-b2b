@@ -363,11 +363,9 @@ def main():
                     with st.chat_message("user"):
                         st.markdown(query)
                     with st.chat_message("assistant"):
-                        # Use st.components for HTML rendering
-                        if "<html" in response.lower() or "<div" in response.lower() or "<details" in response.lower():
-                            st.components.v1.html(response, height=600, scrolling=True)
-                        else:
-                            st.markdown(response, unsafe_allow_html=True)
+                        # Always use st.markdown for HTML rendering to allow external images
+                        # components.html() uses iframe which blocks external resources
+                        st.markdown(response, unsafe_allow_html=True)
 
         except Exception as e:
             logging.error(f"Error in 'Create New' tab: {e}")

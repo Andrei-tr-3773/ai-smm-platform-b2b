@@ -506,7 +506,7 @@ Return complete HTML with embedded <style> block and Liquid syntax. NO explanati
                 if field_type == 'text':
                     sample_data[field_name] = field.get('placeholder', f"Sample {field['label']}")
                 elif field_type == 'url':
-                    sample_data[field_name] = "https://via.placeholder.com/400x300"
+                    sample_data[field_name] = "https://placehold.co/400x300"
                 elif field_type == 'number':
                     sample_data[field_name] = "99"
                 elif field_type == 'datetime':

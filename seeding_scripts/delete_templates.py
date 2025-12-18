@@ -22,9 +22,9 @@ load_dotenv(override=True)
 # CONFIGURE: Add template names you want to delete here
 # ============================================================================
 TEMPLATES_TO_DELETE = [
-    "fitness_class",
-    "miami_template",
-    "hot_dog_template",
+    "dog_template",
+    "gym_template",
+    "dog_template",
 ]
 # ============================================================================
 

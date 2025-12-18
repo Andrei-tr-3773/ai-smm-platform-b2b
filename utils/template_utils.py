@@ -207,13 +207,13 @@ def generate_sample_data(field_schema: List[Dict], industry: str = "generic") ->
             if 'image' in field_name.lower() or 'photo' in field_name.lower() or 'picture' in field_name.lower():
                 # Use different placeholder sizes based on context
                 if 'logo' in field_name.lower():
-                    sample_data[field_name] = "https://via.placeholder.com/200x100/FF6B35/FFFFFF?text=Logo"
+                    sample_data[field_name] = "https://placehold.co/200x100/FF6B35/FFF?text=Logo"
                 elif 'instructor' in field_name.lower() or 'person' in field_name.lower() or 'customer' in field_name.lower():
-                    sample_data[field_name] = "https://via.placeholder.com/300x300/4A90E2/FFFFFF?text=Person"
+                    sample_data[field_name] = "https://placehold.co/300x300/4A90E2/FFF?text=Person"
                 elif 'product' in field_name.lower():
-                    sample_data[field_name] = "https://via.placeholder.com/600x400/50C878/FFFFFF?text=Product"
+                    sample_data[field_name] = "https://placehold.co/600x400/50C878/FFF?text=Product"
                 else:
-                    sample_data[field_name] = "https://via.placeholder.com/800x600/9370DB/FFFFFF?text=Image"
+                    sample_data[field_name] = "https://placehold.co/800x600/9370DB/FFF?text=Image"
 
             elif 'video' in field_name.lower():
                 sample_data[field_name] = "https://www.youtube.com/embed/dQw4w9WgXcQ"
@@ -226,7 +226,7 @@ def generate_sample_data(field_schema: List[Dict], industry: str = "generic") ->
                 else:
                     sample_data[field_name] = "https://example.com"
             else:
-                sample_data[field_name] = "https://via.placeholder.com/400x300"
+                sample_data[field_name] = "https://placehold.co/400x300"
 
         # NUMBER FIELDS
         elif field_type == 'number':
