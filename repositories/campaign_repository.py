@@ -2,6 +2,10 @@ from pymongo import MongoClient, errors as mongo_errors
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility, exceptions as milvus_errors
 from utils.openai_utils import generate_embeddings  # Import from utils
 from campaign import Campaign
+from bson import ObjectId
+from datetime import datetime
+from dataclasses import asdict
+from typing import List, Dict, Optional
 import os
 from urllib.parse import urlparse
 import logging
@@ -162,3 +166,101 @@ class CampaignRepository:
         except Exception as e:
             logger.error(f"An unexpected error occurred while retrieving campaigns: {e}")
             raise
+
+    def save_campaign_analytics(
+        self,
+        campaign_id: str,
+        metrics: List,
+        analysis: Dict
+    ):
+        """
+        Save analytics data for campaign.
+
+        Args:
+            campaign_id: Campaign identifier
+            metrics: List of CampaignMetrics objects
+            analysis: Dict with performance_summary, patterns, insights, recommendations
+        """
+        try:
+            from analytics.analytics_models import CampaignMetrics
+
+            # Convert metrics to dict format
+            metrics_dicts = []
+            for m in metrics:
+                if isinstance(m, CampaignMetrics):
+                    m_dict = asdict(m)
+                    # Convert date objects to strings for MongoDB
+                    m_dict['date'] = str(m.date)
+                    metrics_dicts.append(m_dict)
+                else:
+                    metrics_dicts.append(m)
+
+            # Convert patterns and insights to serializable format
+            serialized_analysis = {
+                "performance_summary": analysis.get("performance_summary", {}),
+                "detected_patterns": [
+                    {
+                        "pattern_type": p.pattern_type,
+                        "description": p.description,
+                        "date_range": [str(p.date_range[0]), str(p.date_range[1])],
+                        "impact": p.impact
+                    }
+                    for p in analysis.get("detected_patterns", [])
+                ],
+                "content_insights": [
+                    {
+                        "campaign_id": i.campaign_id,
+                        "insight_type": i.insight_type,
+                        "explanation": i.explanation,
+                        "confidence": i.confidence,
+                        "evidence": i.evidence
+                    }
+                    for i in analysis.get("content_insights", [])
+                ],
+                "recommendations": analysis.get("recommendations", []),
+                "next_month_strategy": analysis.get("next_month_strategy", "")
+            }
+
+            analytics_doc = {
+                "campaign_id": campaign_id,
+                "metrics": metrics_dicts,
+                "analysis": serialized_analysis,
+                "generated_at": datetime.now()
+            }
+
+            self.mongo_collection.update_one(
+                {"_id": ObjectId(campaign_id)},
+                {"$set": {"analytics": analytics_doc}},
+                upsert=False
+            )
+
+            logger.info(f"Saved analytics for campaign {campaign_id}")
+
+        except Exception as e:
+            logger.error(f"Failed to save campaign analytics: {e}")
+            raise
+
+    def get_campaign_analytics(self, campaign_id: str) -> Optional[Dict]:
+        """
+        Retrieve analytics for campaign.
+
+        Args:
+            campaign_id: Campaign identifier
+
+        Returns:
+            Dict with analytics data or None if not found
+        """
+        try:
+            campaign = self.mongo_collection.find_one({"_id": ObjectId(campaign_id)})
+            analytics = campaign.get("analytics") if campaign else None
+
+            if analytics:
+                logger.info(f"Retrieved analytics for campaign {campaign_id}")
+            else:
+                logger.info(f"No analytics found for campaign {campaign_id}")
+
+            return analytics
+
+        except Exception as e:
+            logger.error(f"Failed to retrieve campaign analytics: {e}")
+            return None
