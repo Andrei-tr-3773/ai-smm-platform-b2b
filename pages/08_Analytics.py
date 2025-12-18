@@ -43,7 +43,15 @@ if not has_real_data:
     with col2:
         st.caption("Demo analytics use industry benchmarks to show you what insights look like.")
 
-    if not show_demo and 'analytics_result' not in st.session_state:
+    # Check if we should show analytics (demo mode or manual metrics or already generated)
+    should_show_analytics = (
+        show_demo or
+        st.session_state.get('show_demo_analytics', False) or
+        st.session_state.get('use_manual_metrics', False) or
+        'analytics_result' in st.session_state
+    )
+
+    if not should_show_analytics:
         # Don't show analytics yet
         st.markdown("---")
         st.markdown("### 💡 Why 30 days?")
@@ -91,10 +99,9 @@ if not has_real_data:
                 else:
                     st.error("Please enter at least your Views count")
 
-        if not st.session_state.get('use_manual_metrics', False):
-            st.markdown("---")
-            st.info("In the meantime, focus on creating great content! 🚀")
-            st.stop()  # Don't show analytics UI
+        st.markdown("---")
+        st.info("In the meantime, focus on creating great content! 🚀")
+        st.stop()  # Don't show analytics UI
     elif show_demo:
         # User clicked "Show Demo Analytics" - set flag
         st.session_state['show_demo_analytics'] = True
@@ -138,6 +145,57 @@ if generate_trigger:
                 total_engagement = manual['likes'] + manual['comments'] + manual['shares']
                 engagement_rate = total_engagement / manual['views'] if manual['views'] > 0 else 0
 
+                # Generate 30 days of similar performance based on user's actual metrics
+                # Scale down from industry average to match user's performance level
+                start = date.today() - timedelta(days=29)
+
+                # Get industry baseline
+                benchmark = generator.generate_benchmark_data()
+                industry_avg_views = benchmark.avg_views
+
+                # Calculate user's performance relative to industry
+                # If user has 100 views vs industry 5000, scale_factor = 100/5000 = 0.02
+                scale_factor = manual['views'] / industry_avg_views if industry_avg_views > 0 else 0.1
+
+                # Generate 30 days with user's performance level
+                # Use very low virality_factor and then scale all metrics down
+                metrics_raw = generator.generate_campaign_metrics(
+                    campaign_id=campaign_config["id"],
+                    start_date=start,
+                    days=30,
+                    virality_factor=0.3  # Low baseline
+                )
+
+                # Scale all metrics to match user's actual performance
+                metrics = []
+                for m in metrics_raw:
+                    scaled_views = int(m.views * scale_factor)
+                    scaled_likes = int(m.likes * scale_factor)
+                    scaled_comments = int(m.comments * scale_factor)
+                    scaled_shares = int(m.shares * scale_factor)
+                    scaled_saves = int(m.saves * scale_factor)
+                    scaled_clicks = int(m.clicks * scale_factor)
+
+                    # Ensure at least some minimal values
+                    scaled_views = max(10, scaled_views)
+
+                    metrics.append(CampaignMetrics(
+                        campaign_id=m.campaign_id,
+                        date=m.date,
+                        views=scaled_views,
+                        likes=scaled_likes,
+                        comments=scaled_comments,
+                        shares=scaled_shares,
+                        saves=scaled_saves,
+                        clicks=scaled_clicks,
+                        engagement_rate=m.engagement_rate,  # Keep same rate
+                        save_rate=m.save_rate,
+                        click_through_rate=m.click_through_rate,
+                        virality_score=m.virality_score,
+                        platform=m.platform
+                    ))
+
+                # Replace last day with actual manual metrics
                 metric = CampaignMetrics(
                     campaign_id=campaign_config["id"],
                     date=date.today(),
@@ -153,22 +211,9 @@ if generate_trigger:
                     virality_score=(manual['shares'] / manual['views'] * 100) if manual['views'] > 0 else 0,
                     platform=campaign_config["platform"]
                 )
-
-                # Generate 30 days of projected metrics based on manual input
-                start = date.today() - timedelta(days=29)
-                base_virality = metric.virality_score / 10  # Scale to 1.0-3.0 range
-
-                metrics = generator.generate_campaign_metrics(
-                    campaign_id=campaign_config["id"],
-                    start_date=start,
-                    days=30,
-                    virality_factor=max(1.0, base_virality)  # Use manual data to calibrate
-                )
-
-                # Replace last day with actual manual metrics
                 metrics[-1] = metric
 
-                st.info("📊 Using your manual metrics + AI-projected historical data for insights")
+                st.info(f"📊 Analyzing based on your {manual['views']} views (scaled to match your performance level)")
 
             else:
                 # Generate mock data (demo mode)
