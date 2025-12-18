@@ -26,6 +26,7 @@ html2docx = "^1.6.0"
 pypandoc = "^1.15"
 pdf2docx = "^0.5.8"
 sentry-sdk = "^2.47.0"
+plotly = "^6.5.0"
 
 [tool.poetry.group.dev.dependencies]
 watchdog = "4.0.2"
