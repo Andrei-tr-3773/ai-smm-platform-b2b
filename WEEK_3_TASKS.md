@@ -233,7 +233,7 @@ elif user_tier == "professional":
 - ✅ Example businesses (FitZone, CloudFlow, ShopStyle)
 - ✅ Monitoring & API cost tracking working
 - ✅ Getting Started page deployed
-- ✅ Production deployment on http://34.165.81.129:8501
+- ✅ Production deployment on http://35.252.20.180:8501
 - ✅ GitHub repo: https://github.com/Andrei-tr-3773/ai-smm-platform-b2b
 - ✅ LangGraph agents working (ContentGenerationAgent, TranslationAgent, TemplateGeneratorAgent, VideoScriptAgent)
 - ✅ AI Template Generator (10 sec template creation)

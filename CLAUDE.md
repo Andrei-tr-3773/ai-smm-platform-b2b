@@ -23,7 +23,7 @@ AI SMM Platform for B2B businesses. A Streamlit-based marketing campaign generat
 - Push works automatically: `git push origin main`
 
 **Deployment:**
-- Production: http://34.165.81.129:8501 (GCP VM with SSH configured)
+- Production: http://35.252.20.180:8501 (GCP VM with SSH configured)
 - Local: http://localhost:8501
 - SSH Access: Already configured on local machine
 - Server project path: `~/projects/ai-smm-platform-b2b` (matches GitHub repo name)
@@ -55,7 +55,7 @@ source .venv/bin/activate  # Unix/macOS
 
 ```bash
 # Deploy to production server
-ssh semeniukandrei@34.165.81.129
+ssh semeniukandrei@35.252.20.180
 cd ~/projects/ai-smm-platform-b2b
 git pull origin main
 
@@ -72,8 +72,8 @@ tail -f streamlit.log  # Ctrl+C to exit
 exit
 
 # Verify deployment
-curl http://34.165.81.129:8501
-# Or visit in browser: http://34.165.81.129:8501
+curl http://35.252.20.180:8501
+# Or visit in browser: http://35.252.20.180:8501
 ```
 
 ### Testing
