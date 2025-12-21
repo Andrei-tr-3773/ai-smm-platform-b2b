@@ -12,6 +12,7 @@ from agents.content_generation_agent import ContentGenerationAgent
 from agents.translation_agent import TranslationAgent
 from agents.evaluation_agent import EvaluationAgent
 from agents.platform_optimizer_agent import optimize_for_platform
+from agents.viral_content_agent import generate_viral_content_for_query
 from agents.agent_state import AgentState
 from audience import Audience
 from repositories.audience_repository import AudienceRepository
@@ -367,6 +368,60 @@ def main():
                     else:
                         st.session_state['selected_platform'] = None
 
+                    # Week 4: Viral content generation option
+                    use_viral_patterns = st.checkbox("🔥 Use Viral Patterns", value=False, key='use_viral_patterns')
+
+                    if use_viral_patterns:
+                        with st.expander("Viral Pattern Settings", expanded=True):
+                            # Industry selection
+                            industry_options = ["fitness", "saas", "ecommerce", "education", "consulting", "all"]
+                            selected_industry = st.selectbox(
+                                "Industry",
+                                options=industry_options,
+                                index=1,  # Default to 'saas'
+                                key='viral_industry'
+                            )
+
+                            # Account type
+                            account_type_options = {
+                                "creator": "👤 Creator/Influencer",
+                                "brand_with_video": "🎥 Brand (with video)",
+                                "brand_static_only": "📄 Brand (static only)"
+                            }
+                            selected_account_type = st.selectbox(
+                                "Account Type",
+                                options=list(account_type_options.keys()),
+                                format_func=lambda x: account_type_options[x],
+                                index=2,  # Default to 'brand_static_only'
+                                key='viral_account_type'
+                            )
+
+                            # Content type
+                            content_type_options = ["video", "static", "carousel"]
+                            selected_content_type = st.selectbox(
+                                "Content Type",
+                                options=content_type_options,
+                                index=1,  # Default to 'static'
+                                key='viral_content_type'
+                            )
+
+                            # Follower count
+                            follower_count = st.number_input(
+                                "Follower Count",
+                                min_value=0,
+                                max_value=1000000,
+                                value=5000,
+                                step=1000,
+                                key='viral_follower_count'
+                            )
+
+                            st.session_state['viral_settings'] = {
+                                'industry': selected_industry,
+                                'account_type': selected_account_type,
+                                'content_type': selected_content_type,
+                                'follower_count': follower_count
+                            }
+
                     add_context = st.checkbox("Add Context", value=True, key='add_context')
                     col1_1, col1_2 = st.columns(2)
                     generate_button = col1_1.button("Generate", use_container_width=True)
@@ -542,6 +597,8 @@ def handle_generate(user_query, template_name, state, prompts, history, spinner_
         selected_audience_description = st.session_state.get('selected_audience_description', '')
         # Week 4: Retrieve selected platform
         selected_platform = st.session_state.get('selected_platform', None)
+        # Week 4: Check if viral patterns are enabled
+        use_viral_patterns = st.session_state.get('use_viral_patterns', False)
 
         # Add the original user query (without audience context) to the chat history
         history.append([user_query, "Generating content..."])
@@ -549,23 +606,52 @@ def handle_generate(user_query, template_name, state, prompts, history, spinner_
 
         with spinner_placeholder:
             with st.spinner("Generating..."):
-                # Pass the audience information and platform to the generate_content function
-                result, new_state = generate_content(
-                    user_query,
-                    template_name,
-                    state,
-                    prompts,
-                    add_context,
-                    selected_audience_name,
-                    selected_audience_description,
-                    selected_platform  # Week 4: Platform optimization
-                )
+                # Week 4: If viral patterns are enabled, use viral content agent
+                if use_viral_patterns:
+                    viral_settings = st.session_state.get('viral_settings', {})
+                    platform = selected_platform if selected_platform else "instagram"
+
+                    viral_result = generate_viral_content_for_query(
+                        user_query=user_query,
+                        platform=platform,
+                        industry=viral_settings.get('industry', 'saas'),
+                        follower_count=viral_settings.get('follower_count', 5000),
+                        account_type=viral_settings.get('account_type', 'brand_static_only'),
+                        content_type=viral_settings.get('content_type', 'static')
+                    )
+
+                    # Format viral content output
+                    result = viral_result.get('final_content', 'Error generating viral content')
+
+                    # Store viral content in state for potential translation
+                    viral_content_json = {
+                        "hook": viral_result.get('hook', ''),
+                        "body": viral_result.get('body', ''),
+                        "cta": viral_result.get('cta', ''),
+                        "pattern": viral_result.get('pattern_name', '')
+                    }
+                    state['initial_english_content'] = json.dumps(viral_content_json)
+                    new_state = state
+
+                else:
+                    # Original content generation workflow
+                    result, new_state = generate_content(
+                        user_query,
+                        template_name,
+                        state,
+                        prompts,
+                        add_context,
+                        selected_audience_name,
+                        selected_audience_description,
+                        selected_platform  # Week 4: Platform optimization
+                    )
 
         # Update the chat history with the generated content
         history[-1][1] = result
         st.session_state.update({'state': new_state, 'history': history})
     except Exception as e:
         logging.error(f"Error handling generate: {e}")
+        logging.error(traceback.format_exc())
         st.error("An error occurred during content generation.")
 
 def handle_translate(state, selected_languages, prompts, history, spinner_placeholder):
