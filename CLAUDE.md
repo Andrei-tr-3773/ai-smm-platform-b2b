@@ -23,11 +23,12 @@ AI SMM Platform for B2B businesses. A Streamlit-based marketing campaign generat
 - Push works automatically: `git push origin main`
 
 **Git Branch Strategy:**
-- **Week 3 Development:** ALL Week 3 commits MUST go to `feature/week_3` branch
-- Create branch if not exists: `git checkout -b feature/week_3`
-- Switch to branch: `git checkout feature/week_3`
-- Commit to feature branch: `git add . && git commit -m "message" && git push origin feature/week_3`
-- After Week 3 completion: merge to main via pull request or direct merge
+- **Week 4 Development:** ALL Week 4 commits MUST go to `feature/week_4` branch
+- Create branch if not exists: `git checkout -b feature/week_4`
+- Switch to branch: `git checkout feature/week_4`
+- Commit to feature branch: `git add . && git commit -m "message" && git push origin feature/week_4`
+- After Week 4 completion: merge to main via pull request or direct merge
+- Previous weeks: `feature/week_3` (merged to main)
 
 **Deployment:**
 - Production: http://35.252.20.180:8501 (GCP VM with SSH configured)
