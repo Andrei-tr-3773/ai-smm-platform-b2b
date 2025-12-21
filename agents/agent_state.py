@@ -1,4 +1,4 @@
-from typing import TypedDict, Annotated
+from typing import TypedDict, Annotated, Optional
 from langchain_core.messages import AnyMessage
 import operator
 
@@ -20,3 +20,8 @@ class AgentState(TypedDict):
     evaluation: dict
     selected_audience_name: str
     selected_audience_description: str
+
+    # Week 4: Platform optimization fields
+    selected_platform: Optional[str]  # instagram, facebook, telegram, linkedin
+    optimized_content: Optional[str]  # Platform-optimized content
+    posting_guide: Optional[str]  # Full posting guide with timing recommendations

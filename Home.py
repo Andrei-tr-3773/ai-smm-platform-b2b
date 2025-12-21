@@ -11,6 +11,7 @@ from langchain_core.messages import HumanMessage
 from agents.content_generation_agent import ContentGenerationAgent
 from agents.translation_agent import TranslationAgent
 from agents.evaluation_agent import EvaluationAgent
+from agents.platform_optimizer_agent import optimize_for_platform
 from agents.agent_state import AgentState
 from audience import Audience
 from repositories.audience_repository import AudienceRepository
@@ -50,7 +51,7 @@ def apply_template(content_dict, html_template):
         logging.error(f"Error applying template: {e}")
         return {}
 
-def generate_content(user_query, template_name, state, prompts, add_context, selected_audience_name, selected_audience_description):
+def generate_content(user_query, template_name, state, prompts, add_context, selected_audience_name, selected_audience_description, selected_platform=None):
     try:
         model = get_openai_model()
         mongodb_client = MongoDBClient("content_templates")
@@ -77,7 +78,8 @@ def generate_content(user_query, template_name, state, prompts, add_context, sel
             messages=state['messages'],
             content_template=content_template,
             selected_audience_name=selected_audience_name,
-            selected_audience_description=selected_audience_description
+            selected_audience_description=selected_audience_description,
+            selected_platform=selected_platform
         )
 
         interim_state = content_agent.graph.invoke(agent_state)
@@ -93,8 +95,39 @@ def generate_content(user_query, template_name, state, prompts, add_context, sel
         english_html = translated_htmls['en-US']
         logging.info(f"english_html: {english_html}")
 
-        # Return HTML with language header
-        formatted_html = f"<h3>Generated Content (en-US)</h3>\n{english_html}"
+        # Week 4: Platform optimization (if platform selected)
+        if selected_platform:
+            logging.info(f"Optimizing content for platform: {selected_platform}")
+            try:
+                # Extract text content from HTML for optimization
+                import re
+                text_content = re.sub('<[^<]+?>', '', english_html)  # Strip HTML tags
+
+                optimization_result = optimize_for_platform(
+                    content=text_content,
+                    platform=selected_platform,
+                    content_type="feed_post"
+                )
+
+                # Store optimization results in state
+                state['optimized_content'] = optimization_result['optimized_content']
+                state['posting_guide'] = optimization_result['posting_guide']
+
+                # Add posting guide to output
+                formatted_html = f"<h3>Generated Content (en-US)</h3>\n{english_html}"
+                formatted_html += f"\n\n<div style='background-color: #f0f0f0; padding: 15px; margin-top: 20px; border-left: 4px solid #4CAF50;'>"
+                formatted_html += f"<h4>📱 {selected_platform.title()} Optimization</h4>"
+                formatted_html += f"<pre style='white-space: pre-wrap;'>{optimization_result['posting_guide']}</pre>"
+                formatted_html += "</div>"
+
+                logging.info(f"Platform optimization complete for {selected_platform}")
+            except Exception as e:
+                logging.error(f"Platform optimization error: {e}")
+                formatted_html = f"<h3>Generated Content (en-US)</h3>\n{english_html}"
+                formatted_html += f"\n<p style='color: orange;'>⚠️ Platform optimization failed: {str(e)}</p>"
+        else:
+            # Return HTML with language header (no optimization)
+            formatted_html = f"<h3>Generated Content (en-US)</h3>\n{english_html}"
 
         return formatted_html, state
     except Exception as e:
@@ -316,6 +349,24 @@ def main():
                             selected_audience_description = selected_audience.description
                             st.session_state['selected_audience_description'] = selected_audience_description
 
+                    # Week 4: Platform selection for optimization
+                    platform_options = {
+                        "instagram": "📷 Instagram",
+                        "facebook": "📘 Facebook",
+                        "telegram": "✈️ Telegram",
+                        "linkedin": "💼 LinkedIn"
+                    }
+                    selected_platform = st.selectbox(
+                        "Target Platform (Optional - for optimization)",
+                        options=["None"] + list(platform_options.keys()),
+                        format_func=lambda x: "No optimization" if x == "None" else platform_options.get(x, x),
+                        key='selected_platform'
+                    )
+                    if selected_platform != "None":
+                        st.session_state['selected_platform'] = selected_platform
+                    else:
+                        st.session_state['selected_platform'] = None
+
                     add_context = st.checkbox("Add Context", value=True, key='add_context')
                     col1_1, col1_2 = st.columns(2)
                     generate_button = col1_1.button("Generate", use_container_width=True)
@@ -489,6 +540,8 @@ def handle_generate(user_query, template_name, state, prompts, history, spinner_
         # Retrieve the selected audience name and description from the session state
         selected_audience_name = st.session_state.get('selected_audience_name', '')
         selected_audience_description = st.session_state.get('selected_audience_description', '')
+        # Week 4: Retrieve selected platform
+        selected_platform = st.session_state.get('selected_platform', None)
 
         # Add the original user query (without audience context) to the chat history
         history.append([user_query, "Generating content..."])
@@ -496,8 +549,17 @@ def handle_generate(user_query, template_name, state, prompts, history, spinner_
 
         with spinner_placeholder:
             with st.spinner("Generating..."):
-                # Pass the audience information to the generate_content function
-                result, new_state = generate_content(user_query, template_name, state, prompts, add_context, selected_audience_name, selected_audience_description)
+                # Pass the audience information and platform to the generate_content function
+                result, new_state = generate_content(
+                    user_query,
+                    template_name,
+                    state,
+                    prompts,
+                    add_context,
+                    selected_audience_name,
+                    selected_audience_description,
+                    selected_platform  # Week 4: Platform optimization
+                )
 
         # Update the chat history with the generated content
         history[-1][1] = result
