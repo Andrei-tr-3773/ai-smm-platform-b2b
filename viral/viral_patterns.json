@@ -1,0 +1,639 @@
+[
+  {
+    "pattern_id": "trending_sound",
+    "name": "Trending Sound/Music Sync",
+    "description": "Use trending audio to ride algorithmic waves",
+    "hook_template": "{{hook_first_0.5_sec}} [Trending {{sound_name}}]",
+    "hook_examples": [
+      "Wait for the beat drop 🔥",
+      "If you know this sound, you're a real one 👀"
+    ],
+    "body_template": "{{content}} synced to {{trending_audio}}",
+    "cta_template": "Which part hit different? Comment below! 👇",
+    "cta_examples": [
+      "Drop a 🔥 if you felt that beat!",
+      "Save this sound before it's gone! 🔖"
+    ],
+    "avg_engagement_boost": 2.8,
+    "success_rate_by_account_type": {
+      "creator": 0.88,
+      "brand_with_video": 0.65,
+      "brand_static_only": 0.30
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 5000,
+      "10k-50k": 25000,
+      "50k+": 100000
+    },
+    "works_best_on": ["instagram", "tiktok", "facebook"],
+    "platforms_with_caveat": {
+      "instagram": "Reels only, not feed posts",
+      "linkedin": "Avoid - too casual for professional audience"
+    },
+    "industry_fit": ["fitness", "ecommerce", "all"],
+    "example_campaigns": [
+      "Fitness routine to trending dance beat",
+      "Product unboxing with viral sound"
+    ],
+    "content_type_required": ["video"],
+    "execution_difficulty": "medium",
+    "follower_threshold": {"min": 5000, "optimal": 20000},
+    "trend_status": "active",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [88, 65, 65],
+    "deprecation_warning": "⚠️ Requires VIDEO content - not suitable for static-only brands"
+  },
+  {
+    "pattern_id": "challenge_participation",
+    "name": "Challenge/Trend Participation",
+    "description": "Join existing challenges for algorithmic boost (within first 24-48h)",
+    "hook_template": "Taking the #{{challenge_name}} challenge!",
+    "hook_examples": [
+      "Day 1 of #75Hard and I'm already struggling 😅",
+      "#BuildInPublic: Here's my revenue this month (unfiltered)"
+    ],
+    "body_template": "{{our_version}} 💪\n\nWho else is doing this? Drop your results below!",
+    "cta_template": "Who else is trying this? Let me know your progress! 👇",
+    "cta_examples": [
+      "Share your day below! 💬",
+      "What's your biggest challenge so far? Comment!"
+    ],
+    "avg_engagement_boost": 2.7,
+    "success_rate_by_account_type": {
+      "creator": 0.85,
+      "brand_with_video": 0.50,
+      "brand_static_only": 0.35
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 3000,
+      "10k-50k": 15000,
+      "50k+": 80000
+    },
+    "works_best_on": ["instagram", "tiktok", "facebook"],
+    "platforms_with_caveat": {
+      "linkedin": "Use professional challenges only (#BuildInPublic, not dance challenges)"
+    },
+    "industry_fit": ["fitness", "education", "all"],
+    "b2b_challenges": ["#BuildInPublic", "#75Hard", "#ShowYourWork", "#100DaysOfCode"],
+    "example_campaigns": [
+      "#75Hard fitness challenge",
+      "#BuildInPublic SaaS revenue transparency"
+    ],
+    "content_type_required": ["video", "static"],
+    "execution_difficulty": "medium",
+    "follower_threshold": {"min": 1000, "optimal": 10000},
+    "challenge_timing": "Join within first 24-48h for max boost",
+    "trend_status": "active",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [85, 50, 50],
+    "deprecation_warning": "⚠️ AVOID 'Tag 3 friends' - violates Instagram engagement bait rules"
+  },
+  {
+    "pattern_id": "before_after",
+    "name": "Before & After Transformation",
+    "description": "Show visual transformation for high engagement",
+    "hook_template": "{{exact_timeframe}} ago vs. today [{{emotional_reaction}}]",
+    "hook_examples": [
+      "90 days. Same mirror. Different body. 💪",
+      "I can't believe this is the same person 😳",
+      "$0 MRR → $100k MRR in 12 months 📈"
+    ],
+    "body_template": "Before: {{before_state}}\n\n➡️ What I did: {{actions}}\n\nAfter: {{after_state}}",
+    "cta_template": "Want the same results? {{action}}",
+    "cta_examples": [
+      "Which transformation shocked you most? Comment! 👇",
+      "Ready to start your own? DM me for the plan 💬"
+    ],
+    "avg_engagement_boost": 3.0,
+    "success_rate_by_account_type": {
+      "creator": 0.82,
+      "brand_with_video": 0.75,
+      "brand_static_only": 0.70
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 3000,
+      "10k-50k": 15000,
+      "50k+": 80000
+    },
+    "works_best_on": ["instagram", "facebook", "linkedin"],
+    "industry_fit": ["fitness", "ecommerce", "saas", "education"],
+    "example_campaigns": [
+      "6 months of fitness progress",
+      "Revenue growth: $0 → $100k MRR"
+    ],
+    "content_type_required": ["video", "static", "carousel"],
+    "visual_format": ["side-by-side image", "carousel swipe", "video transition"],
+    "proof_required": true,
+    "execution_difficulty": "easy",
+    "follower_threshold": {"min": 500, "optimal": 5000},
+    "trend_status": "active",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [82, 75, 70],
+    "deprecation_warning": null
+  },
+  {
+    "pattern_id": "pov",
+    "name": "POV (Point of View)",
+    "description": "Immersive first-person perspective (video required)",
+    "hook_template": "POV: {{specific_relatable_situation}} [{{emotion_emoji}}]",
+    "hook_examples": [
+      "POV: You're at the gym and forgot headphones 😭",
+      "POV: The gym bro is staring at your form 👀",
+      "POV: Your demo breaks during investor pitch 😅",
+      "POV: Your SaaS MRR chart looks like a hockey stick... but it's upside down 📉😅"
+    ],
+    "body_template": "{{immersive_description}}\n\n[Camera shows {{perspective}}]",
+    "cta_template": "Can you relate? Drop your story below! 👇",
+    "cta_examples": [
+      "Tell me this has happened to you too 😂",
+      "Who else feels this pain? Comment! 💬"
+    ],
+    "avg_engagement_boost": 2.4,
+    "success_rate_by_account_type": {
+      "creator": 0.79,
+      "brand_with_video": 0.45,
+      "brand_static_only": 0.10
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 2000,
+      "10k-50k": 10000,
+      "50k+": 50000
+    },
+    "works_best_on": ["instagram", "tiktok"],
+    "platforms_with_caveat": {
+      "linkedin": "Avoid - too casual/Gen-Z for professional audience",
+      "facebook": "Limited engagement compared to Instagram/TikTok"
+    },
+    "industry_fit": ["fitness", "education"],
+    "pov_types": {
+      "pov_relatable": "Struggles, embarrassing moments (better for B2B)",
+      "pov_aspirational": "Wins, achievements (can feel like humble brag)"
+    },
+    "example_campaigns": [
+      "POV: Your first day at the gym (relatable struggle)",
+      "POV: Your demo breaks during investor pitch (B2B relatable)"
+    ],
+    "content_type_required": ["video"],
+    "execution_difficulty": "hard",
+    "follower_threshold": {"min": 5000, "optimal": 20000},
+    "trend_status": "active",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [79, 45, 30],
+    "deprecation_warning": "⚠️ VIDEO ONLY - excludes 80% of B2B brands. Avoid aspirational flexing for B2B."
+  },
+  {
+    "pattern_id": "myth_busting",
+    "name": "Myth Busting",
+    "description": "Challenge common misconceptions (requires proof/data)",
+    "hook_template": "❌ STOP believing {{myth}}!",
+    "hook_examples": [
+      "❌ STOP believing you need 10k followers to make money!",
+      "The biggest lie in fitness: Carbs make you fat 🚫"
+    ],
+    "body_template": "Common myth: {{myth_statement}}\n\nThe TRUTH: {{reality}}\n\nWhy this matters: {{explanation}}",
+    "cta_template": "Which myth held YOU back? Let me know 👇",
+    "cta_examples": [
+      "Agree or disagree? Let's debate! 💬",
+      "What other myths should I bust? Comment!"
+    ],
+    "avg_engagement_boost": 2.3,
+    "success_rate_by_account_type": {
+      "creator": 0.75,
+      "brand_with_video": 0.70,
+      "brand_static_only": 0.68
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 2000,
+      "10k-50k": 10000,
+      "50k+": 40000
+    },
+    "works_best_on": ["linkedin", "instagram", "facebook"],
+    "industry_fit": ["fitness", "saas", "education", "all"],
+    "example_campaigns": [
+      "Myth: You need 10k followers to make money",
+      "Myth: Carbs make you fat"
+    ],
+    "content_type_required": ["static", "video", "carousel"],
+    "proof_required": ["data", "case study", "research citation"],
+    "backlash_risk": "medium",
+    "execution_difficulty": "medium",
+    "follower_threshold": {"min": 1000, "optimal": 5000},
+    "trend_status": "active",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [75, 70, 68],
+    "deprecation_warning": null
+  },
+  {
+    "pattern_id": "customer_testimonial",
+    "name": "Customer Testimonial Story",
+    "description": "Real results from real customers (video preferred)",
+    "hook_template": "{{customer_name}} tried {{failed_attempts}}. Then {{turning_point}}...",
+    "hook_examples": [
+      "Sarah tried EVERYTHING to lose weight. Nothing worked... until this. 👇",
+      "This is Sarah. 6 months ago, she couldn't run 1 mile. Watch this 🎥"
+    ],
+    "body_template": "{{customer_name}}'s story:\n\nBefore: {{before}}\nAfter: {{after}}\nTime: {{timeframe}}",
+    "cta_template": "Ready for your own transformation? {{action}}",
+    "cta_examples": [
+      "Want these results? DM me 'START' 💬",
+      "Who wants to be our next success story? 👇"
+    ],
+    "avg_engagement_boost": 2.1,
+    "success_rate_by_account_type": {
+      "creator": 0.73,
+      "brand_with_video": 0.68,
+      "brand_static_only": 0.55
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 2000,
+      "10k-50k": 8000,
+      "50k+": 35000
+    },
+    "works_best_on": ["instagram", "facebook", "linkedin"],
+    "industry_fit": ["fitness", "saas", "ecommerce", "education"],
+    "example_campaigns": [
+      "How Sarah lost 30 lbs in 90 days",
+      "How we grew from $0 to $50k MRR"
+    ],
+    "content_type_required": ["video", "static"],
+    "content_type_preference": "video testimonial",
+    "authenticity_signals": ["real name", "real photo", "specific results"],
+    "execution_difficulty": "medium",
+    "follower_threshold": {"min": 500, "optimal": 3000},
+    "trend_status": "active",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [73, 68, 65],
+    "deprecation_warning": "⚠️ Text screenshots = fake reviews. Use VIDEO testimonials for authenticity."
+  },
+  {
+    "pattern_id": "problem_agitate_solve",
+    "name": "Problem → Agitate → Solve (PAS)",
+    "description": "Classic copywriting formula for B2B (timeless)",
+    "hook_template": "Struggling with {{problem}}? 😓",
+    "hook_examples": [
+      "Struggling with low engagement? Here's why.",
+      "Can't retain customers? You're making this mistake."
+    ],
+    "body_template": "Most people try {{wrong_solution}}, which only makes it WORSE.\n\nHere's what actually works: {{solution}}\n\nResults: {{proof}}",
+    "cta_template": "Ready to solve this? {{action}}",
+    "cta_examples": [
+      "Want the full guide? Link in bio 🔗",
+      "DM me 'FIX' for the solution 💬"
+    ],
+    "avg_engagement_boost": 2.0,
+    "success_rate_by_account_type": {
+      "creator": 0.71,
+      "brand_with_video": 0.72,
+      "brand_static_only": 0.72
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 2000,
+      "10k-50k": 10000,
+      "50k+": 40000
+    },
+    "works_best_on": ["linkedin", "facebook", "instagram"],
+    "industry_fit": ["saas", "education", "consulting"],
+    "example_campaigns": [
+      "Struggling with low engagement?",
+      "Can't retain customers?"
+    ],
+    "content_type_required": ["static", "video", "carousel"],
+    "agitation_level": "medium",
+    "proof_type": ["case study", "data chart", "before/after screenshot"],
+    "execution_difficulty": "easy",
+    "follower_threshold": {"min": 100, "optimal": 1000},
+    "trend_status": "evergreen",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [71, 72, 72],
+    "deprecation_warning": null
+  },
+  {
+    "pattern_id": "quick_tutorial",
+    "name": "Quick Tutorial (How-To)",
+    "description": "Short, actionable tutorial (video/carousel preferred)",
+    "hook_template": "How to {{goal}} in {{time}} (I tested {{sample_size}} methods) ⏱️",
+    "hook_examples": [
+      "30-minute meal prep that ACTUALLY works (I tested 10 methods) 🍱",
+      "Meal prep = boring? Not anymore. Watch this hack 👀"
+    ],
+    "body_template": "Step 1: {{step_1}}\nStep 2: {{step_2}}\nStep 3: {{step_3}}\n\nPro tip: {{bonus_tip}}",
+    "cta_template": "Which step will you try first? Comment 1, 2, or 3!",
+    "cta_examples": [
+      "Save this for later! 🔖",
+      "Which step surprised you most? 👇"
+    ],
+    "avg_engagement_boost": 1.9,
+    "success_rate_by_account_type": {
+      "creator": 0.68,
+      "brand_with_video": 0.60,
+      "brand_static_only": 0.55
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 1500,
+      "10k-50k": 7000,
+      "50k+": 30000
+    },
+    "works_best_on": ["instagram", "tiktok", "youtube"],
+    "industry_fit": ["fitness", "education", "saas", "all"],
+    "example_campaigns": [
+      "How to meal prep in 30 minutes",
+      "How to write cold emails that convert"
+    ],
+    "content_type_required": ["video", "carousel"],
+    "visual_aids_required": true,
+    "execution_difficulty": "medium",
+    "follower_threshold": {"min": 500, "optimal": 5000},
+    "trend_status": "active",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [68, 60, 55],
+    "deprecation_warning": "⚠️ Text tutorials = LOW engagement. Use video or carousel with step-by-step visuals."
+  },
+  {
+    "pattern_id": "personal_story",
+    "name": "Personal Story (Vulnerability)",
+    "description": "Authentic storytelling builds connection (founder-led brands)",
+    "hook_template": "I need to be honest about {{topic}}... 💬",
+    "hook_examples": [
+      "I need to be honest about my biggest business failure... 💬",
+      "I cried in my car after a client canceled. Here's what I learned 💔"
+    ],
+    "body_template": "{{vulnerable_moment}}\n\nWhat I learned: {{lesson}}\n\nWhat changed: {{transformation}}",
+    "cta_template": "Have you experienced this too? Let me know 💙",
+    "cta_examples": [
+      "Share your story below 👇",
+      "Anyone else been here? 💬"
+    ],
+    "avg_engagement_boost": 2.2,
+    "success_rate_by_account_type": {
+      "creator": 0.67,
+      "brand_with_video": 0.62,
+      "brand_static_only": 0.60
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 2000,
+      "10k-50k": 10000,
+      "50k+": 45000
+    },
+    "works_best_on": ["instagram", "facebook", "linkedin"],
+    "industry_fit": ["fitness", "saas", "education", "all"],
+    "best_for": ["founders", "personal brands"],
+    "example_campaigns": [
+      "My biggest business failure (real vulnerability)",
+      "I cried in my car after client cancelation (not fake corporate story)"
+    ],
+    "content_type_required": ["static", "video"],
+    "authenticity_required": true,
+    "oversharing_risk": "medium",
+    "execution_difficulty": "hard",
+    "follower_threshold": {"min": 100, "optimal": 3000},
+    "trend_status": "active",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [67, 62, 60],
+    "deprecation_warning": "⚠️ Fake vulnerability = backlash. Corporate brands should avoid (founders only)."
+  },
+  {
+    "pattern_id": "educational_explainer",
+    "name": "Educational Explainer",
+    "description": "Teach something valuable (B2B focus, data-driven)",
+    "hook_template": "I analyzed {{sample_size}} {{thing}}. Here's what I found 📊",
+    "hook_examples": [
+      "I analyzed 500 SaaS companies. Here's the #1 reason they lose customers 👇",
+      "Your SaaS is bleeding customers. Here's the math behind why 📊"
+    ],
+    "body_template": "The problem: {{problem}}\n\nThe science: {{explanation}}\n\nHow to use it: {{actionable_steps}}",
+    "cta_template": "Want to learn more? {{action}}",
+    "cta_examples": [
+      "Full breakdown in comments 👇",
+      "Save this for your team! 🔖"
+    ],
+    "avg_engagement_boost": 1.8,
+    "success_rate_by_account_type": {
+      "creator": 0.66,
+      "brand_with_video": 0.65,
+      "brand_static_only": 0.63
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 1500,
+      "10k-50k": 8000,
+      "50k+": 35000
+    },
+    "works_best_on": ["linkedin", "instagram", "youtube"],
+    "industry_fit": ["saas", "education", "consulting"],
+    "example_campaigns": [
+      "Why customer churn happens (and how to fix it)",
+      "The psychology of viral content"
+    ],
+    "content_type_required": ["static", "video", "carousel"],
+    "content_length": "short",
+    "visual_required": true,
+    "execution_difficulty": "medium",
+    "follower_threshold": {"min": 1000, "optimal": 5000},
+    "trend_status": "active",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [66, 65, 63],
+    "deprecation_warning": "⚠️ Long paragraphs + jargon = LOW engagement. Keep it short (60s video, 150 words max)."
+  },
+  {
+    "pattern_id": "ai_reveal",
+    "name": "AI Reveal / Process Video",
+    "description": "Show how AI created this (2025 trend)",
+    "hook_template": "I used AI to {{task}}. Here's what happened 🤖",
+    "hook_examples": [
+      "I used AI to create my workout plan. Here's what happened 🤖",
+      "ChatGPT wrote my sales emails for a week. Results: 👇"
+    ],
+    "body_template": "The prompt: {{ai_prompt}}\n\nWhat AI gave me: {{ai_output}}\n\nThe results: {{actual_results}}",
+    "cta_template": "Want the prompt? Comment 'AI' 💬",
+    "cta_examples": [
+      "Drop a 🤖 if you want the full prompt!",
+      "Should I test this for {{other_use_case}}? Let me know!"
+    ],
+    "avg_engagement_boost": 2.5,
+    "success_rate_by_account_type": {
+      "creator": 0.75,
+      "brand_with_video": 0.70,
+      "brand_static_only": 0.60
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 3000,
+      "10k-50k": 15000,
+      "50k+": 70000
+    },
+    "works_best_on": ["instagram", "tiktok", "linkedin"],
+    "industry_fit": ["saas", "ecommerce", "fitness", "education", "all"],
+    "example_campaigns": [
+      "I used AI to create my workout plan",
+      "ChatGPT wrote my cold emails for a week",
+      "AI-generated product descriptions (real results)"
+    ],
+    "content_type_required": ["video", "carousel", "static"],
+    "execution_difficulty": "easy",
+    "follower_threshold": {"min": 500, "optimal": 3000},
+    "trend_status": "rising",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [75, 75, 70],
+    "deprecation_warning": null
+  },
+  {
+    "pattern_id": "behind_the_scenes",
+    "name": "Behind-the-Scenes / Day in the Life",
+    "description": "Authenticity over polish (2025 trend)",
+    "hook_template": "A day in the life of {{role}} (unfiltered) 📹",
+    "hook_examples": [
+      "A day in the life of a SaaS founder (unfiltered) 📹",
+      "What I ACTUALLY do all day as a fitness coach 👀"
+    ],
+    "body_template": "{{time_1}}: {{activity_1}}\n{{time_2}}: {{activity_2}}\n{{time_3}}: {{activity_3}}\n\n{{honest_reflection}}",
+    "cta_template": "What surprised you most? Let me know! 👇",
+    "cta_examples": [
+      "Ask me anything about my day! 💬",
+      "Which part do you want to see more of?"
+    ],
+    "avg_engagement_boost": 2.3,
+    "success_rate_by_account_type": {
+      "creator": 0.70,
+      "brand_with_video": 0.65,
+      "brand_static_only": 0.50
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 2500,
+      "10k-50k": 12000,
+      "50k+": 60000
+    },
+    "works_best_on": ["instagram", "tiktok", "linkedin"],
+    "industry_fit": ["fitness", "saas", "ecommerce", "education", "all"],
+    "example_campaigns": [
+      "A day in the life of a SaaS founder",
+      "What I ACTUALLY do all day (not what you think)"
+    ],
+    "content_type_required": ["video"],
+    "execution_difficulty": "easy",
+    "follower_threshold": {"min": 100, "optimal": 1000},
+    "trend_status": "rising",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [70, 70, 65],
+    "deprecation_warning": null
+  },
+  {
+    "pattern_id": "listicle",
+    "name": "Listicle / Countdown",
+    "description": "Bingeable content (people watch till #1)",
+    "hook_template": "Top {{number}} {{thing}} (I made all of them) 📉",
+    "hook_examples": [
+      "Top 5 mistakes killing your SaaS (I made all of them) 📉",
+      "7 things I wish I knew before starting my business 💡"
+    ],
+    "body_template": "{{number}}. {{item_1}}\n{{number-1}}. {{item_2}}\n...\n1. {{item_final}} (the WORST)",
+    "cta_template": "Which one hit hardest? Comment the number! 👇",
+    "cta_examples": [
+      "Did I miss any? Let me know! 💬",
+      "Which mistake have YOU made? 👇"
+    ],
+    "avg_engagement_boost": 2.1,
+    "success_rate_by_account_type": {
+      "creator": 0.72,
+      "brand_with_video": 0.68,
+      "brand_static_only": 0.65
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 2000,
+      "10k-50k": 10000,
+      "50k+": 50000
+    },
+    "works_best_on": ["instagram", "linkedin", "youtube"],
+    "industry_fit": ["saas", "consulting", "education", "all"],
+    "example_campaigns": [
+      "Top 5 mistakes killing your SaaS",
+      "7 things I wish I knew before starting"
+    ],
+    "content_type_required": ["video", "carousel", "static"],
+    "execution_difficulty": "easy",
+    "follower_threshold": {"min": 500, "optimal": 3000},
+    "trend_status": "evergreen",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [72, 68, 68],
+    "deprecation_warning": null
+  },
+  {
+    "pattern_id": "newsjacking",
+    "name": "Trend Hijacking / Newsjacking",
+    "description": "Ride trending topics for algorithmic boost",
+    "hook_template": "{{trending_topic}} just changed everything for {{niche}}. Here's how 👀",
+    "hook_examples": [
+      "ChatGPT just changed everything for SaaS founders. Here's how 👀",
+      "Instagram's new algorithm update = game changer. What you need to know 🚨"
+    ],
+    "body_template": "What happened: {{news_summary}}\n\nWhy it matters for YOU: {{impact}}\n\nWhat to do NOW: {{action_steps}}",
+    "cta_template": "What's your take? Let me know! 👇",
+    "cta_examples": [
+      "Are you adapting to this? Comment! 💬",
+      "Want a full breakdown? Link in bio 🔗"
+    ],
+    "avg_engagement_boost": 2.0,
+    "success_rate_by_account_type": {
+      "creator": 0.65,
+      "brand_with_video": 0.62,
+      "brand_static_only": 0.60
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 2500,
+      "10k-50k": 12000,
+      "50k+": 60000
+    },
+    "works_best_on": ["linkedin", "twitter", "instagram"],
+    "industry_fit": ["saas", "consulting", "all"],
+    "example_campaigns": [
+      "ChatGPT just changed everything for [your niche]",
+      "Instagram's new algorithm update explained"
+    ],
+    "content_type_required": ["static", "video"],
+    "execution_difficulty": "medium",
+    "follower_threshold": {"min": 1000, "optimal": 5000},
+    "timing_critical": true,
+    "trend_status": "evergreen",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [65, 62, 62],
+    "deprecation_warning": "⚠️ Timing is CRITICAL - post within 24-48h of news breaking."
+  },
+  {
+    "pattern_id": "hot_take",
+    "name": "Controversial Hot Take",
+    "description": "Debate = engagement (higher risk)",
+    "hook_template": "Unpopular opinion: {{controversial_statement}} 💣",
+    "hook_examples": [
+      "Unpopular opinion: Your SaaS pricing is killing your growth 💣",
+      "Hot take: You don't need 10k followers to make $10k/month 🔥"
+    ],
+    "body_template": "Everyone says: {{common_belief}}\n\nBut the truth is: {{contrarian_take}}\n\nHere's why: {{reasoning}}",
+    "cta_template": "Agree or disagree? Let's debate! 👇",
+    "cta_examples": [
+      "Change my mind 💬",
+      "Too harsh? Let me know your take 👇"
+    ],
+    "avg_engagement_boost": 2.2,
+    "success_rate_by_account_type": {
+      "creator": 0.60,
+      "brand_with_video": 0.55,
+      "brand_static_only": 0.55
+    },
+    "avg_views_by_follower_tier": {
+      "0-10k": 2000,
+      "10k-50k": 10000,
+      "50k+": 50000
+    },
+    "works_best_on": ["linkedin", "twitter"],
+    "industry_fit": ["saas", "consulting"],
+    "example_campaigns": [
+      "Unpopular opinion: Your SaaS pricing is killing your growth",
+      "Hot take: You don't need a co-founder"
+    ],
+    "content_type_required": ["static", "video"],
+    "execution_difficulty": "hard",
+    "follower_threshold": {"min": 3000, "optimal": 10000},
+    "backlash_risk": "high",
+    "trend_status": "evergreen",
+    "last_validated": "2025-12-21",
+    "success_rate_history": [60, 55, 55],
+    "deprecation_warning": "⚠️ HIGH RISK - attracts haters. Only for established thought leaders with thick skin."
+  }
+]
