@@ -285,6 +285,28 @@ def main():
         if summary['total_cost'] > 80:
             st.warning("⚠️ Approaching budget limit!")
 
+        # Examples section
+        with st.expander("💡 Examples", expanded=False):
+            st.markdown("**🏋️ Fitness:**")
+            st.markdown("- Launch 30-day transformation challenge")
+            st.markdown("- Announce new HIIT class")
+            st.markdown("- Promote personal training packages")
+
+            st.markdown("**💼 SaaS:**")
+            st.markdown("- Announce new AI feature")
+            st.markdown("- Share customer success story")
+            st.markdown("- Launch product update")
+
+            st.markdown("**🛍️ E-commerce:**")
+            st.markdown("- Black Friday sale")
+            st.markdown("- New product collection")
+            st.markdown("- Limited-time discount")
+
+            st.markdown("**📚 Education:**")
+            st.markdown("- New course launch")
+            st.markdown("- Student testimonials")
+            st.markdown("- Webinar announcement")
+
         with st.expander("📋 Content Guidelines", expanded=False):
             show_content_disclaimer()
 
@@ -352,17 +374,34 @@ def main():
 
                 with tabs[0]:
                     st.markdown("### Generate Content")
-                    user_query = st.text_area("Enter your query here...", default_query, key='user_query')
+                    user_query = st.text_area(
+                        "Enter your query here...",
+                        default_query,
+                        key='user_query',
+                        help="💡 Describe what you want to promote. Be specific about details, benefits, and call-to-action!"
+                    )
 
                     if not template_names:
                         st.error("No content templates found. Please load templates into MongoDB.")
                         template_name = None
                     else:
                         default_index = template_names.index(default_template) if default_template in template_names else 0
-                        template_name = st.selectbox("Select Content Template", template_names, index=default_index, key='template_name', on_change=update_query)
+                        template_name = st.selectbox(
+                            "Select Content Template",
+                            template_names,
+                            index=default_index,
+                            key='template_name',
+                            on_change=update_query,
+                            help="📝 Choose template based on your campaign type (sale, product launch, event, etc.)"
+                        )
 
                     # Move audience selection here
-                    selected_audience_name = st.selectbox("Select Audience", audience_names, key='selected_audience_name')
+                    selected_audience_name = st.selectbox(
+                        "Select Audience",
+                        audience_names,
+                        key='selected_audience_name',
+                        help="👥 Target specific audience for better content personalization"
+                    )
                     selected_audience_description = ""
                     if selected_audience_name:
                         selected_audience = next((audience for audience in audiences if audience.name == selected_audience_name), None)
@@ -381,11 +420,17 @@ def main():
                         "Target Platform (Optional - for optimization)",
                         options=["None"] + list(platform_options.keys()),
                         format_func=lambda x: "No optimization" if x == "None" else platform_options.get(x, x),
-                        key='selected_platform'
+                        key='selected_platform',
+                        help="📱 Choose platform for optimized content (hashtags, formatting, timing recommendations)"
                     )
 
                     # Week 4: Viral content generation option
-                    use_viral_patterns = st.checkbox("🔥 Use Viral Patterns", value=False, key='use_viral_patterns')
+                    use_viral_patterns = st.checkbox(
+                        "🔥 Use Viral Patterns",
+                        value=False,
+                        key='use_viral_patterns',
+                        help="🚀 Generate viral content using proven patterns (2-3x more engagement). Powered by real data from 100+ successful campaigns!"
+                    )
 
                     if use_viral_patterns:
                         with st.expander("Viral Pattern Settings", expanded=True):
@@ -395,7 +440,8 @@ def main():
                                 "Industry",
                                 options=industry_options,
                                 index=1,  # Default to 'saas'
-                                key='viral_industry'
+                                key='viral_industry',
+                                help="🏢 Your business industry - patterns are optimized per industry"
                             )
 
                             # Account type
@@ -409,7 +455,8 @@ def main():
                                 options=list(account_type_options.keys()),
                                 format_func=lambda x: account_type_options[x],
                                 index=2,  # Default to 'brand_static_only'
-                                key='viral_account_type'
+                                key='viral_account_type',
+                                help="👤 Your account type affects which patterns work best"
                             )
 
                             # Content type
@@ -418,7 +465,8 @@ def main():
                                 "Content Type",
                                 options=content_type_options,
                                 index=1,  # Default to 'static'
-                                key='viral_content_type'
+                                key='viral_content_type',
+                                help="📸 Type of content you'll create (video performs best, but requires production)"
                             )
 
                             # Follower count
@@ -428,18 +476,34 @@ def main():
                                 max_value=1000000,
                                 value=5000,
                                 step=1000,
-                                key='viral_follower_count'
+                                key='viral_follower_count',
+                                help="👥 Your current follower count - affects pattern selection and expected results"
                             )
 
-                    add_context = st.checkbox("Add Context", value=True, key='add_context')
+                    add_context = st.checkbox(
+                        "Add Context",
+                        value=True,
+                        key='add_context',
+                        help="🔍 Use RAG to find similar campaigns and improve content quality"
+                    )
                     col1_1, col1_2 = st.columns(2)
                     generate_button = col1_1.button("Generate", use_container_width=True)
                     show_template_button = col1_2.button("Show Template", use_container_width=True)
 
                 with tabs[1]:
                     st.markdown("### Translate Content")
-                    selected_languages = st.multiselect("Select Languages", languages, default=default_languages)
-                    selected_metrics = st.multiselect("Select Evaluation Metrics", list(EvaluationAgent.all_metrics.keys()), default=EvaluationAgent.default_metrics)
+                    selected_languages = st.multiselect(
+                        "Select Languages",
+                        languages,
+                        default=default_languages,
+                        help="🌍 Choose target languages for translation (15+ languages supported). Uses AI with cultural adaptation!"
+                    )
+                    selected_metrics = st.multiselect(
+                        "Select Evaluation Metrics",
+                        list(EvaluationAgent.all_metrics.keys()),
+                        default=EvaluationAgent.default_metrics,
+                        help="📊 Choose quality metrics to evaluate translations (accuracy, fluency, cultural appropriateness, etc.)"
+                    )
                     col1_3, col1_4 = st.columns(2)
                     translate_button = col1_3.button("Translate", use_container_width=True)
                     evaluate_button = col1_4.button("Evaluate", use_container_width=True)
@@ -659,6 +723,7 @@ def handle_generate(user_query, template_name, state, prompts, history, spinner_
         # Update the chat history with the generated content
         history[-1][1] = result
         st.session_state.update({'state': new_state, 'history': history})
+        st.success("✅ Content generated successfully! Review it below or translate to other languages.")
     except Exception as e:
         logging.error(f"Error handling generate: {e}")
         logging.error(traceback.format_exc())
@@ -677,6 +742,7 @@ def handle_translate(state, selected_languages, prompts, history, spinner_placeh
                 result, new_state = translate_content(state, selected_languages, prompts)
         history[-1][1] = result
         st.session_state.update({'state': new_state, 'history': history})
+        st.success(f"✅ Content translated to {len(selected_languages)} language(s) successfully! Click 'Evaluate' to check translation quality.")
     except Exception as e:
         logging.error(f"Error handling translate: {e}")
         st.error("An error occurred during translation.")
@@ -684,6 +750,7 @@ def handle_translate(state, selected_languages, prompts, history, spinner_placeh
 def handle_clear(default_prompts):
     try:
         st.session_state.update({'state': {'messages': [], 'evaluation': {}, 'translations': {}, 'initial_english_content': '', 'selected_languages': [], 'content_template': None, 'criticisms': ''}, 'history': [], 'prompts': default_prompts})
+        st.success("✅ Session cleared! Start with a new campaign.")
         st.rerun()
     except Exception as e:
         logging.error(f"Error handling clear: {e}")
@@ -698,6 +765,7 @@ def handle_evaluate(state, selected_metrics, history, spinner_placeholder):
         evaluation_results = new_state['evaluation']
         history.append(["Translation Evaluation Results:", display_evaluation_results(evaluation_results)])
         st.session_state.update({'state': new_state, 'history': history})
+        st.success("✅ Translation evaluation complete! Check results below.")
     except Exception as e:
         logging.error(f"Error handling evaluate: {e}")
         st.error("An error occurred during evaluation.")
