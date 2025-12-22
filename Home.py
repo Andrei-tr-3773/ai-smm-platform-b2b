@@ -21,6 +21,7 @@ from utils.ui_components import init_page_settings, load_css
 from utils.llm_queries import predefined_query, DefaultPrompts
 from utils.mongodb_utils import MongoDBClient
 from campaign import Campaign
+from components import CampaignWizard
 import streamlit as st
 from utils.deepeval_openai import DeepEvalOpenAI
 from utils.openai_utils import get_openai_model
@@ -310,6 +311,18 @@ def main():
         with st.expander("📋 Content Guidelines", expanded=False):
             show_content_disclaimer()
 
+        # Wizard toggle
+        st.markdown("---")
+        wizard_enabled = st.checkbox(
+            "🧙‍♂️ Use Setup Wizard",
+            value=st.session_state.get('wizard_active', False),
+            key='wizard_toggle',
+            help="Step-by-step guide for creating your first campaign (recommended for new users)"
+        )
+        if wizard_enabled != st.session_state.get('wizard_active', False):
+            st.session_state.wizard_active = wizard_enabled
+            st.rerun()
+
     # Define top-level tabs
     main_tabs = st.tabs(["Create New", "Campaigns", "Audiences", "Prompts"])
 
@@ -366,6 +379,14 @@ def main():
                 # Clear demo flag and show success message
                 st.session_state['demo_loaded'] = False
                 st.success("✅ Demo campaign loaded! Review settings below and click 'Generate' to create content.")
+
+            # Check if wizard is active
+            if st.session_state.get('wizard_active', False):
+                # Show wizard instead of regular form
+                wizard = CampaignWizard(audiences, template_names)
+                wizard.run()
+                # Stop here - don't show the regular form
+                return
 
             col1, col2 = st.columns([1, 2])
 
