@@ -357,16 +357,12 @@ def main():
                         "telegram": "✈️ Telegram",
                         "linkedin": "💼 LinkedIn"
                     }
-                    selected_platform = st.selectbox(
+                    st.selectbox(
                         "Target Platform (Optional - for optimization)",
                         options=["None"] + list(platform_options.keys()),
                         format_func=lambda x: "No optimization" if x == "None" else platform_options.get(x, x),
                         key='selected_platform'
                     )
-                    if selected_platform != "None":
-                        st.session_state['selected_platform'] = selected_platform
-                    else:
-                        st.session_state['selected_platform'] = None
 
                     # Week 4: Viral content generation option
                     use_viral_patterns = st.checkbox("🔥 Use Viral Patterns", value=False, key='use_viral_patterns')
@@ -375,7 +371,7 @@ def main():
                         with st.expander("Viral Pattern Settings", expanded=True):
                             # Industry selection
                             industry_options = ["fitness", "saas", "ecommerce", "education", "consulting", "all"]
-                            selected_industry = st.selectbox(
+                            st.selectbox(
                                 "Industry",
                                 options=industry_options,
                                 index=1,  # Default to 'saas'
@@ -388,7 +384,7 @@ def main():
                                 "brand_with_video": "🎥 Brand (with video)",
                                 "brand_static_only": "📄 Brand (static only)"
                             }
-                            selected_account_type = st.selectbox(
+                            st.selectbox(
                                 "Account Type",
                                 options=list(account_type_options.keys()),
                                 format_func=lambda x: account_type_options[x],
@@ -398,7 +394,7 @@ def main():
 
                             # Content type
                             content_type_options = ["video", "static", "carousel"]
-                            selected_content_type = st.selectbox(
+                            st.selectbox(
                                 "Content Type",
                                 options=content_type_options,
                                 index=1,  # Default to 'static'
@@ -406,7 +402,7 @@ def main():
                             )
 
                             # Follower count
-                            follower_count = st.number_input(
+                            st.number_input(
                                 "Follower Count",
                                 min_value=0,
                                 max_value=1000000,
@@ -414,13 +410,6 @@ def main():
                                 step=1000,
                                 key='viral_follower_count'
                             )
-
-                            st.session_state['viral_settings'] = {
-                                'industry': selected_industry,
-                                'account_type': selected_account_type,
-                                'content_type': selected_content_type,
-                                'follower_count': follower_count
-                            }
 
                     add_context = st.checkbox("Add Context", value=True, key='add_context')
                     col1_1, col1_2 = st.columns(2)
@@ -595,8 +584,10 @@ def handle_generate(user_query, template_name, state, prompts, history, spinner_
         # Retrieve the selected audience name and description from the session state
         selected_audience_name = st.session_state.get('selected_audience_name', '')
         selected_audience_description = st.session_state.get('selected_audience_description', '')
-        # Week 4: Retrieve selected platform
-        selected_platform = st.session_state.get('selected_platform', None)
+        # Week 4: Retrieve selected platform (convert "None" to None)
+        selected_platform = st.session_state.get('selected_platform', 'None')
+        if selected_platform == 'None':
+            selected_platform = None
         # Week 4: Check if viral patterns are enabled
         use_viral_patterns = st.session_state.get('use_viral_patterns', False)
 
@@ -608,16 +599,15 @@ def handle_generate(user_query, template_name, state, prompts, history, spinner_
             with st.spinner("Generating..."):
                 # Week 4: If viral patterns are enabled, use viral content agent
                 if use_viral_patterns:
-                    viral_settings = st.session_state.get('viral_settings', {})
                     platform = selected_platform if selected_platform else "instagram"
 
                     viral_result = generate_viral_content_for_query(
                         user_query=user_query,
                         platform=platform,
-                        industry=viral_settings.get('industry', 'saas'),
-                        follower_count=viral_settings.get('follower_count', 5000),
-                        account_type=viral_settings.get('account_type', 'brand_static_only'),
-                        content_type=viral_settings.get('content_type', 'static')
+                        industry=st.session_state.get('viral_industry', 'saas'),
+                        follower_count=st.session_state.get('viral_follower_count', 5000),
+                        account_type=st.session_state.get('viral_account_type', 'brand_static_only'),
+                        content_type=st.session_state.get('viral_content_type', 'static')
                     )
 
                     # Format viral content output
