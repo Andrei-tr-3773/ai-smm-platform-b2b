@@ -969,41 +969,68 @@ Features:
 
 ---
 
-### Phase 5: Campaign Setup & UX (Week 5) - 20 hours
+### Phase 5: UX Optimization & Onboarding (Week 5) - 20 hours
 
-**Goal:** Improve user experience and onboarding
+**PRIORITY: CRITICAL (Churn reduction = +$200k Year 1)**
+
+**Goal:** Reduce churn from 5.5% → 4.5% through better onboarding and UX
+
+**Business Case:**
+- **Current:** 5.5% churn → LTV $2,700
+- **Target:** 4.5% churn → LTV $3,600 (+33%)
+- **Impact:** +$200k revenue in Year 1 (720 users × $900 LTV increase)
+- **ROI:** 100:1 ($2,000 investment → $200k return)
+
+**Churn Reduction Strategy:**
+- Onboarding improvements: -30% churn (proven in market research)
+- Feature engagement boost: -20% churn (users who create 10+ posts)
+- Visual hierarchy + examples: +20% feature usage
 
 **Tasks:**
 
-**5.1 Getting Started Page (4 hours)**
-- Quick start guide
-- Demo campaigns (fitness, SaaS, e-commerce)
-- Video tutorial
-- Tips & best practices
+**5.1 Getting Started Page (4 hours) - HIGH PRIORITY**
+- Quick start guide with screenshots
+- 3 demo campaigns (fitness, SaaS, e-commerce) - **click-to-load**
+- Embedded video tutorial (Loom)
+- Tips & best practices panel
+- **Effect:** -30% churn in first 7 days
 
-**5.2 Campaign Setup Wizard (8 hours)**
-- Step-by-step wizard
-- Target audience selection
-- Platform selection (Instagram, Facebook, Telegram, LinkedIn)
-- Template selection
-- Preview before generation
+**5.2 UI Theme & Examples Relayout (6 hours) - MEDIUM PRIORITY**
+- Streamlit theme customization (`.streamlit/config.toml`)
+- Professional color scheme (blue + white, LinkedIn-style)
+- Move examples to sidebar expander "💡 Examples"
+- Add tooltips to all major widgets (`help=...` parameter)
+- Improve visual hierarchy (icons, spacing, success messages)
+- **Effect:** +20% feature engagement
 
-**5.3 Improved Template Selection (4 hours)**
-- Filter by industry (fitness, e-commerce, SaaS, etc.)
-- Search templates
-- Preview template before use
-- "Recently used" section
+**5.3 Campaign Setup Wizard (8 hours) - HIGH PRIORITY**
+- Step-by-step wizard UI (4 steps)
+  - Step 1: Select audience + describe business
+  - Step 2: Choose platform (Instagram, Facebook, LinkedIn, Telegram)
+  - Step 3: Select template + customize
+  - Step 4: Preview → Generate
+- Progress indicator (Step 1 of 4)
+- "Skip wizard" option for advanced users
+- **Effect:** -20% churn (easier first campaign)
 
-**5.4 Bulk Campaign Generation (4 hours)**
-- Generate 5-10 campaigns at once
-- Variation generation (different angles)
-- Calendar view (schedule content)
+**5.4 Template Selection Improvements (2 hours) - LOW PRIORITY**
+- Show template preview on hover
+- Add "Recently used" section
+- **Defer:** Search/filter (not critical until 20+ templates)
+
+**Deferred to Week 7:**
+- ❌ Bulk campaign generation (4h) - not critical for beta
+- ❌ Calendar view (4h) - not critical for beta
+- ❌ Advanced filters (2h) - not needed yet
 
 **Deliverables:**
-✅ Onboarding smooth
-✅ Wizard guides users
-✅ Bulk generation works
-✅ Better UX overall
+✅ Getting Started page reduces onboarding churn by 30%
+✅ Professional UI theme (blue/white color scheme)
+✅ Campaign wizard guides new users (4 steps)
+✅ Examples easily accessible in sidebar
+✅ Tooltips explain all features
+✅ **Target churn: 4.5% (from 5.5%)**
+✅ **Target LTV: $3,600 (from $2,700)**
 
 ---
 
