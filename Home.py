@@ -406,6 +406,18 @@ def main():
                         st.error("No content templates found. Please load templates into MongoDB.")
                         template_name = None
                     else:
+                        # Initialize recently used templates
+                        if 'recent_templates' not in st.session_state:
+                            st.session_state.recent_templates = []
+
+                        # Show recently used templates
+                        if st.session_state.recent_templates:
+                            with st.expander("⏱️ Recently Used Templates", expanded=False):
+                                for recent_tmpl in st.session_state.recent_templates[:5]:
+                                    if st.button(f"📄 {recent_tmpl}", key=f"recent_{recent_tmpl}", use_container_width=True):
+                                        st.session_state.template_name = recent_tmpl
+                                        st.rerun()
+
                         default_index = template_names.index(default_template) if default_template in template_names else 0
                         template_name = st.selectbox(
                             "Select Content Template",
@@ -415,6 +427,36 @@ def main():
                             on_change=update_query,
                             help="📝 Choose template based on your campaign type (sale, product launch, event, etc.)"
                         )
+
+                        # Track template usage (add to recent if not already at top)
+                        if template_name and (not st.session_state.recent_templates or st.session_state.recent_templates[0] != template_name):
+                            # Remove if exists elsewhere in list
+                            if template_name in st.session_state.recent_templates:
+                                st.session_state.recent_templates.remove(template_name)
+                            # Add to front
+                            st.session_state.recent_templates.insert(0, template_name)
+                            # Keep only last 5
+                            st.session_state.recent_templates = st.session_state.recent_templates[:5]
+
+                        # Show template preview
+                        if template_name:
+                            selected_template = next((t for t in templates if t['name'] == template_name), None)
+                            if selected_template:
+                                with st.expander("📋 Template Preview", expanded=False):
+                                    # Show example query if available
+                                    if selected_template.get('example_query'):
+                                        st.markdown("**Example Query:**")
+                                        st.caption(selected_template['example_query'])
+
+                                    # Show template fields
+                                    if selected_template.get('items'):
+                                        st.markdown("**Template Fields:**")
+                                        field_count = len(selected_template['items'])
+                                        st.caption(f"This template has {field_count} fields:")
+                                        for i, item in enumerate(selected_template['items'][:5], 1):
+                                            st.markdown(f"{i}. `{item.get('name', 'Unnamed field')}`")
+                                        if field_count > 5:
+                                            st.caption(f"... and {field_count - 5} more fields")
 
                     # Move audience selection here
                     selected_audience_name = st.selectbox(
