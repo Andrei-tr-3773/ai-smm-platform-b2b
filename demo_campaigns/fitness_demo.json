@@ -1,0 +1,15 @@
+{
+  "name": "30-Day Transformation Challenge",
+  "industry": "fitness",
+  "platform": "Instagram",
+  "template": "Sale Announcement",
+  "audience": "General Audience",
+  "query": "Launch a 30-day transformation challenge starting January 15th. Results guaranteed: lose 10 pounds, gain muscle, boost energy. Includes meal plan, workout videos, and weekly coaching calls. Early bird special: $199 (regular $299). Limited to 20 participants.",
+  "use_viral_patterns": true,
+  "description": "Fitness studio promoting a comprehensive transformation program with guaranteed results and limited-time pricing.",
+  "expected_results": {
+    "engagement_rate": "4-6%",
+    "optimal_posting_time": "9-11 AM or 7-9 PM",
+    "best_content_type": "Before/after photos, workout snippets, testimonials"
+  }
+}

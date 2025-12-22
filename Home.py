@@ -325,6 +325,26 @@ def main():
                 campaigns = campaigns_client.get_campaigns()
                 st.session_state['campaigns'] = campaigns
 
+            # Check for demo data loaded from Getting Started page
+            if st.session_state.get('demo_loaded', False):
+                st.session_state['user_query'] = st.session_state.get('demo_query', default_query)
+                st.session_state['template_name'] = st.session_state.get('demo_template', default_template)
+
+                # Set platform if specified
+                demo_platform = st.session_state.get('demo_platform', 'None')
+                st.session_state['selected_platform'] = demo_platform.lower() if demo_platform != 'None' else 'None'
+
+                # Enable viral patterns by default for demos
+                st.session_state['use_viral_patterns'] = True
+                st.session_state['viral_industry'] = st.session_state.get('demo_industry', 'saas')
+                st.session_state['viral_account_type'] = 'brand_static_only'
+                st.session_state['viral_content_type'] = 'static'
+                st.session_state['viral_follower_count'] = 5000
+
+                # Clear demo flag and show success message
+                st.session_state['demo_loaded'] = False
+                st.success("✅ Demo campaign loaded! Review settings below and click 'Generate' to create content.")
+
             col1, col2 = st.columns([1, 2])
 
             with col1:

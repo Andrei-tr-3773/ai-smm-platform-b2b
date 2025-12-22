@@ -1,0 +1,15 @@
+{
+  "name": "Black Friday Electronics Sale",
+  "industry": "ecommerce",
+  "platform": "Facebook",
+  "template": "Sale Announcement",
+  "audience": "General Audience",
+  "query": "Black Friday MEGA SALE: Up to 70% off on all electronics! New iPhone 15 Pro - $899 (save $200), AirPods Pro - $179 (save $70), MacBook Air - $899 (save $300). Free shipping on orders over $50. Sale ends Sunday midnight. Shop now while supplies last!",
+  "use_viral_patterns": true,
+  "description": "E-commerce store promoting a major sale event with specific product discounts and urgency elements.",
+  "expected_results": {
+    "engagement_rate": "3-5%",
+    "optimal_posting_time": "1-3 PM weekdays",
+    "best_content_type": "Product images, price comparisons, countdown timers"
+  }
+}
