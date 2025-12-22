@@ -31,9 +31,10 @@ AI SMM Platform for B2B businesses. A Streamlit-based marketing campaign generat
 - Previous weeks: `feature/week_3` (merged to main)
 
 **Deployment:**
-- Production: http://35.252.20.180:8501 (GCP VM with SSH configured)
+- Production: http://34.165.201.76:8501 (GCP VM with SSH configured)
+- Internal IP: http://10.208.0.3:8501
 - Local: http://localhost:8501
-- SSH Access: Already configured on local machine
+- SSH Access: semeniukandrei@34.165.201.76
 - Server project path: `~/projects/ai-smm-platform-b2b` (matches GitHub repo name)
 - Local project path: `~/Projects/marketing_generator_work` (different name - OK!)
 - Deploy: `ssh` to server → `cd ~/projects/ai-smm-platform-b2b` → `git pull` → restart Streamlit
