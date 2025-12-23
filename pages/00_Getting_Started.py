@@ -114,8 +114,22 @@ for demo in demos:
         with col1:
             st.code(demo['query'], language=None)
         with col2:
-            if st.button(f"Try This", key=f"try_{demo['name']}", type="primary"):
-                st.info("✓ Copy this query and paste in Home tab → Create Campaign")
+            if st.button(f"Load Demo", key=f"load_{demo['name']}", type="primary"):
+                # Store demo data in session state
+                st.session_state['demo_loaded'] = True
+                st.session_state['demo_query'] = demo['query']
+                st.session_state['demo_template'] = demo['template']
+                st.session_state['demo_platform'] = demo['platform']
+
+                # Determine industry based on business type
+                if "Fitness" in demo['business']:
+                    st.session_state['demo_industry'] = "fitness"
+                elif "SaaS" in demo['business'] or "CloudFlow" in demo['business']:
+                    st.session_state['demo_industry'] = "saas"
+                else:
+                    st.session_state['demo_industry'] = "ecommerce"
+
+                st.success("✅ Demo loaded! Go to **Home** tab to generate content →")
 
 # Social Proof
 st.header("🏆 What Our Users Say")
