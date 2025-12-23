@@ -588,9 +588,13 @@ def main():
                     with st.chat_message("user"):
                         st.markdown(query)
                     with st.chat_message("assistant"):
-                        # Always use st.markdown for HTML rendering to allow external images
-                        # components.html() uses iframe which blocks external resources
-                        st.markdown(response, unsafe_allow_html=True)
+                        # Use st.html for proper HTML rendering
+                        # st.html is better than st.markdown for complex HTML
+                        try:
+                            st.html(response)
+                        except AttributeError:
+                            # Fallback for older Streamlit versions
+                            st.markdown(response, unsafe_allow_html=True)
 
         except Exception as e:
             logging.error(f"Error in 'Create New' tab: {e}")
