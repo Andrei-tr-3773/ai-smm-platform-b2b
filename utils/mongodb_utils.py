@@ -7,6 +7,12 @@ from campaign import Campaign
 # Load environment variables from .env file
 load_dotenv(override=True)
 
+
+def get_mongo_client():
+    """Get MongoDB client instance."""
+    return MongoClient(os.getenv("CONNECTION_STRING_MONGO"))
+
+
 class MongoDBClient:
     def __init__(self, collection_name):
         self.client = MongoClient(os.getenv("CONNECTION_STRING_MONGO"))
