@@ -878,9 +878,13 @@ def handle_show_template(template_name, mongodb_client, history):
 
         items_content = "<br>".join(items_lines)
 
+        # Escape HTML for display
+        import html
+        escaped_template = html.escape(template_content)
+
         # Combine the template HTML and items into a single message
         combined_content = (
-            f"<details><summary>{template_name} HTML</summary>{template_content}</details>"
+            f"<details><summary>{template_name} HTML</summary><pre><code>{escaped_template}</code></pre></details>"
             f"<details><summary>Template items</summary>{items_content}</details>"
         )
 
