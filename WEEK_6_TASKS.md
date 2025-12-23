@@ -361,26 +361,38 @@ class Workspace:
         plans = {
             "free": {
                 "campaigns": 10,
-                "custom_templates": 0,
+                "custom_templates": 1,
                 "team_members": 1,
                 "languages": 3
             },
+            "starter": {
+                "campaigns": 50,
+                "custom_templates": 3,
+                "team_members": 1,
+                "languages": 5
+            },
             "professional": {
-                "campaigns": 100,
+                "campaigns": 200,
                 "custom_templates": 5,
                 "team_members": 1,
                 "languages": 15
             },
-            "business": {
+            "team": {
                 "campaigns": -1,  # unlimited
-                "custom_templates": -1,
+                "custom_templates": 20,
                 "team_members": 3,
                 "languages": 15
             },
             "agency": {
                 "campaigns": -1,
-                "custom_templates": -1,
+                "custom_templates": 50,
                 "team_members": 10,
+                "languages": 15
+            },
+            "enterprise": {
+                "campaigns": -1,
+                "custom_templates": -1,
+                "team_members": -1,
                 "languages": 15
             }
         }
@@ -688,7 +700,7 @@ if user:
 if st.button("Generate Content", type="primary"):
     if user and not workspace.can_create_campaign():
         st.error("❌ Monthly campaign limit reached!")
-        st.info("💎 Upgrade to Professional plan for 100 campaigns/month or Business plan for unlimited.")
+        st.info("💎 Upgrade to Professional plan for 200 campaigns/month or Business plan for unlimited.")
 
         if st.button("View Plans", type="primary"):
             st.switch_page("pages/06_Pricing.py")
@@ -797,29 +809,30 @@ if user:
 else:
     current_plan = None
 
-# Pricing tiers
-col1, col2, col3, col4 = st.columns(4)
+# Pricing tiers - First Row (Free, Starter, Professional)
+st.markdown("### Choose Your Plan")
+col1, col2, col3 = st.columns(3)
 
 # Free tier
 with col1:
-    st.markdown("### 🆓 STARTER")
-    st.markdown("**Forever Free**")
+    st.markdown("### 🆓 FREE")
+    st.markdown("**$0/month**")
+    st.markdown("Forever Free")
 
     st.markdown("---")
 
     st.markdown("""
     **✅ Included:**
     - 10 campaigns/month
+    - 1 custom template
     - 3 languages
-    - Basic templates (5)
     - Instagram + Facebook
-    - PDF/DOCX export
+    - Basic analytics
 
     **❌ Not included:**
-    - No custom templates
-    - No analytics
     - Watermark on exports
     - No Telegram/LinkedIn
+    - Limited support
     """)
 
     st.markdown("---")
@@ -832,24 +845,49 @@ with col1:
         if st.button("Start Free", type="primary", use_container_width=True):
             st.switch_page("pages/03_Signup.py")
 
-# Professional tier
+# Starter tier
 with col2:
-    st.markdown("### 💼 PROFESSIONAL")
+    st.markdown("### 🚀 STARTER")
     st.markdown("**$49/month**")
 
     st.markdown("---")
 
     st.markdown("""
-    **✅ Everything in Starter, plus:**
-    - **100 campaigns/month**
-    - **All 15 languages**
-    - **All platforms** (Instagram, Facebook, Telegram, LinkedIn)
-    - **5 custom templates**
-    - Basic analytics
+    **✅ Everything in Free, plus:**
+    - **50 campaigns/month** (5x more!)
+    - **3 custom templates**
+    - **5 languages**
+    - All platforms (Instagram, Facebook, Telegram, LinkedIn)
     - No watermark
     - Email support
 
-    **💡 Best for:** Small businesses
+    **💡 Best for:** Solo business owners
+    """)
+
+    st.markdown("---")
+
+    if current_plan == "starter":
+        st.success("✅ Current Plan")
+    else:
+        if st.button("Upgrade to Starter", type="primary", use_container_width=True):
+            st.info("💳 Stripe integration coming in Week 7")
+
+# Professional tier
+with col3:
+    st.markdown("### 💼 PROFESSIONAL")
+    st.markdown("**$99/month**")
+
+    st.markdown("---")
+
+    st.markdown("""
+    **✅ Everything in Starter, plus:**
+    - **200 campaigns/month** (4x more!)
+    - **All 15 languages**
+    - **5 custom templates**
+    - Advanced analytics
+    - Priority email support
+
+    **💡 Best for:** Growing businesses
     """)
 
     st.markdown("---")
@@ -857,13 +895,17 @@ with col2:
     if current_plan == "professional":
         st.success("✅ Current Plan")
     else:
-        if st.button("Upgrade to Pro", type="primary", use_container_width=True):
+        if st.button("Upgrade to Professional", type="primary", use_container_width=True):
             st.info("💳 Stripe integration coming in Week 7")
 
-# Business tier (POPULAR)
-with col3:
-    st.markdown("### 🚀 BUSINESS")
-    st.markdown("**$99/month**")
+# Second Row (Team, Agency, Enterprise)
+st.markdown("---")
+col4, col5, col6 = st.columns(3)
+
+# Team tier (POPULAR)
+with col4:
+    st.markdown("### 👥 TEAM")
+    st.markdown("**$199/month**")
     st.markdown("⭐ **MOST POPULAR**")
 
     st.markdown("---")
@@ -871,40 +913,40 @@ with col3:
     st.markdown("""
     **✅ Everything in Professional, plus:**
     - **Unlimited campaigns**
-    - **Unlimited custom templates**
-    - **Advanced analytics** (with WHY)
-    - **Viral content generation**
-    - **Video script generation**
+    - **20 custom templates**
     - **3 team members**
+    - Advanced analytics (with WHY)
+    - Viral content generation
+    - Video script generation
     - Priority support (24h)
 
-    **💡 Best for:** Marketing managers
+    **💡 Best for:** Marketing teams
     """)
 
     st.markdown("---")
 
-    if current_plan == "business":
+    if current_plan == "team":
         st.success("✅ Current Plan")
     else:
-        if st.button("Upgrade to Business", type="primary", use_container_width=True):
+        if st.button("Upgrade to Team", type="primary", use_container_width=True):
             st.info("💳 Stripe integration coming in Week 7")
 
 # Agency tier
-with col4:
+with col5:
     st.markdown("### 🏢 AGENCY")
-    st.markdown("**$299/month**")
+    st.markdown("**$499/month**")
 
     st.markdown("---")
 
     st.markdown("""
-    **✅ Everything in Business, plus:**
-    - **10 team members**
-    - **25 client workspaces**
+    **✅ Everything in Team, plus:**
+    - **10 team members** (vs 3)
+    - **50 custom templates** (vs 20)
     - **White-label exports**
     - **API access** (coming soon)
     - Dedicated account manager
     - Monthly strategy call
-    - Custom training
+    - Multi-workspace management
 
     **💡 Best for:** Digital agencies
     """)
@@ -916,6 +958,35 @@ with col4:
     else:
         if st.button("Upgrade to Agency", type="primary", use_container_width=True):
             st.info("💳 Stripe integration coming in Week 7")
+
+# Enterprise tier
+with col6:
+    st.markdown("### 🏆 ENTERPRISE")
+    st.markdown("**$999+/month**")
+
+    st.markdown("---")
+
+    st.markdown("""
+    **✅ Everything in Agency, plus:**
+    - **Unlimited team members**
+    - **Unlimited custom templates**
+    - **SSO & SAML**
+    - **Dedicated infrastructure**
+    - **SLA guarantees**
+    - **Custom integrations**
+    - **On-premise option**
+    - **24/7 priority support**
+
+    **💡 Best for:** Large enterprises
+    """)
+
+    st.markdown("---")
+
+    if current_plan == "enterprise":
+        st.success("✅ Current Plan")
+    else:
+        if st.button("Contact Sales", type="primary", use_container_width=True):
+            st.info("📧 Email: enterprise@example.com")
 
 # Comparison table
 st.markdown("---")
@@ -934,17 +1005,23 @@ comparison_data = {
         "White-label",
         "Support"
     ],
+    "Free": [
+        "10", "3", "1", "Instagram, Facebook", "Basic", "❌", "❌", "1", "❌", "Community"
+    ],
     "Starter": [
-        "10", "3", "0", "Instagram, Facebook", "❌", "❌", "❌", "1", "❌", "Email"
+        "50", "5", "3", "All 4 platforms", "Basic", "❌", "❌", "1", "❌", "Email"
     ],
     "Professional": [
-        "100", "15", "5", "All 4 platforms", "Basic", "❌", "❌", "1", "❌", "Email"
+        "200", "15", "5", "All 4 platforms", "Advanced", "❌", "❌", "1", "❌", "Email"
     ],
-    "Business": [
-        "Unlimited", "15", "Unlimited", "All 4 platforms", "Advanced", "✅", "✅", "3", "❌", "Priority"
+    "Team": [
+        "Unlimited", "15", "20", "All 4 platforms", "Advanced", "✅", "✅", "3", "❌", "Priority"
     ],
     "Agency": [
-        "Unlimited", "15", "Unlimited", "All 4 platforms", "Advanced", "✅", "✅", "10", "✅", "Dedicated"
+        "Unlimited", "15", "50", "All 4 platforms", "Advanced", "✅", "✅", "10", "✅", "Dedicated"
+    ],
+    "Enterprise": [
+        "Unlimited", "15", "Unlimited", "All 4 platforms", "Advanced", "✅", "✅", "Unlimited", "✅", "24/7"
     ]
 }
 
