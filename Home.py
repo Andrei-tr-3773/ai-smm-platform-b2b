@@ -438,26 +438,6 @@ def main():
                             # Keep only last 5
                             st.session_state.recent_templates = st.session_state.recent_templates[:5]
 
-                        # Show template preview
-                        if template_name:
-                            selected_template = next((t for t in templates if t['name'] == template_name), None)
-                            if selected_template:
-                                with st.expander("📋 Template Preview", expanded=False):
-                                    # Show example query if available
-                                    if selected_template.get('example_query'):
-                                        st.markdown("**Example Query:**")
-                                        st.caption(selected_template['example_query'])
-
-                                    # Show template fields
-                                    if selected_template.get('items'):
-                                        st.markdown("**Template Fields:**")
-                                        field_count = len(selected_template['items'])
-                                        st.caption(f"This template has {field_count} fields:")
-                                        for i, item in enumerate(selected_template['items'][:5], 1):
-                                            st.markdown(f"{i}. `{item.get('name', 'Unnamed field')}`")
-                                        if field_count > 5:
-                                            st.caption(f"... and {field_count - 5} more fields")
-
                     # Move audience selection here
                     selected_audience_name = st.selectbox(
                         "Select Audience",
