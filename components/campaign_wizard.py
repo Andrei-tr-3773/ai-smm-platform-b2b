@@ -69,6 +69,7 @@ class CampaignWizard:
         with col1:
             if st.button("❌ Skip Wizard", key="skip_wizard_step1", use_container_width=True):
                 st.session_state.wizard_active = False
+                st.session_state.wizard_toggle = False
                 st.rerun()
         with col2:
             if st.button("Next →", key="next_step1", type="primary", use_container_width=True):
@@ -103,6 +104,7 @@ class CampaignWizard:
         with col1:
             if st.button("❌ Skip Wizard", key="skip_wizard_step2", use_container_width=True):
                 st.session_state.wizard_active = False
+                st.session_state.wizard_toggle = False
                 st.rerun()
         with col2:
             if st.button("← Back", key="back_step2", use_container_width=True):
@@ -146,6 +148,7 @@ class CampaignWizard:
         with col1:
             if st.button("❌ Skip Wizard", key="skip_wizard_step3", use_container_width=True):
                 st.session_state.wizard_active = False
+                st.session_state.wizard_toggle = False
                 st.rerun()
         with col2:
             if st.button("← Back", key="back_step3", use_container_width=True):
@@ -201,6 +204,7 @@ class CampaignWizard:
         with col1:
             if st.button("❌ Cancel", key="cancel_wizard_step4", use_container_width=True):
                 st.session_state.wizard_active = False
+                st.session_state.wizard_toggle = False  # Also update the checkbox key
                 st.session_state.wizard_step = 1
                 st.session_state.wizard_data = {}
                 st.rerun()
@@ -212,11 +216,11 @@ class CampaignWizard:
             if st.button("🚀 Generate Content", key="generate_step4", type="primary", use_container_width=True, disabled=not user_query):
                 # Apply wizard settings to session state
                 self._apply_wizard_settings(user_query)
-                # Close wizard
+                # Close wizard completely
                 st.session_state.wizard_active = False
+                st.session_state.wizard_toggle = False  # Also update the checkbox key
                 st.session_state.wizard_step = 1
                 st.session_state.wizard_data = {}
-                st.success("✅ Wizard settings applied! Generating content...")
                 st.rerun()
 
     def _apply_wizard_settings(self, user_query: str):

@@ -313,15 +313,18 @@ def main():
 
         # Wizard toggle
         st.markdown("---")
-        wizard_enabled = st.checkbox(
+
+        # Use checkbox with on_change callback instead of manual check
+        def toggle_wizard():
+            st.session_state.wizard_active = st.session_state.wizard_toggle
+
+        st.checkbox(
             "🧙‍♂️ Use Setup Wizard",
             value=st.session_state.get('wizard_active', False),
             key='wizard_toggle',
+            on_change=toggle_wizard,
             help="Step-by-step guide for creating your first campaign (recommended for new users)"
         )
-        if wizard_enabled != st.session_state.get('wizard_active', False):
-            st.session_state.wizard_active = wizard_enabled
-            st.rerun()
 
     # Define top-level tabs
     main_tabs = st.tabs(["Create New", "Campaigns", "Audiences", "Prompts"])
