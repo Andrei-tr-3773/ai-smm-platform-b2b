@@ -882,18 +882,13 @@ def handle_show_template(template_name, mongodb_client, history):
 
         items_content = "<br>".join(items_lines)
 
-        # Escape HTML for display
-        import html
-        escaped_template = html.escape(template_content)
+        # Show rendered HTML with Liquid variables ({{UserPhone}} etc) visible
+        # Append the template HTML directly for rendering (not escaped)
+        history.append((f"Template Preview for {template_name}:", template_content))
 
-        # Combine the template HTML and items into a single message
-        combined_content = (
-            f"<details><summary>{template_name} HTML</summary><pre><code>{escaped_template}</code></pre></details>"
-            f"<details><summary>Template items</summary>{items_content}</details>"
-        )
-
-        # Append the combined content as a single message to the history
-        history.append((f"Template Details for {template_name}:", combined_content))
+        # Also show template items info
+        items_html = f"<div style='background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin-top: 10px;'><strong>Template Fields:</strong><br>{items_content}</div>"
+        history.append(("", items_html))
 
         st.session_state['history'] = history
     except Exception as e:
