@@ -37,6 +37,10 @@ from utils.monitoring import track_execution_time, track_metric
 from utils.api_cost_tracker import get_tracker
 from utils.compliance import show_first_time_disclaimer, show_content_disclaimer
 
+# Week 6: Authentication
+from utils.auth import get_current_user, clear_session
+from repositories.workspace_repository import WorkspaceRepository
+
 ssl._create_default_https_context = ssl._create_unverified_context
 load_dotenv(override=True)
 logging.basicConfig(level=logging.INFO)
@@ -271,6 +275,66 @@ def main():
 
     # Sidebar with API usage tracking
     with st.sidebar:
+        # Week 6: User session management
+        user = get_current_user()
+
+        # Week 6: Initialize workspace repo for usage tracking
+        if user:
+            workspace_repo = WorkspaceRepository()
+
+        if user:
+            st.markdown("### 👤 Account")
+            st.markdown(f"**{user.name}**")
+            st.caption(f"📧 {user.email}")
+
+            # Logout button
+            if st.button("🚪 Logout", use_container_width=True):
+                clear_session()
+                st.success("✅ Logged out successfully")
+                st.rerun()
+
+            # Week 6: Usage tracking for logged-in users
+            workspace = workspace_repo.get_workspace(user.workspace_id)
+            limits = workspace.get_plan_limits()
+
+            st.markdown(f"**Plan:** {workspace.plan_tier.title()}")
+
+            # Campaigns usage
+            if limits["campaigns"] == -1:
+                st.success(f"✅ {workspace.campaigns_this_month} campaigns (Unlimited)")
+            else:
+                remaining = limits["campaigns"] - workspace.campaigns_this_month
+                st.metric("Campaigns Remaining", remaining)
+
+                progress = workspace.campaigns_this_month / limits["campaigns"]
+                st.progress(min(progress, 1.0))
+
+                if remaining <= 0:
+                    st.error("⚠️ Limit reached!")
+                    if st.button("💎 Upgrade", type="primary", use_container_width=True, key="sidebar_upgrade"):
+                        st.switch_page("pages/06_Pricing.py")
+                elif remaining <= 2:
+                    st.warning(f"⚠️ Only {remaining} left")
+
+            # Link to workspace settings
+            if st.button("⚙️ Workspace Settings", use_container_width=True, key="workspace_settings_btn"):
+                st.switch_page("pages/05_Workspace_Settings.py")
+
+            st.markdown("---")
+        else:
+            st.markdown("### 👋 Welcome")
+            st.info("Sign up to track your usage and unlock premium features!")
+
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("🔐 Login", use_container_width=True):
+                    st.switch_page("pages/02_Login.py")
+            with col2:
+                if st.button("📝 Sign Up", use_container_width=True):
+                    st.switch_page("pages/03_Signup.py")
+
+            st.markdown("---")
+
         st.markdown("### 📊 API Usage")
         tracker = get_cached_tracker()
         summary = tracker.get_summary()
@@ -358,6 +422,9 @@ def main():
             audience_repository = AudienceRepository("audiences")
             audiences = audience_repository.get_audiences()
             audience_names = [audience.name for audience in audiences]
+
+            # Week 6: Workspace repository for usage tracking
+            workspace_repo = WorkspaceRepository()
 
             if not campaigns:
                 campaigns = campaigns_client.get_campaigns()
@@ -566,7 +633,37 @@ def main():
                 chat_placeholder = st.container()
 
             if generate_button:
+                # Week 6: Check campaign limits before generation
+                if user:
+                    workspace = workspace_repo.get_workspace(user.workspace_id)
+
+                    if not workspace.can_create_campaign():
+                        limits = workspace.get_plan_limits()
+
+                        st.error("❌ Monthly campaign limit reached!")
+
+                        if workspace.plan_tier == "free":
+                            st.info("💎 Upgrade to Starter plan for 50 campaigns/month ($49/mo) or Professional for 200 campaigns/month ($99/mo).")
+                        elif workspace.plan_tier == "starter":
+                            st.info("💎 Upgrade to Professional plan for 200 campaigns/month ($99/mo).")
+                        elif workspace.plan_tier == "professional":
+                            st.info("💎 Upgrade to Team plan for unlimited campaigns ($199/mo).")
+
+                        col1_upgrade, col2_upgrade = st.columns(2)
+                        with col1_upgrade:
+                            if st.button("📊 View Usage", type="secondary", use_container_width=True, key="view_usage_limit"):
+                                st.switch_page("pages/05_Workspace_Settings.py")
+                        with col2_upgrade:
+                            if st.button("💎 View Plans", type="primary", use_container_width=True, key="upgrade_limit"):
+                                st.switch_page("pages/06_Pricing.py")
+
+                        st.stop()
+
                 handle_generate(user_query, template_name, state, prompts, history, spinner_placeholder, add_context)
+
+                # Week 6: Increment campaign count after successful generation
+                if user:
+                    workspace_repo.increment_campaign_count(user.workspace_id)
 
             if translate_button:
                 handle_translate(state, selected_languages, prompts, history, spinner_placeholder)
