@@ -154,11 +154,14 @@ with st.form("signup_form"):
                 1. Explore the Getting Started guide
                 2. Create your first campaign
                 3. Invite team members (coming soon)
+
+                Redirecting to Getting Started page...
                 """)
 
-                # Redirect to Getting Started
-                if st.button("Get Started", type="primary", use_container_width=True):
-                    st.switch_page("pages/00_Getting_Started.py")
+                # Auto-redirect after signup (wait a moment for user to see success message)
+                import time
+                time.sleep(2)
+                st.switch_page("pages/00_Getting_Started.py")
 
             except Exception as e:
                 logger.error(f"Signup error: {e}")
