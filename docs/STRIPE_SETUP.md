@@ -90,6 +90,9 @@ stripe prices create \
 
 ## Step 3: Configure Webhooks (Optional for MVP)
 
+**NOTE:** Week 7 MVP uses **manual verification** on the Success page (verifies checkout session directly).
+Webhooks are optional and recommended for production deployment for robustness (handles cases where user closes browser before redirect).
+
 For production, you'll need to handle Stripe webhooks:
 
 1. Go to https://dashboard.stripe.com/test/webhooks

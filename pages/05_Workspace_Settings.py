@@ -3,6 +3,12 @@ import streamlit as st
 from utils.auth import require_auth
 from repositories.workspace_repository import WorkspaceRepository
 from repositories.user_repository import UserRepository
+from utils.stripe_utils import (
+    get_subscription,
+    cancel_subscription,
+    reactivate_subscription,
+    format_subscription_status
+)
 import logging
 
 logger = logging.getLogger(__name__)
@@ -311,13 +317,55 @@ with tab4:
     else:
         st.success(f"✅ Subscribed to {workspace.plan_tier.upper()} plan")
 
-        # Placeholder for Stripe integration
-        st.markdown("### Payment Method")
-        st.info("💳 Stripe integration coming in Week 7")
+        # Stripe subscription details
+        formatted = None  # Initialize for later use
 
-        st.markdown("### Billing History")
-        st.info("📄 Invoice history coming in Week 7")
+        if workspace.stripe_subscription_id:
+            st.markdown("### 💳 Subscription Details")
 
+            try:
+                subscription = get_subscription(workspace.stripe_subscription_id)
+
+                if subscription:
+                    formatted = format_subscription_status(subscription)
+
+                    col1, col2 = st.columns(2)
+
+                    with col1:
+                        st.metric("Status", formatted["status"].upper())
+                        st.metric("Amount", f"${formatted['amount']:.2f}/{formatted['interval']}")
+
+                    with col2:
+                        st.metric("Current Period Start", formatted["current_period_start"])
+                        st.metric("Current Period End", formatted["current_period_end"])
+
+                    # Cancellation status
+                    if formatted["cancel_at_period_end"]:
+                        st.warning(f"⚠️ Subscription will cancel on {formatted['current_period_end']}")
+
+                        if st.button("Reactivate Subscription", type="primary", use_container_width=True):
+                            try:
+                                reactivate_subscription(workspace.stripe_subscription_id)
+                                st.success("✅ Subscription reactivated!")
+                                st.rerun()
+                            except Exception as e:
+                                logger.error(f"Failed to reactivate subscription: {e}")
+                                st.error(f"❌ Error: {str(e)}")
+                    else:
+                        st.success("✅ Subscription active and renewing automatically")
+
+                    st.markdown("---")
+
+                else:
+                    st.warning("⚠️ Could not retrieve subscription details from Stripe")
+
+            except Exception as e:
+                logger.error(f"Error fetching subscription: {e}")
+                st.error(f"❌ Error loading subscription details: {str(e)}")
+        else:
+            st.info("💡 No active Stripe subscription. Plan may have been set manually.")
+
+        # Manage Subscription
         st.markdown("### Manage Subscription")
 
         col1, col2 = st.columns(2)
@@ -327,9 +375,56 @@ with tab4:
                 st.switch_page("pages/06_Pricing.py")
 
         with col2:
-            if st.button("Cancel Subscription", type="secondary", use_container_width=True):
-                st.warning("⚠️ Subscription management coming in Week 7")
-                st.info("To cancel, please contact support@example.com")
+            # Check if subscription can be cancelled
+            can_cancel = (
+                workspace.stripe_subscription_id and
+                formatted and
+                not formatted.get("cancel_at_period_end", False)
+            )
+
+            if can_cancel:
+                if st.button("Cancel Subscription", type="secondary", use_container_width=True, key="cancel_sub"):
+                    with st.expander("⚠️ Confirm Cancellation", expanded=True):
+                        st.warning("""
+                        **Are you sure you want to cancel?**
+
+                        - Your subscription will remain active until the end of the current billing period
+                        - After that, you'll be downgraded to the Free plan
+                        - You can reactivate anytime before the period ends
+                        """)
+
+                        confirm_cancel = st.checkbox("I understand and want to cancel")
+
+                        if confirm_cancel:
+                            if st.button("Confirm Cancellation", type="primary"):
+                                try:
+                                    cancel_subscription(workspace.stripe_subscription_id, at_period_end=True)
+                                    st.success("✅ Subscription will cancel at end of billing period")
+                                    logger.info(f"Subscription cancelled: {workspace.stripe_subscription_id}")
+                                    st.rerun()
+                                except Exception as e:
+                                    logger.error(f"Failed to cancel subscription: {e}")
+                                    st.error(f"❌ Error: {str(e)}")
+            else:
+                st.caption("Cancel not available (no active subscription)")
+
+        # Billing history
+        st.markdown("---")
+        st.markdown("### 📄 Billing History")
+
+        if workspace.stripe_customer_id:
+            st.info("""
+            💡 **View invoices in Stripe:**
+
+            Visit your [Stripe Customer Portal](https://billing.stripe.com/p/login/test_XXXXX) to:
+            - View and download invoices
+            - Update payment methods
+            - See payment history
+
+            (Customer ID: `{customer_id}`)
+            """.format(customer_id=workspace.stripe_customer_id))
+        else:
+            st.info("No billing history available")
 
 # Footer
 st.markdown("---")
