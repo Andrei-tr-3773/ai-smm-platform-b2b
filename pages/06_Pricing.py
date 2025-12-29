@@ -2,6 +2,7 @@
 import streamlit as st
 from utils.auth import get_current_user
 from repositories.workspace_repository import WorkspaceRepository
+from utils.stripe_utils import create_checkout_session
 import logging
 
 logger = logging.getLogger(__name__)
@@ -97,7 +98,30 @@ with col2:
         st.success("✅ Current Plan")
     else:
         if st.button("Upgrade to Starter", type="primary", use_container_width=True, key="starter_upgrade"):
-            st.info("💳 Stripe integration coming in Week 7")
+            if user:
+                try:
+                    # Create Stripe checkout session
+                    session = create_checkout_session(
+                        user_email=user.email,
+                        plan_tier="starter",
+                        workspace_id=user.workspace_id
+                    )
+
+                    # Redirect to Stripe Checkout (using JavaScript)
+                    st.markdown(
+                        f'<meta http-equiv="refresh" content="0; url={session.url}">',
+                        unsafe_allow_html=True
+                    )
+                    st.success("🔄 Redirecting to checkout...")
+
+                except Exception as e:
+                    logger.error(f"Error creating checkout session: {str(e)}")
+                    st.error(f"❌ Payment error: {str(e)}")
+                    st.info("Please try again or contact support@example.com")
+            else:
+                st.info("Please log in first")
+                if st.button("Go to Login", use_container_width=True, key="login_starter"):
+                    st.switch_page("pages/02_Login.py")
 
 # PROFESSIONAL TIER
 with col3:
@@ -125,7 +149,28 @@ with col3:
         st.success("✅ Current Plan")
     else:
         if st.button("Upgrade to Professional", type="primary", use_container_width=True, key="pro_upgrade"):
-            st.info("💳 Stripe integration coming in Week 7")
+            if user:
+                try:
+                    session = create_checkout_session(
+                        user_email=user.email,
+                        plan_tier="professional",
+                        workspace_id=user.workspace_id
+                    )
+
+                    st.markdown(
+                        f'<meta http-equiv="refresh" content="0; url={session.url}">',
+                        unsafe_allow_html=True
+                    )
+                    st.success("🔄 Redirecting to checkout...")
+
+                except Exception as e:
+                    logger.error(f"Error creating checkout session: {str(e)}")
+                    st.error(f"❌ Payment error: {str(e)}")
+                    st.info("Please try again or contact support@example.com")
+            else:
+                st.info("Please log in first")
+                if st.button("Go to Login", use_container_width=True, key="login_pro"):
+                    st.switch_page("pages/02_Login.py")
 
 # Second Row: Team, Agency, Enterprise
 st.markdown("---")
@@ -158,7 +203,28 @@ with col4:
         st.success("✅ Current Plan")
     else:
         if st.button("Upgrade to Team", type="primary", use_container_width=True, key="team_upgrade"):
-            st.info("💳 Stripe integration coming in Week 7")
+            if user:
+                try:
+                    session = create_checkout_session(
+                        user_email=user.email,
+                        plan_tier="team",
+                        workspace_id=user.workspace_id
+                    )
+
+                    st.markdown(
+                        f'<meta http-equiv="refresh" content="0; url={session.url}">',
+                        unsafe_allow_html=True
+                    )
+                    st.success("🔄 Redirecting to checkout...")
+
+                except Exception as e:
+                    logger.error(f"Error creating checkout session: {str(e)}")
+                    st.error(f"❌ Payment error: {str(e)}")
+                    st.info("Please try again or contact support@example.com")
+            else:
+                st.info("Please log in first")
+                if st.button("Go to Login", use_container_width=True, key="login_team"):
+                    st.switch_page("pages/02_Login.py")
 
 # AGENCY TIER
 with col5:
@@ -187,7 +253,28 @@ with col5:
         st.success("✅ Current Plan")
     else:
         if st.button("Upgrade to Agency", type="primary", use_container_width=True, key="agency_upgrade"):
-            st.info("💳 Stripe integration coming in Week 7")
+            if user:
+                try:
+                    session = create_checkout_session(
+                        user_email=user.email,
+                        plan_tier="agency",
+                        workspace_id=user.workspace_id
+                    )
+
+                    st.markdown(
+                        f'<meta http-equiv="refresh" content="0; url={session.url}">',
+                        unsafe_allow_html=True
+                    )
+                    st.success("🔄 Redirecting to checkout...")
+
+                except Exception as e:
+                    logger.error(f"Error creating checkout session: {str(e)}")
+                    st.error(f"❌ Payment error: {str(e)}")
+                    st.info("Please try again or contact support@example.com")
+            else:
+                st.info("Please log in first")
+                if st.button("Go to Login", use_container_width=True, key="login_agency"):
+                    st.switch_page("pages/02_Login.py")
 
 # ENTERPRISE TIER
 with col6:

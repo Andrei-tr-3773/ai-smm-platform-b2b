@@ -29,6 +29,7 @@ sentry-sdk = "^2.47.0"
 plotly = "^6.5.0"
 bcrypt = "^5.0.0"
 pyjwt = "^2.10.1"
+stripe = "^11.0.0"
 
 [tool.poetry.group.dev.dependencies]
 watchdog = "4.0.2"

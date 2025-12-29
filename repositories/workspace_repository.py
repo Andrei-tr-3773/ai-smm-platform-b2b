@@ -180,8 +180,14 @@ class WorkspaceRepository:
             logger.error(f"Failed to remove team member: {e}")
             raise
 
-    def upgrade_plan(self, workspace_id: str, new_tier: str, stripe_subscription_id: str = None):
-        """Upgrade workspace plan."""
+    def upgrade_plan(
+        self,
+        workspace_id: str,
+        new_tier: str,
+        stripe_subscription_id: str = None,
+        stripe_customer_id: str = None
+    ):
+        """Upgrade workspace plan with Stripe subscription details."""
         try:
             update_fields = {
                 "plan_tier": new_tier,
@@ -191,6 +197,9 @@ class WorkspaceRepository:
 
             if stripe_subscription_id:
                 update_fields["stripe_subscription_id"] = stripe_subscription_id
+
+            if stripe_customer_id:
+                update_fields["stripe_customer_id"] = stripe_customer_id
 
             self.collection.update_one(
                 {"_id": ObjectId(workspace_id)},
