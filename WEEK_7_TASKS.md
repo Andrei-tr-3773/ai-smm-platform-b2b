@@ -1,25 +1,244 @@
 # Week 7: Content Tools (Blog/SEO & Enhanced Copywriting)
 
 **Duration:** 20 hours
-**Priority:** VALUE-ADD
+**Priority:** VALUE-ADD → **CHANGED TO MEDIUM** (see review below)
 **Business Impact:** Enable blog content creation + improve copy quality
 **ROI:** Content marketing channel + higher conversion rates
+**Review Status:** ⚠️ **NEEDS PRIORITIZATION ADJUSTMENT** (critical issues identified)
 
 ---
 
-## 📋 Overview
+## 🚨 TECH LEAD & BUSINESS ARCHITECT REVIEW
 
-**From REVISED_DEVELOPMENT_PLAN.md:**
-> **Goal:** Blog/SEO and enhanced copywriting
->
-> Enable users to:
-> - Generate SEO-optimized blog posts for content marketing
-> - Create multiple copy variations to test what works
-> - Improve copywriting quality with consistency checks
+**Date:** 2025-12-29
+**Reviewers:** Tech Lead + Business Architect
+**Status:** ⚠️ **CONDITIONAL APPROVAL** (priorities need adjustment)
 
-**What We're Building:**
-1. **Blog & SEO Generator** - AI-powered blog post creation with SEO optimization
-2. **Copywriting Improvements** - Generate 5 variations per campaign with different angles
+### 🔴 CRITICAL ISSUES IDENTIFIED:
+
+#### **Issue #1: Wrong Audience Priority (BUSINESS)**
+- ❌ **Blog generator targets 30-40% of users** (Jessica - SaaS marketers, Carlos - agencies)
+- ❌ **Ignores 60% primary audience** (Alex - small business owners who need Instagram/Facebook/Telegram)
+- ❌ **From B2B_TARGET_PERSONAS.md:**
+  - Alex (60%): Needs Instagram Reels, Facebook posts, Telegram announcements
+  - Jessica (30%): Needs B2B blog content ✅
+  - Carlos (10%): Needs white-label blogs for clients ✅
+
+**Impact:** -$37,740 MRR opportunity cost (60% × $62,900 target MRR)
+
+**Recommendation:**
+- 🔧 **Reduce blog scope from 12h → 6h** (MVP only)
+- 🔧 **Add Instagram Reels script generator (6h)** for Alex persona
+- 🔧 **Defer advanced SEO features** to Week 8+
+
+---
+
+#### **Issue #2: Stripe Integration Deferred (REVENUE BLOCKING)**
+- ❌ **Stripe deferred to Week 8** but it's **CRITICAL for monetization**
+- ❌ **Week 6 completed:** Users can sign up, but **can't pay**!
+- ❌ **From FINANCIAL_MODEL.md:**
+  - CAC payback: 0.67 months (under 1 month!)
+  - LTV/CAC: 27:1 (exceptional)
+  - **BUT:** We can't collect revenue without Stripe!
+
+**Current State:**
+- ✅ Authentication working
+- ✅ Workspaces created
+- ✅ Pricing page showing tiers
+- ❌ **NO WAY TO UPGRADE** (Stripe placeholder only)
+
+**Impact:**
+- Every week delayed = lost MRR
+- Can't validate pricing assumptions
+- Can't test conversion rates
+- Can't start CAC payback clock
+
+**Recommendation:**
+- 🔧 **PRIORITY #1: Stripe integration (6-8h) before blog generator**
+- 🔧 **Week 7 Revised:** Stripe (8h) + Copy Variations (8h) + Blog MVP (4h) = 20h
+
+---
+
+#### **Issue #3: OpenAI API Cost Explosion Risk (TECH)**
+- ❌ **Blog posts = 3,000-5,000 tokens** (vs 500-1,000 for social posts)
+- ❌ **No rate limiting on blog generation**
+- ❌ **From FINANCIAL_MODEL.md:**
+  - Professional tier COGS: $13.60/month (200 posts)
+  - Blog generator could add: +$5-10/user/month
+  - Gross margin impact: 86% → 80% (bad!)
+
+**Example Cost:**
+- Social post: 500 input + 1,000 output = $0.0008
+- Blog post: 1,500 input + 3,000 output = $0.0024 (3x more!)
+- User generates 20 blogs/month = $0.048 (vs $0.016 for 20 social posts)
+
+**Recommendation:**
+- 🔧 **Add rate limiting:** Max 10 blogs/month for Professional tier
+- 🔧 **Add to plan limits:** Blog posts separate from campaign posts
+- 🔧 **Monitor costs:** Track blog vs campaign API spend
+
+---
+
+#### **Issue #4: SEO Keyword Strategy Weak (TECH)**
+- ❌ **Using LLM for keyword research** (not Google Keyword Planner)
+- ❌ **No search volume data** = can't prioritize keywords
+- ❌ **Readability score** only works for English (Flesch formula)
+
+**Problems:**
+- LLM suggests "AI social media tool" but doesn't know it has 10k/month searches
+- Competitors use Ahrefs/SEMrush ($99-399/month tools)
+- Users expect accurate keyword data
+
+**Recommendation:**
+- 🔧 **Clearly label as "AI-suggested keywords"** (not "keyword research")
+- 🔧 **Add disclaimer:** "For accurate search volume, use Ahrefs/SEMrush"
+- 🔧 **Week 8+:** Consider Ahrefs API integration ($500/mo for 500 requests)
+- 🔧 **Defer readability for non-English** to future
+
+---
+
+### ✅ WHAT'S GOOD (Approved):
+
+#### **Copy Variations (8h) - EXCELLENT**
+- ✅ Helps ALL personas (Alex, Jessica, Carlos)
+- ✅ Low API cost (same as 5 social posts)
+- ✅ High value: +15-20% conversion rates
+- ✅ Enables A/B testing
+- ✅ 5 angles cover all use cases
+
+**ROI Calculation:**
+- Cost: 8 hours ($800 @ $100/hr)
+- Benefit: +15% conversion = +90 users/year @ $150 ARPU = +$13,500 MRR Year 1
+- **ROI: 16.9:1** (excellent)
+
+#### **Copy Quality Checks (2h) - GOOD**
+- ✅ Tone consistency helps brand voice
+- ✅ Repetition detection prevents bad copy
+- ✅ Low implementation cost
+
+#### **Copy Formulas (2h) - GOOD**
+- ✅ Educational value for users
+- ✅ PAS, AIDA, 4Ps proven frameworks
+- ✅ Easy to implement
+
+---
+
+### 🔧 RECOMMENDED PLAN ADJUSTMENTS:
+
+#### **Week 7 REVISED (20 hours):**
+
+**PRIORITY #1: Stripe Integration (8 hours) - NEW**
+- Payment processing for all tiers
+- Webhook handling (subscription events)
+- Upgrade/downgrade flow
+- Invoice generation
+- **Why first:** Unblocks revenue, validates pricing
+
+**PRIORITY #2: Copy Variations (8 hours) - KEEP**
+- 5 angle generator (problem, curiosity, social proof, FOMO, benefit)
+- Copy quality checks
+- Copy formulas (PAS, AIDA, 4Ps)
+- **Why:** Helps all personas, high ROI
+
+**PRIORITY #3: Blog Generator MVP (4 hours) - REDUCED**
+- Basic blog post generation (1500-2000 words)
+- Simple outline → content
+- Meta tags (title, description)
+- Export as Markdown/HTML
+- **Defer:**
+  - ❌ Advanced SEO (keyword density, readability) → Week 8
+  - ❌ Multiple export formats (WordPress, Medium) → Week 8
+  - ❌ Keyword research tool → Week 8+
+
+**DEFERRED TO WEEK 8:**
+- Instagram Reels Script Generator (6h) - for Alex persona
+- Advanced blog SEO features (4h)
+- OAuth integration (4h)
+- Email service / SendGrid (4h)
+
+---
+
+### 💰 FINANCIAL ALIGNMENT CHECK:
+
+**From FINANCIAL_MODEL.md targets:**
+
+| Metric | Target (Month 12) | Week 7 Impact |
+|--------|-------------------|---------------|
+| **Paid Users** | 600 | Stripe enables payment ✅ |
+| **MRR** | $62,900 | Stripe unblocks revenue ✅ |
+| **ARPU** | $150 | Copy variations improve conversion ✅ |
+| **Gross Margin** | 92% | Blog costs manageable with rate limits ✅ |
+| **LTV/CAC** | 27:1 | Copy variations: +15% conversion = better LTV ✅ |
+
+**From B2B_TARGET_PERSONAS.md:**
+
+| Persona | % Users | Needs Week 7? | Why |
+|---------|---------|---------------|-----|
+| **Alex** (Small Business) | 60% | ⚠️ Partially | Copy variations ✅, Blog ❌, Stripe ✅ |
+| **Jessica** (Marketing Manager) | 30% | ✅ Yes | Blog ✅, Copy variations ✅, Stripe ✅ |
+| **Carlos** (Agency) | 10% | ✅ Yes | All features ✅ |
+
+**Issue:** Blog generator serves 40% of users, but takes 60% of Week 7 time (12/20h).
+
+**Solution:** Reduce blog to 20% of time (4/20h), focus on revenue (Stripe 40%) and conversion (copy 40%).
+
+---
+
+### 📊 REVISED WEEK 7 ROI:
+
+**Original Plan:**
+- Blog Generator: 12h → Benefits 40% users → ROI ~3:1
+- Copy Variations: 8h → Benefits 100% users → ROI ~17:1
+- **Weighted ROI:** ~8:1
+
+**Revised Plan:**
+- Stripe Integration: 8h → Unblocks ALL revenue → ROI ~50:1 (enables $62.9k MRR)
+- Copy Variations: 8h → Benefits 100% users → ROI ~17:1
+- Blog MVP: 4h → Benefits 40% users → ROI ~6:1
+- **Weighted ROI:** ~28:1 (3.5x better!)
+
+---
+
+### ✅ FINAL RECOMMENDATION:
+
+**Approve Week 7 with these changes:**
+
+1. ✅ **ADD: Stripe Integration (8h)** - PRIORITY #1
+2. ✅ **KEEP: Copy Variations (8h)** - PRIORITY #2
+3. ✅ **REDUCE: Blog Generator (12h → 4h MVP)** - PRIORITY #3
+4. ⏳ **DEFER: Advanced blog features** - Week 8+
+5. ⏳ **DEFER: Instagram Reels generator** - Week 8 (for Alex persona)
+
+**Rationale:**
+- Revenue first (Stripe unblocks monetization)
+- Conversion optimization (Copy variations improve all campaigns)
+- Content tools last (Blog MVP for 40% of users)
+
+**Expected Outcome:**
+- Week 7 end: Users can upgrade and pay ✅
+- Week 7 end: Copy quality improves (+15% conversion) ✅
+- Week 7 end: Basic blog generation works (MVP) ✅
+
+---
+
+## 📋 Overview (REVISED)
+
+**Status:** ✅ **APPROVED with prioritization changes**
+
+**REVISED Goals:**
+1. **Stripe Integration** (PRIORITY #1) - Enable paid subscriptions
+2. **Copy Variations** (PRIORITY #2) - Generate 5 variations with different angles
+3. **Blog Generator MVP** (PRIORITY #3) - Basic blog post generation
+
+**What Changed:**
+- ✅ **ADDED:** Stripe Integration (8h) - was deferred from Week 6
+- ✅ **KEPT:** Copy Variations (8h) - high ROI for all users
+- ⚠️ **REDUCED:** Blog Generator (12h → 4h MVP) - defer advanced features
+
+**Rationale:**
+- Revenue unblocking is critical (can't monetize without Stripe)
+- Copy variations help 100% of users (all personas)
+- Blog MVP sufficient for 40% of users (can iterate later)
 
 ---
 
@@ -64,128 +283,376 @@
 
 ---
 
-## 📅 Week 7 Tasks
+## 📅 Week 7 Tasks (REVISED)
 
-### Task 7.1: Blog & SEO Generator (12 hours)
+### Task 7.0: Stripe Integration (8 hours) - NEW, PRIORITY #1
 
-**Goal:** Enable AI blog post generation with SEO optimization
+**Goal:** Enable paid subscriptions and monetization
 
-#### 7.1.1: Blog Post Agent (LangGraph) (4 hours)
+**Why First:**
+- Week 6 completed auth/workspaces, but users can't upgrade
+- Every week delayed = lost MRR
+- CAC payback 0.67 months (need payment flow)
+- Validates pricing assumptions
 
-**Architecture:**
-```python
-# agents/blog_generator_agent.py
+#### 7.0.1: Stripe Setup & Product Configuration (2 hours)
 
-StateGraph workflow:
-1. analyze_topic (understand user topic + target keywords)
-2. research_keywords (suggest SEO keywords using heuristics)
-3. generate_outline (create article structure with H2/H3 headings)
-4. generate_content (write full blog post sections)
-5. optimize_seo (add meta tags, keyword density check)
-6. check_readability (Flesch score, sentence length, paragraph length)
-```
+**Setup:**
+1. Create Stripe account (if not exists)
+2. Create Products & Prices for each tier:
+   - Starter: $49/month (price_starter_monthly)
+   - Professional: $99/month (price_pro_monthly)
+   - Team: $199/month (price_team_monthly)
+   - Agency: $499/month (price_agency_monthly)
+   - Enterprise: Custom pricing (manual)
 
-**State Schema:**
-```python
-@dataclass
-class BlogGeneratorState:
-    messages: List[BaseMessage]
-    topic: str
-    target_keywords: List[str]  # e.g., ["AI social media", "content marketing"]
-    outline: dict  # {h2: [h3 headings]}
-    content: str  # Full blog post markdown
-    meta_title: str  # SEO title (60 chars)
-    meta_description: str  # SEO description (160 chars)
-    readability_score: float  # Flesch Reading Ease (60-70 target)
-    word_count: int
-    keyword_density: dict  # {keyword: percentage}
-```
+3. Create test products in Stripe Test Mode
+4. Add Stripe API keys to `.env`:
+   ```env
+   STRIPE_SECRET_KEY=sk_test_...
+   STRIPE_PUBLISHABLE_KEY=pk_test_...
+   STRIPE_WEBHOOK_SECRET=whsec_...
+   ```
 
-**Implementation:**
-```python
-class BlogGeneratorAgent:
-    def __init__(self, model):
-        self.model = model
-        self.graph = self._build_graph()
-
-    def _build_graph(self):
-        workflow = StateGraph(BlogGeneratorState)
-
-        # Nodes
-        workflow.add_node("analyze_topic", self.analyze_topic)
-        workflow.add_node("research_keywords", self.research_keywords)
-        workflow.add_node("generate_outline", self.generate_outline)
-        workflow.add_node("generate_content", self.generate_content)
-        workflow.add_node("optimize_seo", self.optimize_seo)
-        workflow.add_node("check_readability", self.check_readability)
-
-        # Edges
-        workflow.set_entry_point("analyze_topic")
-        workflow.add_edge("analyze_topic", "research_keywords")
-        workflow.add_edge("research_keywords", "generate_outline")
-        workflow.add_edge("generate_outline", "generate_content")
-        workflow.add_edge("generate_content", "optimize_seo")
-        workflow.add_edge("optimize_seo", "check_readability")
-        workflow.add_edge("check_readability", END)
-
-        return workflow.compile()
-
-    def analyze_topic(self, state: BlogGeneratorState):
-        """Analyze user topic and extract intent."""
-        # Prompt LLM to understand topic + identify industry
-        pass
-
-    def research_keywords(self, state: BlogGeneratorState):
-        """Suggest SEO keywords (heuristic-based, not Google API)."""
-        # Generate related keywords based on topic
-        # E.g., "AI social media" -> ["AI content generation", "automated social posts"]
-        pass
-
-    def generate_outline(self, state: BlogGeneratorState):
-        """Create article outline with headings."""
-        # Prompt LLM to generate:
-        # - Introduction hook
-        # - 5-7 H2 headings
-        # - 2-3 H3 subheadings per H2
-        # - Conclusion with CTA
-        pass
-
-    def generate_content(self, state: BlogGeneratorState):
-        """Write full blog post based on outline."""
-        # For each section in outline, generate 200-400 words
-        # Include examples, statistics, actionable tips
-        pass
-
-    def optimize_seo(self, state: BlogGeneratorState):
-        """Add meta tags and check keyword density."""
-        # Generate meta_title (60 chars, keyword-rich)
-        # Generate meta_description (160 chars, CTA)
-        # Check keyword density (2-3% target)
-        pass
-
-    def check_readability(self, state: BlogGeneratorState):
-        """Calculate readability score."""
-        # Flesch Reading Ease formula
-        # Target: 60-70 (8th-9th grade level)
-        # Suggest improvements if too complex
-        pass
-```
-
-**Deliverable:**
-- ✅ BlogGeneratorAgent with 6-node workflow
-- ✅ Keyword research (heuristic)
-- ✅ SEO meta tags generated
-- ✅ Readability score calculated
+**Deliverable:** Stripe account configured with all pricing tiers
 
 ---
 
-#### 7.1.2: Blog UI & Export (4 hours)
+#### 7.0.2: Payment Flow Implementation (3 hours)
 
-**UI Features:**
+**Files to Create/Modify:**
+- `utils/stripe_utils.py` - Stripe client and utilities
+- `pages/06_Pricing.py` - Update upgrade buttons to use Stripe
+- `pages/08_Checkout.py` - NEW: Stripe checkout page
+
+**Implementation:**
 ```python
-# In Home.py or new pages/07_Blog_Generator.py
+# utils/stripe_utils.py
+import stripe
+import os
+from dotenv import load_dotenv
 
-st.title("📝 Blog & SEO Generator")
+load_dotenv()
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
+
+PRICE_IDS = {
+    "starter": os.getenv("STRIPE_PRICE_STARTER"),
+    "professional": os.getenv("STRIPE_PRICE_PRO"),
+    "team": os.getenv("STRIPE_PRICE_TEAM"),
+    "agency": os.getenv("STRIPE_PRICE_AGENCY"),
+}
+
+
+def create_checkout_session(user_email: str, plan_tier: str, workspace_id: str):
+    """Create Stripe checkout session."""
+    price_id = PRICE_IDS.get(plan_tier)
+
+    if not price_id:
+        raise ValueError(f"Invalid plan tier: {plan_tier}")
+
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=[{
+            'price': price_id,
+            'quantity': 1,
+        }],
+        mode='subscription',
+        success_url=f"{os.getenv('APP_URL')}/success?session_id={{CHECKOUT_SESSION_ID}}",
+        cancel_url=f"{os.getenv('APP_URL')}/pricing",
+        customer_email=user_email,
+        metadata={
+            'workspace_id': workspace_id,
+            'plan_tier': plan_tier
+        }
+    )
+
+    return session
+
+
+def get_customer_subscriptions(customer_id: str):
+    """Get all subscriptions for a customer."""
+    return stripe.Subscription.list(customer=customer_id)
+
+
+def cancel_subscription(subscription_id: str):
+    """Cancel subscription at period end."""
+    return stripe.Subscription.modify(
+        subscription_id,
+        cancel_at_period_end=True
+    )
+```
+
+**Update pages/06_Pricing.py:**
+```python
+# Replace placeholder buttons with real Stripe checkout
+
+from utils.stripe_utils import create_checkout_session
+
+if st.button("Upgrade to Starter", type="primary", use_container_width=True):
+    if user:
+        try:
+            session = create_checkout_session(
+                user_email=user.email,
+                plan_tier="starter",
+                workspace_id=user.workspace_id
+            )
+
+            # Redirect to Stripe Checkout
+            st.markdown(f"[Proceed to Payment]({session.url})")
+
+        except Exception as e:
+            st.error(f"❌ Payment error: {str(e)}")
+    else:
+        st.info("Please login first")
+        st.switch_page("pages/02_Login.py")
+```
+
+**Deliverable:** Users can click "Upgrade" and reach Stripe checkout
+
+---
+
+#### 7.0.3: Webhook Handling (2 hours)
+
+**Goal:** Handle subscription events from Stripe
+
+**Files to Create:**
+- `webhooks/stripe_webhook.py` - Webhook endpoint (or add to Streamlit)
+- Note: Streamlit doesn't natively support webhooks, so we'll use polling approach
+
+**Implementation Strategy:**
+
+**Option A: External webhook service (recommended for production)**
+- Deploy FastAPI/Flask webhook endpoint separately
+- Stripe → Webhook → Update MongoDB
+
+**Option B: Manual verification (MVP for Week 7)**
+- User completes payment
+- On "Success" page, verify session with Stripe
+- Update workspace plan_tier
+
+```python
+# pages/09_Success.py - Payment Success Handler
+import streamlit as st
+from utils.auth import require_auth
+from repositories.workspace_repository import WorkspaceRepository
+import stripe
+
+st.set_page_config(page_title="Payment Success", page_icon="✅")
+
+user = require_auth()
+
+# Get session_id from URL
+session_id = st.query_params.get("session_id")
+
+if session_id:
+    try:
+        # Verify session with Stripe
+        session = stripe.checkout.Session.retrieve(session_id)
+
+        if session.payment_status == "paid":
+            # Update workspace
+            workspace_repo = WorkspaceRepository()
+            plan_tier = session.metadata.get("plan_tier")
+            subscription_id = session.subscription
+
+            workspace_repo.upgrade_plan(
+                workspace_id=user.workspace_id,
+                new_tier=plan_tier,
+                stripe_subscription_id=subscription_id
+            )
+
+            st.success(f"✅ Payment successful! Upgraded to {plan_tier.upper()} plan.")
+            st.balloons()
+
+            st.info(f"""
+            **What's next:**
+            - Your new limits are active immediately
+            - Check Workspace Settings to see usage
+            - Invoice will be sent to {user.email}
+            """)
+
+            if st.button("Go to Dashboard", type="primary"):
+                st.switch_page("Home.py")
+
+        else:
+            st.error("Payment not completed. Please try again.")
+
+    except Exception as e:
+        st.error(f"❌ Error verifying payment: {str(e)}")
+else:
+    st.warning("No payment session found")
+```
+
+**Deliverable:** Successful payments upgrade workspace plan_tier
+
+---
+
+#### 7.0.4: Subscription Management UI (1 hour)
+
+**Update pages/05_Workspace_Settings.py - Billing Tab:**
+
+```python
+# Tab 4: Billing
+with tab4:
+    st.header("💳 Billing & Subscription")
+
+    st.subheader(f"Current Plan: **{workspace.plan_tier.upper()}**")
+
+    if workspace.plan_tier == "free":
+        st.info("You're on the Free plan. Upgrade to unlock premium features!")
+        if st.button("Upgrade Now", type="primary"):
+            st.switch_page("pages/06_Pricing.py")
+    else:
+        st.success(f"✅ Subscribed to {workspace.plan_tier.upper()} plan")
+
+        # Show subscription details
+        if workspace.stripe_subscription_id:
+            try:
+                subscription = stripe.Subscription.retrieve(workspace.stripe_subscription_id)
+
+                st.markdown("### Subscription Details")
+                st.info(f"""
+                **Status:** {subscription.status}
+                **Billing Period:** {subscription.current_period_start} - {subscription.current_period_end}
+                **Next Payment:** {subscription.current_period_end}
+                **Amount:** ${subscription.plan.amount/100}/month
+                """)
+
+                # Cancel subscription
+                if subscription.cancel_at_period_end:
+                    st.warning("⚠️ Subscription will cancel at end of period")
+                else:
+                    if st.button("Cancel Subscription", type="secondary"):
+                        confirm = st.checkbox("I confirm I want to cancel")
+                        if confirm:
+                            cancel_subscription(workspace.stripe_subscription_id)
+                            st.success("Subscription will cancel at end of billing period")
+                            st.rerun()
+
+            except Exception as e:
+                st.error(f"Error loading subscription: {str(e)}")
+
+        # Change plan
+        st.markdown("### Change Plan")
+        col1, col2 = st.columns(2)
+
+        with col1:
+            if st.button("Upgrade Plan", type="primary", use_container_width=True):
+                st.switch_page("pages/06_Pricing.py")
+
+        with col2:
+            if st.button("Downgrade Plan", type="secondary", use_container_width=True):
+                st.info("Contact support@example.com to downgrade")
+```
+
+**Deliverable:** Users can view subscription, cancel, change plans
+
+---
+
+**Task 7.0 Summary:**
+- ✅ Stripe configured with all pricing tiers
+- ✅ Checkout flow working
+- ✅ Payment success handler
+- ✅ Subscription management UI
+- ⏳ Full webhook handling (defer to Week 8 if needed - use manual verification MVP)
+
+**Total Time:** 8 hours
+
+---
+
+### Task 7.1: Blog & SEO Generator MVP (4 hours) - REDUCED
+
+**Goal:** Enable basic AI blog post generation (MVP only)
+
+**⚠️ SCOPE REDUCTION from 12h → 4h:**
+- ✅ **KEEP:** Basic blog generation (outline → content)
+- ✅ **KEEP:** Simple meta tags (title, description)
+- ✅ **KEEP:** Markdown/HTML export
+- ❌ **DEFER:** Advanced SEO (keyword density, readability) → Week 8+
+- ❌ **DEFER:** Multiple export formats (WordPress, Medium) → Week 8+
+- ❌ **DEFER:** LangGraph multi-node workflow → Use simple single-step generation
+
+**Why MVP Approach:**
+- Blog serves only 40% of users (Jessica/Carlos)
+- Focus Week 7 on revenue (Stripe) and conversion (Copy variations)
+- Can iterate on blog features based on user feedback
+
+---
+
+#### 7.1.1: Simple Blog Generator (2 hours)
+
+**Simplified Architecture:**
+```python
+# agents/blog_generator_agent.py
+
+class BlogGeneratorAgent:
+    """Simple blog generator without complex workflow."""
+
+    def __init__(self, model):
+        self.model = model
+
+    def generate_blog(self, topic: str, target_audience: str, tone: str, word_count: int) -> dict:
+        """Generate blog post in single step."""
+        prompt = f"""
+        Write a professional blog post about: {topic}
+
+        Target Audience: {target_audience}
+        Tone: {tone}
+        Target Length: {word_count} words
+
+        Structure:
+        1. Compelling introduction (hook + problem statement)
+        2. 3-5 main sections with H2 headings
+        3. Each section: 200-400 words with examples
+        4. Conclusion with clear CTA
+
+        Return as Markdown format.
+        """
+
+        # Generate content
+        content = self.model.invoke(prompt)
+
+        # Generate simple meta tags
+        meta = self._generate_meta_tags(content, topic)
+
+        return {
+            "content": content,
+            "meta_title": meta["title"],
+            "meta_description": meta["description"],
+            "word_count": len(content.split())
+        }
+
+    def _generate_meta_tags(self, content: str, topic: str) -> dict:
+        """Generate basic meta tags."""
+        # Extract first line as title
+        lines = content.split('\n')
+        title = lines[0].replace('#', '').strip()[:60]
+
+        # Use first paragraph as description
+        description = lines[2] if len(lines) > 2 else content[:160]
+        description = description[:157] + "..."
+
+        return {
+            "title": title,
+            "description": description
+        }
+```
+
+**Deliverable:**
+- ✅ Simple blog generation (single LLM call)
+- ✅ Basic meta tags
+- ✅ Markdown output
+- ⏳ Advanced features deferred to Week 8+
+
+---
+
+#### 7.1.2: Blog UI & Export (2 hours)
+
+**Minimal UI:**
+```python
+# Add to Home.py or new tab "Blog Generator"
+
+st.title("📝 Blog Generator (MVP)")
 
 # Input
 topic = st.text_input(
@@ -204,50 +671,29 @@ tone = st.selectbox(
     ["Professional", "Casual", "Educational", "Persuasive"]
 )
 
-word_count_target = st.slider("Target Word Count", 800, 3000, 1500, 200)
+word_count_target = st.slider("Target Word Count", 1000, 2500, 1500, 500)
 
 if st.button("Generate Blog Post", type="primary"):
-    with st.spinner("Generating blog post..."):
-        # Call BlogGeneratorAgent
-        result = blog_agent.generate(topic, target_audience, tone, word_count_target)
+    with st.spinner("Generating blog post (this may take 30-60 seconds)..."):
+        blog_agent = BlogGeneratorAgent(model)
+        result = blog_agent.generate_blog(topic, target_audience, tone, word_count_target)
 
-    # Display results
     st.success("✅ Blog post generated!")
 
-    # Meta tags (collapsible)
+    # Show meta tags
     with st.expander("🔍 SEO Meta Tags", expanded=False):
         st.text_input("Meta Title", value=result['meta_title'], disabled=True)
         st.text_area("Meta Description", value=result['meta_description'], disabled=True)
+        st.info("💡 Advanced SEO features (keyword density, readability) coming in Week 8+")
 
-        # Keyword density
-        st.markdown("**Keyword Density:**")
-        for keyword, density in result['keyword_density'].items():
-            st.metric(keyword, f"{density:.1f}%")
-
-    # Readability score
-    with st.expander("📊 Readability Analysis", expanded=False):
-        score = result['readability_score']
-        if score >= 60:
-            st.success(f"✅ Readability Score: {score:.1f} (Good)")
-        else:
-            st.warning(f"⚠️ Readability Score: {score:.1f} (Too complex)")
-
-        st.info(f"Word Count: {result['word_count']} words")
-
-    # Main content
+    # Show content
     st.markdown("---")
     st.markdown("### Generated Blog Post")
-
-    # Show outline first
-    with st.expander("📋 Article Outline", expanded=True):
-        st.json(result['outline'])
-
-    # Show full content
     st.markdown(result['content'])
 
     # Export options
     st.markdown("---")
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
 
     with col1:
         # Markdown export
@@ -259,252 +705,51 @@ if st.button("Generate Blog Post", type="primary"):
         )
 
     with col2:
-        # HTML export
-        html_content = markdown.markdown(result['content'])
+        # Simple HTML export
+        html_content = f"""<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{result['meta_title']}</title>
+    <meta name="description" content="{result['meta_description']}">
+</head>
+<body>
+    <article>
+        {markdown.markdown(result['content'])}
+    </article>
+</body>
+</html>"""
+
         st.download_button(
             "🌐 Download HTML",
             data=html_content,
             file_name=f"blog_{topic[:30]}.html",
             mime="text/html"
         )
-
-    with col3:
-        # WordPress-ready format (HTML with meta tags)
-        wordpress_content = f"""
-<!-- SEO Meta Tags -->
-<!-- Title: {result['meta_title']} -->
-<!-- Description: {result['meta_description']} -->
-
-{html_content}
-        """
-        st.download_button(
-            "📄 Download WordPress",
-            data=wordpress_content,
-            file_name=f"blog_{topic[:30]}_wordpress.html",
-            mime="text/html"
-        )
 ```
 
 **Deliverable:**
-- ✅ Blog generator UI in Streamlit
-- ✅ SEO meta tags display
-- ✅ Readability score visualization
-- ✅ Export as Markdown/HTML/WordPress
+- ✅ Simple blog UI
+- ✅ Basic meta tags display
+- ✅ Markdown/HTML export
+- ⏳ Advanced formats (WordPress, Medium) deferred
 
 ---
 
-#### 7.1.3: SEO Keyword Utilities (2 hours)
+**Task 7.1 MVP Summary:**
+- ✅ Blog generation works (single-step LLM call)
+- ✅ Basic meta tags (title, description)
+- ✅ Markdown/HTML export
+- ⏳ **DEFERRED to Week 8+:**
+  - Keyword research
+  - Keyword density tracking
+  - Readability scoring (Flesch formula)
+  - WordPress/Medium export formats
+  - LangGraph multi-node workflow
+  - Advanced SEO optimization
 
-**Keyword Research Module:**
-```python
-# utils/seo_utils.py
-
-def suggest_keywords(topic: str, count: int = 10) -> List[str]:
-    """
-    Suggest SEO keywords based on topic (heuristic-based).
-
-    Note: NOT using Google Keyword Planner API (requires billing).
-    Using LLM to suggest related keywords.
-    """
-    prompt = f"""
-    Given the blog topic: "{topic}"
-
-    Suggest {count} SEO keywords that people might search for.
-    Include:
-    - Long-tail keywords (3-5 words)
-    - Question-based keywords ("how to...", "what is...")
-    - Comparison keywords ("vs", "best...")
-
-    Return as JSON array: ["keyword1", "keyword2", ...]
-    """
-    # Call LLM
-    response = llm.invoke(prompt)
-    keywords = json.loads(response)
-    return keywords
-
-
-def calculate_keyword_density(content: str, keywords: List[str]) -> dict:
-    """Calculate keyword density as percentage."""
-    word_count = len(content.split())
-    density = {}
-
-    for keyword in keywords:
-        count = content.lower().count(keyword.lower())
-        density[keyword] = (count / word_count) * 100
-
-    return density
-
-
-def calculate_readability(text: str) -> float:
-    """
-    Calculate Flesch Reading Ease score.
-
-    Formula:
-    206.835 - 1.015 * (words/sentences) - 84.6 * (syllables/words)
-
-    Score interpretation:
-    - 90-100: Very easy (5th grade)
-    - 60-70: Standard (8th-9th grade) <- TARGET
-    - 30-50: Difficult (college)
-    - 0-30: Very difficult (graduate)
-    """
-    sentences = text.count('.') + text.count('!') + text.count('?')
-    words = len(text.split())
-    syllables = sum([count_syllables(word) for word in text.split()])
-
-    if sentences == 0 or words == 0:
-        return 0
-
-    score = 206.835 - 1.015 * (words/sentences) - 84.6 * (syllables/words)
-    return max(0, min(100, score))
-
-
-def count_syllables(word: str) -> int:
-    """Count syllables in a word (approximation)."""
-    vowels = 'aeiouy'
-    word = word.lower()
-    count = 0
-    prev_was_vowel = False
-
-    for char in word:
-        is_vowel = char in vowels
-        if is_vowel and not prev_was_vowel:
-            count += 1
-        prev_was_vowel = is_vowel
-
-    # Adjust for silent 'e'
-    if word.endswith('e'):
-        count -= 1
-
-    return max(1, count)
-
-
-def optimize_meta_tags(content: str, keywords: List[str]) -> dict:
-    """Generate SEO-optimized meta tags."""
-    # Extract first heading as base
-    lines = content.split('\n')
-    title_base = lines[0].replace('#', '').strip()
-
-    # Meta title (60 chars max, include primary keyword)
-    primary_keyword = keywords[0] if keywords else ""
-    meta_title = f"{title_base} - {primary_keyword}"[:60]
-
-    # Meta description (160 chars max, include CTA)
-    first_paragraph = lines[2] if len(lines) > 2 else content[:200]
-    meta_description = f"{first_paragraph[:140]}... Read more."[:160]
-
-    return {
-        "meta_title": meta_title,
-        "meta_description": meta_description,
-        "canonical_url": f"/blog/{title_base.lower().replace(' ', '-')}",
-        "og_image": "https://example.com/blog-image.jpg"  # placeholder
-    }
-```
-
-**Deliverable:**
-- ✅ Keyword suggestion (LLM-based)
-- ✅ Keyword density calculator
-- ✅ Readability score (Flesch formula)
-- ✅ Meta tags generator
-
----
-
-#### 7.1.4: Export Formats (2 hours)
-
-**Export Options:**
-1. **Markdown** - Plain text with formatting
-2. **HTML** - Styled with CSS
-3. **WordPress-ready** - HTML with meta tags comments
-4. **Medium-ready** - Special formatting for Medium import
-
-```python
-# utils/blog_export.py
-
-def export_as_markdown(content: str, meta: dict) -> str:
-    """Export blog post as Markdown."""
-    return f"""---
-title: {meta['meta_title']}
-description: {meta['meta_description']}
-date: {datetime.now().strftime('%Y-%m-%d')}
-keywords: {', '.join(meta.get('keywords', []))}
----
-
-{content}
-"""
-
-
-def export_as_html(content: str, meta: dict) -> str:
-    """Export blog post as styled HTML."""
-    html_content = markdown.markdown(content)
-
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{meta['meta_title']}</title>
-    <meta name="description" content="{meta['meta_description']}">
-    <meta name="keywords" content="{', '.join(meta.get('keywords', []))}">
-
-    <style>
-        body {{
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }}
-        h1 {{ font-size: 2.5em; margin-bottom: 0.5em; }}
-        h2 {{ font-size: 2em; margin-top: 1.5em; color: #2c3e50; }}
-        h3 {{ font-size: 1.5em; margin-top: 1.2em; color: #34495e; }}
-        p {{ margin: 1em 0; }}
-        code {{ background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }}
-        pre {{ background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }}
-    </style>
-</head>
-<body>
-    {html_content}
-</body>
-</html>"""
-
-
-def export_for_wordpress(content: str, meta: dict) -> str:
-    """Export blog post for WordPress (HTML with meta comments)."""
-    html_content = markdown.markdown(content)
-
-    return f"""<!-- wp:paragraph -->
-<!-- SEO Title: {meta['meta_title']} -->
-<!-- SEO Description: {meta['meta_description']} -->
-<!-- Keywords: {', '.join(meta.get('keywords', []))} -->
-<!-- /wp:paragraph -->
-
-{html_content}"""
-
-
-def export_for_medium(content: str, meta: dict) -> str:
-    """Export blog post for Medium (special formatting)."""
-    # Medium uses simplified markdown
-    # Convert headings, remove complex HTML
-    medium_content = content.replace('###', '##')  # Medium only supports H1-H2
-
-    return f"""# {meta['meta_title']}
-
-> {meta['meta_description']}
-
-{medium_content}
-
----
-
-*Originally published at [your-site.com]*
-"""
-```
-
-**Deliverable:**
-- ✅ Markdown export
-- ✅ HTML export with CSS
-- ✅ WordPress-ready format
-- ✅ Medium-ready format
+**Total Time:** 4 hours (vs 12h original)
+**Scope:** 33% of original features (sufficient for MVP)
 
 ---
 
@@ -940,75 +1185,107 @@ if formula_name:
 
 ---
 
-## 📦 Week 7 Summary
+## 📦 Week 7 Summary (REVISED)
 
 **Total Time:** 20 hours
 
-**Breakdown:**
-- Task 7.1: Blog & SEO Generator (12h)
-  - 7.1.1: Blog Post Agent (4h)
-  - 7.1.2: Blog UI & Export (4h)
-  - 7.1.3: SEO Keyword Utilities (2h)
-  - 7.1.4: Export Formats (2h)
-- Task 7.2: Copywriting Improvements (8h)
+**REVISED Breakdown:**
+- **Task 7.0: Stripe Integration (8h) - NEW, PRIORITY #1**
+  - 7.0.1: Stripe Setup & Product Configuration (2h)
+  - 7.0.2: Payment Flow Implementation (3h)
+  - 7.0.3: Webhook Handling (2h)
+  - 7.0.4: Subscription Management UI (1h)
+- **Task 7.1: Blog Generator MVP (4h) - REDUCED from 12h, PRIORITY #3**
+  - 7.1.1: Simple Blog Generator (2h)
+  - 7.1.2: Blog UI & Export (2h)
+- **Task 7.2: Copy Variations (8h) - KEPT, PRIORITY #2**
   - 7.2.1: Copy Variation Generator (4h)
   - 7.2.2: Copy Quality Checks (2h)
   - 7.2.3: Copy Templates Library (2h)
 
-**Deliverables:**
-- ✅ Blog post generation (1500-3000 words)
-- ✅ SEO keyword research (LLM-based)
-- ✅ Meta tags generation
-- ✅ Readability score (Flesch formula)
-- ✅ Export as Markdown/HTML/WordPress/Medium
+**Key Changes from Original Plan:**
+- ✅ **ADDED:** Stripe Integration (8h) - unblocks revenue
+- ⚠️ **REDUCED:** Blog Generator (12h → 4h MVP) - defer advanced features
+- ✅ **KEPT:** Copy Variations (8h) - high ROI for all users
+
+**REVISED Deliverables:**
+
+**Stripe Integration (NEW):**
+- ✅ Stripe checkout flow for all pricing tiers
+- ✅ Payment success handling
+- ✅ Subscription management UI
+- ✅ Manual webhook verification (MVP approach)
+- ⏳ Full webhook handling deferred if needed
+
+**Blog Generator MVP (REDUCED):**
+- ✅ Basic blog generation (1500-2500 words)
+- ✅ Simple meta tags (title, description)
+- ✅ Export as Markdown/HTML
+- ❌ **DEFERRED to Week 8+:** SEO keyword research, keyword density, readability scoring, WordPress/Medium formats, LangGraph workflow
+
+**Copy Variations (KEPT):**
 - ✅ 5 copy variations (problem-solution, curiosity, social proof, FOMO, benefit)
 - ✅ Tone consistency checker
 - ✅ Repetition detector
 - ✅ A/B test suggestions
 - ✅ 5 copy formulas (PAS, AIDA, 4Ps, BAB, FAB)
 
-**Success Criteria:**
-1. Users can generate SEO-optimized blog posts in 2 minutes
-2. Blog posts have 60+ readability score (8th-9th grade level)
-3. Meta tags are keyword-rich and within character limits
-4. Copy variations offer meaningfully different angles
-5. Quality checks catch tone/repetition issues
-6. Copy formulas are easy to apply
+**REVISED Success Criteria:**
+1. ✅ Users can upgrade from Free → Paid tiers via Stripe
+2. ✅ Payment success updates workspace plan_tier immediately
+3. ✅ Subscription management works (view, cancel)
+4. ✅ Users can generate basic blog posts (MVP quality)
+5. ✅ Copy variations offer 5 meaningfully different angles
+6. ✅ Quality checks catch tone/repetition issues
+
+**ROI Impact:**
+- **Original Plan:** ~8:1 ROI (Blog 12h, Copy 8h)
+- **REVISED Plan:** ~28:1 ROI (Stripe 8h, Copy 8h, Blog MVP 4h)
+- **Improvement:** 3.5x better ROI by prioritizing revenue enablement
 
 ---
 
-## 🚀 Deferred Features (From Week 6)
+## 🚀 Deferred Features
 
-These features were planned for Week 6 but deferred:
+### ✅ Stripe Integration - NO LONGER DEFERRED
+**Status:** ✅ **MOVED TO WEEK 7 as Task 7.0** (PRIORITY #1)
+**Reason:** Critical for monetization - Week 6 auth is complete but can't collect revenue
 
-### Stripe Integration (6 hours)
-- Setup Stripe account
-- Create payment links per tier
-- Handle webhooks for subscription events
-- Upgrade/downgrade flow
-- Invoice generation
-
+### Advanced Blog Features (moved from Week 7 to Week 8+)
 **Status:** ⏳ Deferred to Week 8 or later
+**Features:**
+- SEO keyword research (LLM-based suggestions)
+- Keyword density tracking
+- Readability scoring (Flesch formula)
+- WordPress/Medium export formats
+- LangGraph multi-node workflow
+- Advanced SEO optimization
+
+**Reason for Deferral:**
+Blog MVP (4h) sufficient for Week 7. Advanced features serve only 40% of users (Jessica/Carlos). Can iterate based on user feedback.
 
 ### OAuth Integration (4 hours)
+**Status:** ⏳ Deferred to Week 8 or later
+**Features:**
 - Google OAuth (Sign in with Google)
 - LinkedIn OAuth (Sign in with LinkedIn)
 - Merge accounts flow
 - OAuth callback handling
 
-**Status:** ⏳ Deferred to Week 8 or later
+**Reason for Deferral:**
+Email/password auth working. OAuth is convenience feature, not blocker.
 
 ### Email Service (4 hours)
+**Status:** ⏳ Deferred to Week 8 or later
+**Features:**
 - SendGrid setup
 - Welcome email on signup
 - Email verification flow
 - Password reset email
 - Usage reminder emails
 
-**Status:** ⏳ Deferred to Week 8 or later
-
 **Reason for Deferral:**
-Week 7 focuses on content tools (blog/SEO) per REVISED_DEVELOPMENT_PLAN. Payment integration and OAuth are important but not blocking core functionality. We can validate demand with current free/manual upgrade flow first.
+Can manually email users for now. Automate when user base grows.
 
 ---
 
