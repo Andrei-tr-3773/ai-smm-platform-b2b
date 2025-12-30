@@ -2,6 +2,7 @@
 import streamlit as st
 from utils.auth import verify_password, create_session
 from repositories.user_repository import UserRepository
+from utils.analytics_tracker import get_analytics_tracker
 import logging
 
 logger = logging.getLogger(__name__)
@@ -50,6 +51,16 @@ with st.form("login_form"):
                 user = repo.get_user_by_email(email)
 
                 if user and verify_password(password, user.password_hash):
+                    # Track login event (Week 8: Analytics)
+                    try:
+                        analytics = get_analytics_tracker()
+                        analytics.track_login(
+                            user_id=str(user.id),
+                            workspace_id=user.workspace_id
+                        )
+                    except Exception as e:
+                        logger.error(f"Failed to track login event: {e}")
+
                     # Create session
                     create_session(user)
 

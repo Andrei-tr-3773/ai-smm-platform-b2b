@@ -5,6 +5,7 @@ from repositories.user_repository import UserRepository
 from repositories.workspace_repository import WorkspaceRepository
 from models.user import User
 from models.workspace import Workspace
+from utils.analytics_tracker import get_analytics_tracker
 import re
 import logging
 
@@ -25,6 +26,12 @@ Join thousands of businesses creating professional social media content in minut
 """)
 
 st.markdown("---")
+
+# Get acquisition source from URL query parameters (for CAC tracking)
+# Example: ?source=product_hunt&referrer=featured_post
+query_params = st.query_params
+acquisition_source = query_params.get("source", "direct")
+referrer = query_params.get("referrer", None)
 
 # Signup form
 with st.form("signup_form"):
@@ -141,6 +148,18 @@ with st.form("signup_form"):
 
                 # Set ID for user object
                 user.id = user_id
+
+                # Track signup event (Week 8: Analytics)
+                try:
+                    analytics = get_analytics_tracker()
+                    analytics.track_signup(
+                        user_id=str(user_id),
+                        email=email,
+                        source=acquisition_source,
+                        referrer=referrer
+                    )
+                except Exception as e:
+                    logger.error(f"Failed to track signup event: {e}")
 
                 # Create session
                 create_session(user)

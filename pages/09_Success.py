@@ -4,9 +4,19 @@ import streamlit as st
 from utils.auth import require_auth
 from repositories.workspace_repository import WorkspaceRepository
 from utils.stripe_utils import verify_checkout_session
+from utils.analytics_tracker import get_analytics_tracker
 import logging
 
 logger = logging.getLogger(__name__)
+
+# Plan pricing for tracking
+PLAN_PRICING = {
+    "starter": 49,
+    "professional": 99,
+    "team": 199,
+    "agency": 499,
+    "enterprise": 999
+}
 
 st.set_page_config(page_title="Payment Successful", page_icon="✅", layout="centered")
 
@@ -44,6 +54,30 @@ if "session_id" in query_params:
                 stripe_subscription_id=subscription_id,
                 stripe_customer_id=customer_id,
             )
+
+            # Track upgrade and payment events (Week 8: Analytics)
+            try:
+                analytics = get_analytics_tracker()
+
+                # Track upgrade event
+                analytics.track_upgrade(
+                    user_id=str(user.id),
+                    workspace_id=user.workspace_id,
+                    from_tier="free",  # Assume upgrade from free
+                    to_tier=plan_tier,
+                    price=PLAN_PRICING.get(plan_tier, 0)
+                )
+
+                # Track payment successful event
+                analytics.track_payment_successful(
+                    user_id=str(user.id),
+                    workspace_id=user.workspace_id,
+                    amount=PLAN_PRICING.get(plan_tier, 0),
+                    plan_tier=plan_tier,
+                    stripe_subscription_id=subscription_id
+                )
+            except Exception as e:
+                logger.error(f"Failed to track upgrade/payment events: {e}")
 
             logger.info(
                 f"Workspace {user.workspace_id} upgraded to {plan_tier} via Stripe"
