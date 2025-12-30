@@ -25,6 +25,7 @@ from components import CampaignWizard
 import streamlit as st
 from utils.deepeval_openai import DeepEvalOpenAI
 from utils.openai_utils import get_openai_model
+from utils.analytics_tracker import get_analytics_tracker
 from weasyprint import HTML
 from html2docx import html2docx
 from pdf2docx import Converter
@@ -871,6 +872,23 @@ def handle_generate(user_query, template_name, state, prompts, history, spinner_
         history[-1][1] = result
         st.session_state.update({'state': new_state, 'history': history})
         st.success("✅ Content generated successfully! Review it below or translate to other languages.")
+
+        # Track campaign generation event (Week 8: Analytics)
+        try:
+            from utils.auth import get_current_user
+            user = get_current_user()
+            if user:
+                analytics = get_analytics_tracker()
+                analytics.track_campaign_generated(
+                    user_id=str(user.id),
+                    workspace_id=user.workspace_id,
+                    platform=selected_platform or "instagram",
+                    languages=["en-US"],  # Initial generation is English
+                    template_id=template_name
+                )
+        except Exception as track_error:
+            logging.error(f"Failed to track campaign generation: {track_error}")
+
     except Exception as e:
         logging.error(f"Error handling generate: {e}")
         logging.error(traceback.format_exc())
