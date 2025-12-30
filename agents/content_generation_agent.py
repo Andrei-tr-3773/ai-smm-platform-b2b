@@ -5,6 +5,7 @@ from langgraph.graph import StateGraph
 from agents.agent_state import AgentState
 from repositories.campaign_repository import CampaignRepository
 from utils.api_cost_tracker import track_openai_request
+from utils.rate_limiter import rate_limit
 import os
 
 # Configure logging
@@ -31,6 +32,7 @@ class ContentGenerationAgent:
             logger.error(f"Error initializing StateGraph: {e}")
             raise
 
+    @rate_limit("campaigns")
     def generate_campaign_content(self, state: AgentState):
         try:
             messages = state['messages']

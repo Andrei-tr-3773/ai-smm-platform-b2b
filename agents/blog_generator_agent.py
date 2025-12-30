@@ -6,11 +6,14 @@ Week 7 MVP Approach:
 - Basic meta tags (title, description)
 - Markdown output
 - Defers advanced SEO features to Week 8+
+
+Week 8: Added rate limiting to protect API costs
 """
 
 from typing import Dict, Any
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
+from utils.rate_limiter import rate_limit
 import logging
 
 logger = logging.getLogger(__name__)
@@ -28,6 +31,7 @@ class BlogGeneratorAgent:
         """
         self.model = model
 
+    @rate_limit("blog_posts")
     def generate_blog(
         self,
         topic: str,

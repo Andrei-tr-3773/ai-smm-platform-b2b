@@ -5,6 +5,7 @@ from langgraph.graph import StateGraph
 from langchain_core.prompts import ChatPromptTemplate
 from agents.agent_state import AgentState
 from utils.api_cost_tracker import track_openai_request
+from utils.rate_limiter import rate_limit
 import os
 
 # Configure logging
@@ -35,6 +36,7 @@ class TranslationAgent:
             logger.error(f"Error initializing StateGraph: {e}")
             raise
 
+    @rate_limit("translations")
     def translate_content(self, state: AgentState):
         try:
             messages = state['messages']

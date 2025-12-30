@@ -12,6 +12,7 @@ Uses 5 proven copywriting angles:
 from typing import Dict, Any
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
+from utils.rate_limiter import rate_limit
 import json
 import logging
 
@@ -142,6 +143,7 @@ Keep the same tone and length as the original. Return ONLY the rewritten copy, n
         """
         self.model = model
 
+    @rate_limit("copy_variations")
     def generate_variations(
         self,
         original_copy: str,
